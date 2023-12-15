@@ -1,0 +1,86 @@
+{
+  "user": [
+    {
+      "login": "123",
+      "password": "123"
+    },
+    {
+      "login": "456",
+      "password": "456"
+    }
+  ],
+  "items": [
+    {
+      "name": "jjjjjjjjewq",
+      "quantity": "126",
+      "id": 11
+    },
+    {
+      "name": "fds",
+      "quantity": 5,
+      "id": 12
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "patryk",
+      "login": "admin",
+      "pass": "pass"
+    },
+    {
+      "id": 2,
+      "name": "3",
+      "login": "admin2",
+      "pass": "pass2"
+    },
+    {
+      "name": "ff",
+      "login": "f",
+      "pass": "12",
+      "id": 3
+    },
+    {
+      "name": "123",
+      "login": "ff",
+      "pass": "12",
+      "id": 4
+    },
+    {
+      "name": "kuba",
+      "login": "kubson",
+      "pass": "123",
+      "id": 5
+    },
+    {
+      "name": "patryk",
+      "login": "fff",
+      "pass": "12",
+      "id": 6
+    },
+    {
+      "name": "p",
+      "login": "p",
+      "pass": "p",
+      "id": 7
+    },
+    {
+      "name": "kuba123",
+      "login": "kuba",
+      "pass": "kuba",
+      "id": 8
+    },
+    {
+      "name": "",
+      "login": "",
+      "pass": "",
+      "id": 9
+    },
+    {
+      "name": "1",
+      "login": "1",
+      "pass": "1",
+      "id": 10
+    }
+  ]
+}
