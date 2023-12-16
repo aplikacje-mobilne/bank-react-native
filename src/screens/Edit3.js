@@ -3,9 +3,8 @@ import { TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Edit = ({ navigation }) => {
-
-    return (
+const Edit3 = ({ navigation }) => {
+  return (
         <View style={styles.container}>
             <View style={styles.div}>
                 
@@ -24,9 +23,9 @@ const Edit = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="lock" size={30} marginLeft={10} color="black" />
-                            <Text style={styles.text}>BezpieczeÅ„stwo i dostÄ™py</Text>
+                            <Text style={styles.text}>Bezpieczeñstwo i dostêpy</Text>
                         </View>
-                        <Text style={styles.text2}>Logowanie, biometria, narzÄ™dzia autoryzacji, PIN do aplikacji</Text>
+                        <Text style={styles.text2}>Logowanie, biometria, narzêdzia autoryzacji, PIN do aplikacji</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -35,9 +34,9 @@ const Edit = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="money" size={30} marginLeft={10} marginTop={'1%'} color="black" />
-                            <Text style={styles.text}>PÅ‚atnoÅ›ci</Text>
+                            <Text style={styles.text}>P³atnoœci</Text>
                         </View>
-                        <Text style={styles.text2}>Ustawienia pÅ‚atnoÅ›ci</Text>
+                        <Text style={styles.text2}>Ustawienia p³atnoœci</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -46,53 +45,29 @@ const Edit = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="power-off" size={30} marginLeft={10} color="black" />
-                            <Text style={styles.text}>Wyrejestruj aplikacjÄ™</Text>
+                            <Text style={styles.text}>Wyrejestruj aplikacjê</Text>
                         </View>
-                        <Text style={styles.text2}>Gdy zmieniasz numer telefonu lub urzÄ…dzenie</Text>
+                        <Text style={styles.text2}>Gdy zmieniasz numer telefonu lub urz¹dzenie</Text>
                     </View>
                 </TouchableOpacity>
 
 
             </View>
         </View>
-    );
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '100%',
-    },
-    text: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        marginLeft: 10, // Dodaj margines, aby oddzieliÄ‡ ikonÄ™ od tekstu
-    },
-    text2: {
-        fontSize: 15,
-        paddingLeft: '11%', // Dodaj margines, aby oddzieliÄ‡ ikonÄ™ od tekstu
-    },
-    div: {
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',
-        backgroundColor: 'f7f7f7',
-/*        backgroundColor: 'red',*/
-        width: '100%',
-    },
-    wiersz1: {
-        flexDirection: 'row', 
-        width: '100%',
-
-    },
-    wiersz1b: {
-        backgroundColor: '#ffffff',
-        marginTop: '5%',
-        borderRadius: 6,
-        marginLeft: '1%',
-        marginRight: '1%',
-    },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: 10, // Dodaj margines, aby oddzieliæ ikonê od tekstu
+  },
 });
 
-export default Edit;
+export default Edit3;

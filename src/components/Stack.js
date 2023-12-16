@@ -6,6 +6,8 @@ import { Login } from '../screens/Login';
 import RegisterScreen from '../screens/RegisterScreen';
 import Edit from '../screens/Edit';
 import Edit2 from '../screens/Edit2';
+import Edit3 from '../screens/Edit3';
+import Edit4 from '../screens/Edit4';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +40,8 @@ const StackNav = () => {
           options={{ headerShown: false }}
         />
                   <Stack.Screen name="Edit2" component={Edit2} />
+                  <Stack.Screen name="Edit3" component={Edit3} />
+                  <Stack.Screen name="Edit4" component={Edit4} />
 
         </>
         ) : (
