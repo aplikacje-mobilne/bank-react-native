@@ -36,8 +36,8 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={registerStyles.container}>
-      <Text style={registerStyles.title}>REJESTRACJA</Text>
+      <View style={registerStyles.container}>
+          <View style={registerStyles.inputy}>
       <TextInput
         style={registerStyles.input}
         placeholder="NAME"
@@ -68,7 +68,7 @@ const RegisterScreen = ({ navigation }) => {
         value={pass2}
         onChangeText={(text) => setPass2(text)}
       />
-
+      </View>
       <Pressable style={registerStyles.registerBtn} onPress={handleRegister}>
         <Text style={registerStyles.registerText}>REGISTER</Text>
       </Pressable>
@@ -78,32 +78,47 @@ const RegisterScreen = ({ navigation }) => {
 
 const registerStyles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
+        flex: 1,
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    inputy: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        width: '85%',
+        marginTop: '10%',
+    },
   input: {
-    width: '80%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    padding: 10,
+      backgroundColor: "#fefefe",
+      borderWidth: 1,
+      borderColor: "black",
+      borderRadius: 10,
+      height: 40,
+      overflow: "hidden",
+      position: "relative",
+      marginVertical: 10,
+      paddingLeft: 10,
   },
   registerBtn: {
-    backgroundColor: 'green',
-    padding: 10,
-      borderRadius: 5,
-      marginTop: 10,
+      backgroundColor: "#ff570c",
+      borderRadius: 50,
+      width: '90%',
+      position: "relative",
+      justifyContent: 'center',
+      alignSelf: 'center',
+      height: '8%',
+      alignItems: 'center',
+      marginTop: '10%',
   },
     registerText: {
-      color: 'white',
-        textAlign: 'center',
+        color: "#f7f7f7",
+        fontSize: 24,
+        fontWeight: "400",
+        letterSpacing: 0,
+        lineHeight: 28,
+        position: "absolute",
     },
 });
 

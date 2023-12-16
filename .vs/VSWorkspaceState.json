@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\screens"
   ],
-  "SelectedNode": "\\C:\\Users\\um\\Source\\Repos\\bank-react-native",
+  "SelectedNode": "\\src\\components",
   "PreviewInSolutionExplorer": false
 }
