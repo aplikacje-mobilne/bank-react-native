@@ -13,7 +13,12 @@ import Edit from '../screens/Edit';
 import AddScreen from '../screens/AddScreen';
 import EditScreen from '../screens/EditScreen';
 import { Ionicons } from '@expo/vector-icons';
-import Header from '../components/Header';
+import { Octicons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
+
+
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,7 +32,16 @@ function MyDrawer() {
       
     </Drawer.Navigator>
     */
-  <Tab.Navigator>
+  <Tab.Navigator  screenOptions={{
+    tabBarActiveTintColor: '#FF570C', 
+    tabBarStyle: [
+      {
+        display: 'flex',
+      },
+      null,
+    ],
+  }}>
+    
     <Tab.Screen
       name="Home"
       component={ListScreen}
@@ -46,7 +60,7 @@ function MyDrawer() {
       options={{
         tabBarLabel: 'History',
         tabBarIcon: ({ color, size }) => (
-          <Ionicons name="ios-add" size={size} color={color} />
+          <Octicons name="history" size={size} color={color} />
         ),
       }}
     />
@@ -57,7 +71,7 @@ function MyDrawer() {
       options={{
         tabBarLabel: 'Payment',
         tabBarIcon: ({ color, size }) => (
-          <Ionicons name="ios-add" size={size} color={color} />
+          <MaterialIcons name="payment" size={size} color={color} />
         ),
       }}
       
@@ -71,7 +85,7 @@ function MyDrawer() {
       options={{
         tabBarLabel: 'Offers',
         tabBarIcon: ({ color, size }) => (
-          <Ionicons name="ios-add" size={size} color={color} />
+          <MaterialCommunityIcons name="offer" size={size} color={color} />
         ),
       }}
     />
@@ -83,7 +97,7 @@ function MyDrawer() {
       options={{
         tabBarLabel: 'Edit',
         tabBarIcon: ({ color, size }) => (
-          <Ionicons name="ios-add" size={size} color={color} />
+          <Ionicons name="ios-settings-outline" size={size} color={color} />
         ),
         
       }}
