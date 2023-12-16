@@ -9,7 +9,7 @@ export function Login({ setIsLoggedIn }) {
   const navigation = useNavigation();
   const handleLogin = async () => {
     try {
-      const response = await axios.get("http://192.168.8.179:3001/users");
+      const response = await axios.get("http://192.168.1.20:3001/users");
 
       if (!response.data) {
         console.log("User not found.");
