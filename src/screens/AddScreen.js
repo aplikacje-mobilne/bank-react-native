@@ -9,7 +9,7 @@ const AddScreen = ({ onAdd }) => {
     const navigation = useNavigation();
     const handleAddItem = async () => {
         try {
-            await axios.post('http://192.168.1.102:3001/items', {
+            await axios.post('http://192.168.1.20:3001/items', {
                 name: itemName,
                 quantity: parseInt(quantity, 10),
             });
