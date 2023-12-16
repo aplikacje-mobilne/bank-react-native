@@ -11,6 +11,16 @@ import Edit4 from '../screens/Edit4';
 import Payment1 from '../screens/Payment1';
 import Payment2 from '../screens/Payment2';
 import frame_one from '../screens/frame_one';
+<<<<<<< HEAD
+=======
+
+import OfferFirst from '../screens/OfferFirst';
+import OfferSecond from '../screens/OfferSecond';
+import OfferThird from '../screens/OfferThird';
+
+
+
+>>>>>>> jhbranch
 const Stack = createNativeStackNavigator();
 
 const optionScreen = {
@@ -46,6 +56,14 @@ const StackNav = () => {
                   <Stack.Screen name="Edit4" component={Edit4} />
                   <Stack.Screen name="Payment1" component={Payment1} />
                   <Stack.Screen name="Payment2" component={Payment2} />
+<<<<<<< HEAD
+=======
+                  
+                  <Stack.Screen name="OfferFirst" component={OfferFirst} />
+                  <Stack.Screen name="OfferSecond" component={OfferSecond} />
+                  <Stack.Screen name="OfferThird" component={OfferThird} />
+
+>>>>>>> jhbranch
 
         </>
         ) : (

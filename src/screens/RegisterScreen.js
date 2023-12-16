@@ -7,6 +7,12 @@ const RegisterScreen = ({ navigation }) => {
   const [pass, setPass] = useState("");
   const [pass2, setPass2] = useState("");
   const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [balance, setBalance] = useState(1000);
+
+
 
   const handleRegister = async () => {
     try {
@@ -24,8 +30,12 @@ const RegisterScreen = ({ navigation }) => {
 
       await axios.post("http://192.168.1.20:3001/users", {
         name,
+        surname,
         login,
         pass,
+        email,
+        phoneNumber,
+        balance,
       });
 
       alert('Rejestracja udana');
@@ -40,21 +50,42 @@ const RegisterScreen = ({ navigation }) => {
           <View style={registerStyles.inputy}>
       <TextInput
         style={registerStyles.input}
-        placeholder="NAME"
+        placeholder="Imię"
         placeholderTextColor="#808080"
         value={name}
         onChangeText={(text) => setName(text)}
       />
+       <TextInput
+        style={registerStyles.input}
+        placeholder="Nazwisko"
+        placeholderTextColor="#808080"
+        value={surname}
+        onChangeText={(text) => setSurname(text)}
+      />
+        <TextInput
+        style={registerStyles.input}
+        placeholder="E-mail"
+        placeholderTextColor="#808080"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
+        <TextInput
+        style={registerStyles.input}
+        placeholder="Numer telefonu"
+        placeholderTextColor="#808080"
+        value={phoneNumber}
+        onChangeText={(text) => setPhoneNumber(text)}
+      />
       <TextInput
         style={registerStyles.input}
-        placeholder="LOGIN"
+        placeholder="Login"
         placeholderTextColor="#808080"
         value={login}
         onChangeText={(text) => setLogin(text)}
       />
       <TextInput
         style={registerStyles.input}
-        placeholder="PASS"
+        placeholder="Hasło"
         placeholderTextColor="#808080"
         secureTextEntry
         value={pass}
@@ -62,7 +93,7 @@ const RegisterScreen = ({ navigation }) => {
       />
       <TextInput
         style={registerStyles.input}
-        placeholder="PASS2"
+        placeholder="Powtórz hasło"
         placeholderTextColor="#808080"
         secureTextEntry
         value={pass2}
