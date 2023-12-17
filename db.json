@@ -1,3 +1,44 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": 1,
+      "name": "patryk",
+      "login": "admin",
+      "pass": "pass",
+      "nrkonta": "123456",
+      "tel": "432567123"
+    },
+    {
+      "id": 2,
+      "name": "Jakub",
+      "login": "admin2",
+      "pass": "pass2",
+      "nrkonta": "456789",
+      "tel": "123456789"
+    }
+  ],
+  "transaction": [
+    {
+      "id": 1,
+      "loginw": "",
+      "loginodb": "",
+      "kwota": ""
+    },
+    {
+      "loggedInUser": "admin2",
+      "nr_rachunku": "123456",
+      "toUserLogin": "admin",
+      "opis": "dsadasdsa",
+      "kwota": "1200",
+      "id": 2
+    },
+    {
+      "loggedInUser": "admin2",
+      "tytul": "dsd",
+      "toUser": "admin",
+      "opis": "dsd",
+      "kwota": "12345",
+      "id": 3
+    }
+  ]
 }
