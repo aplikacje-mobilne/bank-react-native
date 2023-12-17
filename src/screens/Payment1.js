@@ -34,7 +34,7 @@ const Payment1 = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.8.179:3001/users?name=${dane}`);
+        const response = await axios.get(`http://192.168.1.20:3001/users?name=${dane}`);
         if (response.data.length > 0) {
           const toUserLogin = response.data[0].login; // Załóżmy, że login znajduje się w polu "login" obiektu
           setUserLogin(toUserLogin); // Ustaw login odbiorcy w stanie komponentu
@@ -52,7 +52,7 @@ const Payment1 = ({ navigation }) => {
 
   const checkName = async (Name) => {
     try {
-      const response = await axios.get(`http://192.168.8.179:3001/users?name=${Name}`);
+      const response = await axios.get(`http://192.168.1.20:3001/users?name=${Name}`);
       return response.data.length > 0;
     } catch (error) {
       console.error('Błąd podczas sprawdzania odbiorcy:', error);
@@ -86,7 +86,7 @@ const Payment1 = ({ navigation }) => {
     }
 
     try {
-      await axios.post("http://192.168.8.179:3001/transaction", {
+      await axios.post("http://192.168.1.20:3001/transaction", {
         loggedInUser,
         nr_rachunku,
         toUserLogin,

@@ -42,7 +42,7 @@ const Edit = ({ navigation }) => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('Edit2')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Edit5')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="power-off" size={30} marginLeft={10} color="black" />
