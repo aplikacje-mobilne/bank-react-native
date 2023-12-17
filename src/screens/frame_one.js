@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Login } from '../screens/Login';
 import RegisterScreen from '../screens/RegisterScreen';
-
+import Edit5 from '../screens/Edit5';
 // Import your image here
 import Bank from "./bank.png";
 
