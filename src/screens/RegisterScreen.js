@@ -20,7 +20,7 @@ const RegisterScreen = ({ navigation }) => {
         Alert.alert("Błąd", "Hasła nie są identyczne");
         return;
       }
-      const loginCheckResponse = await axios.get(`http://192.168.1.20:3001/users?login=${login}`);
+      const loginCheckResponse = await axios.get(`http://192.168.0.144:3001/users?login=${login}`);
       const isLoginUnique = !loginCheckResponse.data || loginCheckResponse.data.length === 0;
 
       if (!isLoginUnique) {
@@ -28,7 +28,7 @@ const RegisterScreen = ({ navigation }) => {
         return;
       }
 
-      await axios.post("http://192.168.1.20:3001/users", {
+      await axios.post("http://192.168.0.144:3001/users", {
         name,
         surname,
         login,
