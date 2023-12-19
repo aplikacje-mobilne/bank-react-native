@@ -6,7 +6,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import Edit5 from '../screens/Edit5';
 // Import your image here
 import Bank from "./bank.png";
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 const Frame = () => {
     const navigation = useNavigation();
 
@@ -31,32 +31,37 @@ const Frame = () => {
 
 
     return (
-        <View style={styles.frame}>
+        <View style={styles.container}>
             <View style={styles.div}>
-                <TouchableOpacity style={styles.group} onPress={goToFrameThree}>
-                    <View style={styles.overlapGroup}>
-                        <Text style={styles.textWrapper}>Zaloguj się</Text>
-                    </View>
-                </TouchableOpacity>
-                <View style={styles.overlap}>
+
+                <View style={styles.elipsy}>
                     <View style={styles.ellipse} />
                     <View style={styles.ellipse2} />
-                    <Image style={styles.bankInstance} source={Bank} />
                 </View>
-                <Text style={styles.textWrapper2}>POLSKI BANK KRW</Text>
+
+                <View style={styles.bla1}>
+
+                <Icon name="bank" size={120} color="#323643" />
+                    <Text style={styles.tekst1}>POLSKI BANK KRW</Text>
+                    <TouchableOpacity style={styles.group} onPress={goToFrameThree}>
+                        <View style={styles.overlapGroup}>
+                            <Text style={styles.tekst2}>Zaloguj się</Text>
+                        </View>
+                    </TouchableOpacity>
                 <Text style={styles.nieMaszKontaZaJe} onPress={goToFrameTwo}>Nie masz konta? Załóż je tutaj</Text>
+
+                </View>
+
             </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    frame: {
-        backgroundColor: "#f7f7f7",
-        flexDirection: "row",
-        justifyContent: "center",
-        width: "100%",
-        flex: 1,
+    container: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
     },
     div: {
         backgroundColor: "#f7f7f7",
@@ -65,32 +70,7 @@ const styles = StyleSheet.create({
         position: "relative",
         width: '100%',
     },
-    group: {
-        height: 65,
-        position: "absolute",
-        top: 556,
-        justifyContent: 'center',
-        textAlign: 'center',
-        alignSelf: 'center',
-    },
-    overlapGroup: {
-        backgroundColor: "#ff570c",
-        borderRadius: 50,
-        height: 65,
-        position: "relative",
-        width: 337,
-    },
-    textWrapper: {
-        color: "#f7f7f7",
-        fontSize: 24,
-        fontWeight: "400",
-        left: 109,
-        letterSpacing: 0,
-        lineHeight: 28,
-        position: "absolute",
-        top: 15,
-    },
-    overlap: {
+    elipsy: {
         height: 534,
         left: -146,
         position: "absolute",
@@ -116,34 +96,37 @@ const styles = StyleSheet.create({
         top: 0,
         width: '100%',
     },
-    bankInstance: {
-        height: 139,
-        left: "50%",
-        position: "absolute",
-        top: 395,
-
-    },
-    textWrapper2: {
-        color: "#323643",
-        fontSize: 32,
-        fontWeight: "500",
-        justifyContent: "center",
+    bla1: {
+        flex: 1, 
+        justifyContent: 'center',  
         alignItems: 'center',
-        letterSpacing: 0,
-        lineHeight: 40,
-        textAlign: "center",
-        top: 410,
+    },
+    tekst1: {
+        marginTop: 20,
+        fontSize: 32,
+        color: '#323643',
+        fontWeight: 'bold',
+        paddingBottom: '5%',
+    },
+    group: {
+        backgroundColor: '#ff570c',
+        paddingVertical: 10,
+        width: '85%',
+        borderRadius: 50,
+    },
+    overlapGroup: {
+        alignItems: 'center',
+    },
+    tekst2: {
+        color: '#fff',
+        fontSize: 24,
     },
     nieMaszKontaZaJe: {
-        color: "#323643",
+        marginTop: 20,
+        color: '#323643',
+        textDecorationLine: 'underline',
         fontSize: 20,
-        fontWeight: "500",
-        letterSpacing: 0,
-        textAlign: "center",
-        justifyContent: "center",
-        alignItems: 'center',
-        top: 456,
+        fontWeight: '600',
     },
 });
-
 export default Frame;
