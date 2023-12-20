@@ -10,6 +10,7 @@ import Edit3 from '../screens/Edit3';
 import Edit4 from '../screens/Edit4';
 import Edit5 from '../screens/Edit5';
 import Edit6 from '../screens/Edit6';
+import Edit7 from '../screens/Edit7';
 import Payment1 from '../screens/Payment1';
 import Payment2 from '../screens/Payment2';
 import frame_one from '../screens/frame_one';
@@ -53,6 +54,7 @@ const StackNav = () => {
                   <Stack.Screen name="Edit4" component={Edit4} />
                   <Stack.Screen name="Edit5" component={Edit5} />
                   <Stack.Screen name="Edit6" component={Edit6} />
+                  <Stack.Screen name="Edit7" component={Edit7} />
                   <Stack.Screen name="Payment1" component={Payment1} />
                   <Stack.Screen name="Payment2" component={Payment2} />
          

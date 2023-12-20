@@ -20,7 +20,7 @@ const Edit3 = ({ navigation }) => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('Edit3')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Edit7')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
 
