@@ -24,7 +24,18 @@
       "email": "qwe",
       "phoneNumber": "123123123",
       "balance": 1000,
-      "id": 3
+      "id": 3,
+      "nrkonta": "999999"
+    },
+    {
+      "name": "A",
+      "surname": "A",
+      "login": "a",
+      "pass": "a",
+      "email": "a",
+      "phoneNumber": "102 102 488",
+      "balance": 1000,
+      "id": 4
     }
   ],
   "transaction": [
