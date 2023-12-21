@@ -3,13 +3,14 @@ import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-nativ
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import API_CONFIG from '../components/config'
 export function Login({ setIsLoggedIn }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const handleLogin = async () => {
     try {
-      const response = await axios.get("http://192.168.0.144:3001/users");
+      const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
 
       if (!response.data) {
         console.log("User not found.");

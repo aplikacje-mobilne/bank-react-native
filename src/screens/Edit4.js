@@ -1,29 +1,9 @@
 ﻿import { TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import CheckBox from 'react-native-checkbox';
-import React, { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from 'react';
 const Edit4 = ({ navigation }) => {
     const [isChecked, setChecked] = useState(false);
-    const [userData, setUserData] = useState(null);
-
-    useEffect(() => {
-        // Fetch user data from AsyncStorage
-        const fetchUserData = async () => {
-            try {
-                const userJson = await AsyncStorage.getItem('loggedInUser');
-                if (userJson) {
-                    const user = JSON.parse(userJson);
-                    setUserData(user);
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-
-        fetchUserData();
-    }, []);
-
     return (
         <View style={styles.container}>
             <View style={styles.div}>
@@ -44,10 +24,10 @@ const Edit4 = ({ navigation }) => {
             </View>
             <View style={styles.div2}>
                 <Text style={styles.tekst4}>KRW KONTO</Text>
-                <Text style={styles.tekst4a} >{userData ? userData.nrkonta : ''}</Text>
+                <Text style={styles.tekst4a} >12 1234 1234 1234</Text>
             </View>
             <View style={styles.div3}>
-                <Text style={styles.tekst5}>To konto jest przypisane do numeru telefonu: {userData ? userData.phoneNumber : ''}</Text>
+                <Text style={styles.tekst5}>To konto jest przypisane do numeru telefonu +48 123 123 123</Text>
             </View>
 
         </View>

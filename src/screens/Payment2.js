@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import API_CONFIG from '../components/config';
 
 const Payment2 = ({navigation}) => {
   
@@ -36,7 +37,7 @@ const Payment2 = ({navigation}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.1.20:3001/users?tel=${nr_telefonu}`);
+        const response = await axios.get(`${API_CONFIG.BASE_URL}/users?tel=${nr_telefonu}`);
         if (response.data.length > 0) {
           const toUser = response.data[0].login; // Załóżmy, że login znajduje się w polu "login" obiektu
           setUser(toUser); // Ustaw login odbiorcy w stanie komponentu
@@ -55,7 +56,7 @@ const Payment2 = ({navigation}) => {
   const checknrtel = async (nrtel) => {
     // Sprawdzenie, czy istnieje odbiorca o podanym imieniu w bazie users
     try {
-      const response = await axios.get(`http://192.168.1.20:3001/users?tel=${nrtel}`);
+      const response = await axios.get(`${API_CONFIG.BASE_URL}/users?tel=${nrtel}`);
       return response.data.length > 0;
     } catch (error) {
       console.error('Błąd podczas sprawdzania odbiorcy:', error);
@@ -72,7 +73,7 @@ const Payment2 = ({navigation}) => {
 
     try {
       // Tworzenie obiektu z danymi do wysłania
-      await axios.post("http://192.168.1.20:3001/transaction", {
+      await axios.post("http://192.168.1.193:3001/transaction", {
         loggedInUser,
         tytul,
         toUser,

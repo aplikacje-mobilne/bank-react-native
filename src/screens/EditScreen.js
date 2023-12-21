@@ -25,7 +25,7 @@ const EditScreen = ({ route, navigation }) => {
 
     const handleEditItem = async () => {
         try {
-            const response = await axios.put(`http://192.168.1.102:3001/items/${itemId}`, {
+            const response = await axios.put(`http://192.168.1.193:3001/items/${itemId}`, {
                 name: editedName || item.name,
                 quantity: editedQuantity || item.quantity,
             });

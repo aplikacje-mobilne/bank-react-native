@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, Pressable, TextInput, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import API_CONFIG from '../components/config';
 
 const RegisterScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
@@ -20,7 +21,7 @@ const RegisterScreen = ({ navigation }) => {
         Alert.alert("Błąd", "Hasła nie są identyczne");
         return;
       }
-      const loginCheckResponse = await axios.get(`http://192.168.0.144:3001/users?login=${login}`);
+      const loginCheckResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?login=${login}`);
       const isLoginUnique = !loginCheckResponse.data || loginCheckResponse.data.length === 0;
 
       if (!isLoginUnique) {
@@ -28,7 +29,7 @@ const RegisterScreen = ({ navigation }) => {
         return;
       }
 
-      await axios.post("http://192.168.0.144:3001/users", {
+      await axios.post(`${API_CONFIG.BASE_URL}/users`, {
         name,
         surname,
         login,

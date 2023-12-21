@@ -24,42 +24,110 @@
       "email": "qwe",
       "phoneNumber": "123123123",
       "balance": 1000,
-      "id": 3,
-      "nrkonta": "999999"
-    },
-    {
-      "name": "A",
-      "surname": "A",
-      "login": "a",
-      "pass": "a",
-      "email": "a",
-      "phoneNumber": "102 102 488",
-      "balance": 1000,
-      "id": 4
+      "id": 3
     }
   ],
   "transaction": [
     {
-      "id": 1,
-      "loginw": "",
-      "loginodb": "",
-      "kwota": ""
+      "loggedInUser": "admin",
+      "tytul": "tytul1",
+      "toUserLogin": "admin2",
+      "opis": "opis1",
+      "typ": "zwykly",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-18T12:34:44",
+      "id": 1
     },
     {
-      "loggedInUser": "admin2",
-      "nr_rachunku": "123456",
-      "toUserLogin": "admin",
-      "opis": "dsadasdsa",
-      "kwota": "1200",
+      "loggedInUser": "admin",
+      "tytul": "tytul2",
+      "toUserLogin": "admin2",
+      "opis": "opis2",
+      "typ": "mobilny",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-20T12:34:44",
       "id": 2
+    },
+    {
+      "loggedInUser": "admin",
+      "tytul": "tytul3",
+      "toUserLogin": "admin2",
+      "opis": "opis3",
+      "typ": "zwykly",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-21T12:34:44",
+      "id": 3
     },
     {
       "loggedInUser": "admin2",
       "tytul": "dsd",
-      "toUser": "admin",
+      "toUserLogin": "admin",
       "opis": "dsd",
+      "typ": "mobilny",
       "kwota": "12345",
-      "id": 3
+      "dataTransakcji": "2023-12-21T12:34:56",
+      "id": 4
+    },
+    {
+      "loggedInUser": "admin2",
+      "tytul": "tytul",
+      "toUserLogin": "admin",
+      "opis": "opis",
+      "typ": "zwykly",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-21T12:34:36",
+      "id": 5
+    },
+    {
+      "loggedInUser": "admin",
+      "tytul": "tytul1",
+      "toUserLogin": "admin2",
+      "opis": "opis1",
+      "typ": "zwykly",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-18T12:34:44",
+      "id": 6
+    },
+    {
+      "loggedInUser": "admin",
+      "tytul": "tytul2",
+      "toUserLogin": "admin2",
+      "opis": "opis2",
+      "typ": "mobilny",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-20T12:34:44",
+      "id": 7
+    },
+    {
+      "loggedInUser": "admin",
+      "tytul": "tytul3",
+      "toUserLogin": "admin2",
+      "opis": "opis3",
+      "typ": "zwykly",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-21T12:34:44",
+      "id": 8
+    },
+    {
+      "loggedInUser": "admin2",
+      "tytul": "dsd",
+      "toUserLogin": "admin",
+      "opis": "dsd",
+      "typ": "mobilny",
+      "kwota": "12345",
+      "dataTransakcji": "2023-12-21T12:34:56",
+      "id": 9
+    },
+    {
+      "loggedInUser": "admin2",
+      "tytul": "tytul",
+      "toUserLogin": "admin",
+      "opis": "opis",
+      "typ": "zwykly",
+      "kwota": "100",
+      "dataTransakcji": "2023-12-21T12:34:36",
+      "id": 10
     }
+    
   ]
 }
