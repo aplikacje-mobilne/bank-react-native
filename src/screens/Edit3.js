@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft: '2%', // Dodaj margines, aby oddzielić ikonę od tekstu
+        marginLeft: '2%', 
     },
     text2: {
         fontSize: 15,

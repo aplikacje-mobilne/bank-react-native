@@ -66,12 +66,12 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft: 10, // Dodaj margines, aby oddzielić ikonę od tekstu
+        marginLeft: 10, 
         alignItems: 'center',
     },
     text2: {
         fontSize: 15,
-        paddingLeft: '11%', // Dodaj margines, aby oddzielić ikonę od tekstu
+        paddingLeft: '11%',
     },
     div: {
         display: 'flex',

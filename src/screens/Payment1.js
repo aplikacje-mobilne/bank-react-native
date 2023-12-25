@@ -21,7 +21,7 @@ const Payment1 = ({ navigation }) => {
         const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
         if (storedLoggedInUser) {
           const parsedUser = JSON.parse(storedLoggedInUser);
-          const userLogin = parsedUser.login; // Załóżmy, że pole login zawiera login użytkownika
+          const userLogin = parsedUser.login;
           setLoggedInUser(userLogin);
         }
       } catch (error) {
@@ -37,10 +37,9 @@ const Payment1 = ({ navigation }) => {
       try {
         const response = await axios.get(`${API_CONFIG.BASE_URL}/users?name=${dane}`);
         if (response.data.length > 0) {
-          const toUserLogin = response.data[0].login; // Załóżmy, że login znajduje się w polu "login" obiektu
-          setUserLogin(toUserLogin); // Ustaw login odbiorcy w stanie komponentu
+          const toUserLogin = response.data[0].login;
+          setUserLogin(toUserLogin);
 
-          // Zapisz login odbiorcy w AsyncStorage
           await AsyncStorage.setItem('toUserLogin', JSON.stringify({ login: toUserLogin }));
         }
       } catch (error) {
@@ -51,7 +50,7 @@ const Payment1 = ({ navigation }) => {
     fetchData();
   }, [dane]);
 
-  const checkName = async (Name) => {
+  const nrName = async (Name) => {
     try {
       const response = await axios.get(`${API_CONFIG.BASE_URL}/users?name=${Name}`);
       return response.data.length > 0;
@@ -64,7 +63,7 @@ const Payment1 = ({ navigation }) => {
   const checknrkonta = async (Name, Number) => {
     try {
       const response = await axios.get(
-        `http://192.168.1.193:3001/users?name=${Name}&nrkonta=${Number}`
+        `${API_CONFIG.BASE_URL}/users?name=${Name}&nrkonta=${Number}`
       );
       return response.data.length > 0;
     } catch (error) {
@@ -74,33 +73,30 @@ const Payment1 = ({ navigation }) => {
   };
 
   const handleCheck = async () => {
-    const recipientExists = await checkName(dane);
-    if (!recipientExists) {
-      Alert.alert('Błąd', 'Odbiorca o podanym imieniu nie istnieje.');
-      return;
-    }
+  const recipientExists = await checknrkonta(dane, nr_rachunku);
+  if (!recipientExists) {
+    Alert.alert('Błąd', 'Odbiorca o podanym numerze rachunku nie istnieje.');
+    return;
+  }
 
-    const accountNumberMatches = await checknrkonta(dane, nr_rachunku);
-    if (!accountNumberMatches) {
-      Alert.alert('Błąd', 'Numer rachunku nie jest zgodny z odbiorcą.');
-      return;
-    }
+  try {
+    const response = await axios.post(`${API_CONFIG.BASE_URL}/transaction`, {
+      loggedInUser,
+      tytul,
+      toUserLogin,
+      opis,
+      typ: 'zwykly',
+      kwota: parseFloat(kwota),
+      dataTransakcji: new Date().toISOString(),
+    });
 
-    try {
-      await axios.post(`${API_CONFIG.BASE_URL}/transaction`, {
-        loggedInUser,
-        nr_rachunku,
-        toUserLogin,
-        opis,
-        kwota
-      });
-
-      Alert.alert('Przelew udany');
-      navigation.goBack();
-    } catch (error) {
-      console.error('Błąd podczas wysyłania danych:', error);
-    }
-  };
+    Alert.alert('Przelew udany');
+    navigation.goBack();
+    // console.log('Odpowiedź z serwera:', response.data);
+  } catch (error) {
+    console.error('Błąd podczas wysyłania danych:', error);
+  }
+};
 
   return (
     <View style={styles.header}>

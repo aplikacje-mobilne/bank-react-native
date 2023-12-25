@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
+import API_CONFIG from "../components/config";
 
 const EditScreen = ({ route, navigation }) => {
     const { itemId, onEdit } = route.params;
@@ -11,7 +12,7 @@ const EditScreen = ({ route, navigation }) => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`http://192.168.1.102:3001/items/${itemId}`);
+                const response = await axios.get(`${API_CONFIG.BASE_URL}/items/${itemId}`);
                 setItem(response.data || {});
                 setEditedName(response.data?.name || ''); 
                 setEditedQuantity(response.data?.quantity?.toString() || ''); 
@@ -25,7 +26,7 @@ const EditScreen = ({ route, navigation }) => {
 
     const handleEditItem = async () => {
         try {
-            const response = await axios.put(`http://192.168.1.193:3001/items/${itemId}`, {
+            const response = await axios.put(`${API_CONFIG.BASE_URL}/items/${itemId}`, {
                 name: editedName || item.name,
                 quantity: editedQuantity || item.quantity,
             });

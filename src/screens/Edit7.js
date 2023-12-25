@@ -39,7 +39,7 @@ const Edit7 = ({ navigation }) => {
             }
 
             // Find the user in the JSON file based on the login
-            const response = await axios.get("http://192.168.0.144:3001/users");
+            const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
             const users = response.data || [];
             const userToUpdate = users.find((user) => user.login === loggedInUser.login);
 
@@ -48,7 +48,7 @@ const Edit7 = ({ navigation }) => {
                 userToUpdate.pass = pass;
 
                 // Update the JSON file with the modified user data
-                await axios.put(`http://192.168.0.144:3001/users/${userToUpdate.id}`, userToUpdate);
+                await axios.put(`${API_CONFIG.BASE_URL}/users/${userToUpdate.id}`, userToUpdate);
 
                 Alert.alert("Sukces", "Hasło zostało zmienione pomyślnie");
                 navigation.goBack();

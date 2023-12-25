@@ -137,32 +137,35 @@ const styles = {
     overflow: 'hidden',
   },
   flexBoxTransakcji: {
-    textAlign: 'center',
+    textAlign: 'left',
     letterSpacing: 0,
     position: 'absolute',
   },
   tytulTransakcji: {
     marginTop: -29,
-    left: -16,
+    left:50,
     width: 180,
     height: 34,
     fontSize: 20,
+    fontWeight: 500,
     top: '50%',
     letterSpacing: 0,
   },
   opisTransakcji: {
     marginTop: 5,
-    left: -20,
+    left: 50,
     width: 180,
     fontSize: 14,
     top: '50%',
     letterSpacing: 0,
   },
   kwota: {
+    marginTop: 23,
     fontSize: 16,
-    marginRight: 10,
+    fontWeight: '500',
+    position: 'absolute',
+    right: 10,
     textAlign: 'right',
-    
   },
   dateRow: {
    

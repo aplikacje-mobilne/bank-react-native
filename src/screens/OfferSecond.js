@@ -51,8 +51,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12, 
     marginBottom: 5,
-    marginLeft: 10,
-    marginLeft: 10,
+    
   
   },
   rectangle: {

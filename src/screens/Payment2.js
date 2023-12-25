@@ -23,7 +23,7 @@ const Payment2 = ({navigation}) => {
         const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
         if (storedLoggedInUser) {
           const parsedUser = JSON.parse(storedLoggedInUser);
-          const userLogin = parsedUser.login; // Załóżmy, że pole login zawiera login użytkownika
+          const userLogin = parsedUser.login;
           setLoggedInUser(userLogin);
         }
       } catch (error) {
@@ -39,10 +39,9 @@ const Payment2 = ({navigation}) => {
       try {
         const response = await axios.get(`${API_CONFIG.BASE_URL}/users?tel=${nr_telefonu}`);
         if (response.data.length > 0) {
-          const toUser = response.data[0].login; // Załóżmy, że login znajduje się w polu "login" obiektu
-          setUser(toUser); // Ustaw login odbiorcy w stanie komponentu
+          const toUser = response.data[0].login;
+          setUser(toUser);
 
-          // Zapisz login odbiorcy w AsyncStorage
           await AsyncStorage.setItem('toUserLogin', JSON.stringify({ login: toUser }));
         }
       } catch (error) {
@@ -54,7 +53,6 @@ const Payment2 = ({navigation}) => {
   }, [nr_telefonu]);
 
   const checknrtel = async (nrtel) => {
-    // Sprawdzenie, czy istnieje odbiorca o podanym imieniu w bazie users
     try {
       const response = await axios.get(`${API_CONFIG.BASE_URL}/users?tel=${nrtel}`);
       return response.data.length > 0;
@@ -64,31 +62,35 @@ const Payment2 = ({navigation}) => {
     }
   };
   const handleCheck = async () => {
+  try {
+    // Check if the recipient with the provided phone number exists
+    const recipientResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?phoneNumber=${nr_telefonu}`);
 
-    const recipientExists = await checknrtel(nr_telefonu);
-    if (!recipientExists) {
+    if (recipientResponse.data.length === 0) {
       Alert.alert('Błąd', 'Odbiorca o podanym numerze telefonu nie istnieje.');
       return;
     }
 
-    try {
-      // Tworzenie obiektu z danymi do wysłania
-      await axios.post("http://192.168.1.193:3001/transaction", {
-        loggedInUser,
-        tytul,
-        toUser,
-        opis,
-        kwota
-      });
+    const recipientAccountNumber = recipientResponse.data[0].nrkonta;
 
-      alert('Przelew udany');
-      navigation.goBack();
-      // Przetworzenie odpowiedzi, np. obsługa komunikatu zwrotnego
-      //console.log('Odpowiedź z serwera:', response.data);
+    const transactionResponse = await axios.post(`${API_CONFIG.BASE_URL}/transaction`, {
+      loggedInUser,
+      tytul,
+      opis,
+      kwota,
+      toUserLogin: recipientResponse.data[0].login,
+      recipientAccountNumber,
+      dataTransakcji: new Date().toISOString(),
 
-    } catch (error) {
-      console.error('Błąd podczas wysyłania danych:', error);
-    }
+    });
+
+    Alert.alert('Przelew udany');
+    navigation.goBack();
+    // console.log('Odpowiedź z serwera:', transactionResponse.data);
+
+  } catch (error) {
+    console.error('Błąd podczas wysyłania danych:', error);
+  }
   };
 
   return (
