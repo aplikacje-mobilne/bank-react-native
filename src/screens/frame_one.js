@@ -45,10 +45,10 @@ const Frame = () => {
                     <Text style={styles.tekst1}>POLSKI BANK KRW</Text>
                     <TouchableOpacity style={styles.group} onPress={goToFrameThree}>
                         <View style={styles.overlapGroup}>
-                            <Text style={styles.tekst2}>Zaloguj się</Text>
+                            <Text style={styles.tekst2}>Log IN</Text>
                         </View>
                     </TouchableOpacity>
-                <Text style={styles.nieMaszKontaZaJe} onPress={goToFrameTwo}>Nie masz konta? Załóż je tutaj</Text>
+                <Text style={styles.nieMaszKontaZaJe} onPress={goToFrameTwo}>Don't you have an account? Sign up here</Text>
 
                 </View>
 

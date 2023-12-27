@@ -5,6 +5,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
 import Header from '../components/Header';
+
 const ListScreen = () => {
   const [users, setUsers] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -38,16 +39,9 @@ const ListScreen = () => {
 
   const fetchTransactionHistory = async () => {
     try {
-      const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
-      console.log('Stored Logged In User for Transaction:', storedLoggedInUser);
-      if (storedLoggedInUser) {
-        const loggedInUser = JSON.parse(storedLoggedInUser).login;
-        console.log('Parsed Logged In User for Transaction:', loggedInUser);
-
-        const response = await axios.get(`${API_CONFIG.BASE_URL}/transaction`);
-        console.log('Transaction Response:', response.data);
-        setTransactionHistory(response.data.reverse().slice(0, 4));
-      }
+      const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
+      console.log('Transaction Response:', response.data);
+      setTransactionHistory(response.data.reverse().slice(0, 4));
     } catch (error) {
       console.error('Error fetching transaction history:', error);
     }
@@ -57,97 +51,47 @@ const ListScreen = () => {
     fetchUsers();
     fetchLoggedInUser();
     fetchTransactionHistory();
-    }, [isFocused]);
-
+  }, [isFocused]);
 
   return (
     <View>
-      <View style={styles.rectangle1}>
+      <View style={styles.userContainer}>
         {loggedInUser ? (
-          <Text style={styles.loggedInUserText}>Hej, {loggedInUser.name}!</Text>
-          ) : null}
-        <View style={styles.rectangle2}>
-          <Text style={styles.Text2}>Stan konta: </Text>
+          <Text style={styles.loggedInUserText}>Hello, {loggedInUser.name}!</Text>
+        ) : null}
+        <View style={styles.balanceContainer}>
+          <Text style={styles.balanceLabel}>Account Balance: </Text>
           {loggedInUser ? (
-            <Text style={styles.Text3}>{loggedInUser.balance} PLN</Text>
-            ) : (
-              <Text style={styles.Text3}>0.00 PLN</Text>
-              )}
+            <Text style={styles.balanceAmount}>{loggedInUser.balance} PLN</Text>
+          ) : (
+            <Text style={styles.balanceAmount}>0.00 PLN</Text>
+          )}
         </View>
       </View>
-      <View style={styles.rectangle3}>
-        <Text style={styles.Text4}>Ostatnie transakcje:</Text>
+      <View style={styles.transactionContainer}>
+        <Text style={styles.transactionTitle}>Recent Transactions:</Text>
         {transactionHistory.map((transaction, index) => (
-          <View key={index} style={styles.rectangle4}>
-            <Text style={[styles.tytulTransakcji, styles.flexBoxTransakcji]}>{transaction.tytul}</Text>
-            <Text style={[styles.opisTransakcji, styles.flexBoxTransakcji]}>{transaction.opis}</Text>
-            <Text style={{ ...styles.kwota }}>
-              {loggedInUser && transaction.toUserLogin === loggedInUser.login ? `${transaction.kwota} PLN` : `-${transaction.kwota} PLN`}
+          <View key={index} style={styles.transactionItem}>
+            <Text style={styles.transactionDetail}>{transaction.title}</Text>
+            <Text style={styles.transactionAmount}>
+              {loggedInUser && transaction.toUserLogin === loggedInUser.login
+                ? `+${transaction.amount} PLN`
+                : `-${transaction.amount} PLN`}
             </Text>
           </View>
         ))}
         <TouchableOpacity onPress={() => navigation.navigate('History')}>
-          <View style={styles.rectangle5}>
-            <Text style={styles.buttonText}>Więcej</Text>
+          <View style={styles.moreButton}>
+            <Text style={styles.moreButtonText}>More</Text>
           </View>
         </TouchableOpacity>
       </View>
     </View>
-    );
+  );
 };
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  itemContainer: {
-    marginBottom: 16,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    marginTop: 8,
-  },
- 
-  loggedInUserText: {
-    fontSize: 40,
-    marginTop: 8,
-    marginBottom: 8,
-    marginLeft: 20,
-    color: 'white', 
-    
-  },
-  Text2: {
-    fontSize: 20, 
-    marginTop: 5,
-    marginBottom: 10,
-    marginLeft: 10,
-    color: 'white', 
-    
-  },
-  Text3: {
-    fontSize: 32,
-    marginTop: -15, 
-    marginLeft: 10,
-    color: 'white',
-  },
-  Text4: {
-    fontSize: 20,
-    marginTop: 5,
-    marginBottom: 8,
-    alignSelf: 'center',
-    color: 'white',
-  },
-  
-  rectangle1: {
+  userContainer: {
     backgroundColor: '#323643',
     width: 390,
     height: 200,
@@ -155,7 +99,14 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf: 'center',
   },
-  rectangle2: {
+  loggedInUserText: {
+    fontSize: 40,
+    marginTop: 8,
+    marginBottom: 8,
+    marginLeft: 20,
+    color: 'white',
+  },
+  balanceContainer: {
     backgroundColor: '#606470',
     width: 300,
     height: 80,
@@ -164,8 +115,20 @@ const styles = StyleSheet.create({
     marginLeft: 70,
     alignSelf: 'center',
   },
-
-  rectangle3: {
+  balanceLabel: {
+    fontSize: 20,
+    marginTop: 5,
+    marginBottom: 10,
+    marginLeft: 10,
+    color: 'white',
+  },
+  balanceAmount: {
+    fontSize: 32,
+    marginTop: -15,
+    marginLeft: 10,
+    color: 'white',
+  },
+  transactionContainer: {
     backgroundColor: '#323643',
     width: 390,
     height: 400,
@@ -174,69 +137,32 @@ const styles = StyleSheet.create({
     marginTop: 0,
     alignSelf: 'center',
   },
-  rectangle4: {
+  transactionTitle: {
+    fontSize: 20,
+    marginTop: 5,
+    marginBottom: 8,
+    alignSelf: 'center',
+    color: 'white',
+  },
+  transactionItem: {
     backgroundColor: 'white',
     width: 370,
     height: 70,
     borderRadius: 8,
     marginVertical: 10,
     marginTop: 0,
-    paddingLeft:0,
+    paddingLeft: 0,
     alignSelf: 'center',
-
-   // marginBottom: 1,
     overflow: 'hidden',
-    //flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-
-
-  },
-  rectangle5: {
-
-    backgroundColor: '#606470',
-    width: 90, 
-    height: 40, 
-    borderRadius: 50,
-    marginTop: -5,
-    alignSelf: 'center',
-
-  },
-  
-  orangeButton: {
-    position: 'absolute', 
-    backgroundColor: '#FF570C',
-    width: 90, 
-    height: 40, 
-    borderRadius: 50,
-    bottom: 10,
-    right: 10,
-  },
-  buttonText: {
-    fontSize: 17,
-    color: 'white',
-    marginTop: 10,
-    textAlign: 'center', 
-  },
-  kontenerTransakcji: {
-    backgroundColor: 'white',
-    marginBottom: 1,
-    overflow: 'hidden',
-    height: 70,
-    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-
-  flexBoxTransakcji: {
+  transactionDetail: {
     textAlign: 'left',
-    letterSpacing: 0,
     position: 'absolute',
-  },
-  tytulTransakcji: {
-    marginTop: -30,
+    marginTop: -15,
     left: 10,
     width: 240,
     fontWeight: '500',
@@ -245,21 +171,27 @@ const styles = StyleSheet.create({
     top: '50%',
     letterSpacing: 0,
   },
-  opisTransakcji: {
-    marginTop: 5,
-    left: 10,
-    width: 240,
-  fontSize: 14,
-  top: '50%',
-  letterSpacing: 0,
-},
-  kwota: {
+  transactionAmount: {
     marginTop: 23,
     fontSize: 24,
     fontWeight: '500',
     position: 'absolute',
     right: 10,
     textAlign: 'right',
+  },
+  moreButton: {
+    backgroundColor: '#606470',
+    width: 90,
+    height: 40,
+    borderRadius: 50,
+    marginTop: -5,
+    alignSelf: 'center',
+  },
+  moreButtonText: {
+    fontSize: 17,
+    color: 'white',
+    marginTop: 10,
+    textAlign: 'center',
   },
 });
 

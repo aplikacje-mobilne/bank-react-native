@@ -1,21 +1,18 @@
-import React from 'react';
-import { View, Text, StyleSheet,Image,TouchableOpacity,TextInput,Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { styles } from './styles';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
 
-const Payment2 = ({navigation}) => {
-  
-  const [nr_telefonu, setInput1] = useState('');
-  const [tytul, setInput2] = useState('');
-  const [opis, setInput3] = useState('');
-  const [kwota, setInput4] = useState('');
+const Payment2 = ({ navigation }) => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [toUser, setUser] = useState(null);
+  const [toUserLogin, setToUserLogin] = useState(null);
 
   useEffect(() => {
     const fetchLoggedInUser = async () => {
@@ -27,7 +24,7 @@ const Payment2 = ({navigation}) => {
           setLoggedInUser(userLogin);
         }
       } catch (error) {
-        console.error('Błąd podczas pobierania loginu zalogowanego użytkownika:', error);
+        console.error('Error fetching the logged-in user login:', error);
       }
     };
 
@@ -37,103 +34,106 @@ const Payment2 = ({navigation}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_CONFIG.BASE_URL}/users?tel=${nr_telefonu}`);
+        const response = await axios.get(`${API_CONFIG.BASE_URL}/users?phoneNumber=${phoneNumber}`);
         if (response.data.length > 0) {
           const toUser = response.data[0].login;
-          setUser(toUser);
+          setToUserLogin(toUser);
 
           await AsyncStorage.setItem('toUserLogin', JSON.stringify({ login: toUser }));
         }
       } catch (error) {
-        console.error('Błąd podczas pobierania loginu odbiorcy:', error);
+        console.error('Error fetching recipient login:', error);
       }
     };
 
     fetchData();
-  }, [nr_telefonu]);
+  }, [phoneNumber]);
 
-  const checknrtel = async (nrtel) => {
+  const checkPhoneNumber = async (phoneNumber) => {
     try {
-      const response = await axios.get(`${API_CONFIG.BASE_URL}/users?tel=${nrtel}`);
-      return response.data.length > 0;
+      const response = await axios.get(`${API_CONFIG.BASE_URL}/users?phoneNumber=${phoneNumber}`);
+
+      if (response.data && response.data.length > 0) {
+        return response.data;
+      } else {
+        return false;
+      }
     } catch (error) {
-      console.error('Błąd podczas sprawdzania odbiorcy:', error);
+      console.error('Error checking recipient:', error);
       return false;
     }
   };
+
   const handleCheck = async () => {
-  try {
-    const recipientResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?phoneNumber=${nr_telefonu}`);
+    try {
+      const recipientExists = await checkPhoneNumber(phoneNumber);
 
-    if (recipientResponse.data.length === 0) {
-      Alert.alert('Błąd', 'Odbiorca o podanym numerze telefonu nie istnieje.');
-      return;
+      if (!recipientExists) {
+        Alert.alert('Error', 'Recipient with the provided phone number does not exist.');
+        return;
+      }
+
+      const recipientAccountNumber = recipientExists[0].accountNumber;
+
+      const transactionResponse = await axios.post(`${API_CONFIG.BASE_URL}/transactions`, {
+        loggedInUser: loggedInUser,
+        title: title,
+        description: description,
+        type: 'mobile',
+        amount: parseFloat(amount),
+        toUserLogin: toUserLogin,
+        recipientAccountNumber: recipientAccountNumber,
+        transactionDate: new Date().toISOString(),
+      });
+
+      Alert.alert('Transfer successful');
+      navigation.goBack();
+      // console.log('Server response:', transactionResponse.data);
+
+    } catch (error) {
+      console.error('Error sending data:', error);
     }
-
-    const recipientAccountNumber = recipientResponse.data[0].nrkonta;
-
-    const transactionResponse = await axios.post(`${API_CONFIG.BASE_URL}/transaction`, {
-      loggedInUser,
-      tytul,
-      opis,
-      kwota,
-      toUserLogin: recipientResponse.data[0].login,
-      recipientAccountNumber,
-      dataTransakcji: new Date().toISOString(),
-
-    });
-
-    Alert.alert('Przelew udany');
-    navigation.goBack();
-    // console.log('Odpowiedź z serwera:', transactionResponse.data);
-
-  } catch (error) {
-    console.error('Błąd podczas wysyłania danych:', error);
-  }
   };
 
   return (
     <View style={styles.header}>
-        <View style={styles.sectionContainerp1}>
-            <View style={styles.sectionContent}>
-            <Icon name="mobile" light size={35}/>
-                <Text style={styles.sectionText}>Przelew Na Telefon</Text>
-            </View>
+      <View style={styles.sectionContainerp1}>
+        <View style={styles.sectionContent}>
+          <Icon name="mobile" light size={35} />
+          <Text style={styles.sectionText}>Mobile Transfer</Text>
         </View>
-        <View style={styles.sectionContainer}>
-       
-        
+      </View>
+      <View style={styles.sectionContainer}>
         <TextInput
-        style={styles.input}
-        placeholder="Numer Telefonu Odbiorcy:"
-        value={nr_telefonu}
-        onChangeText={(text) => setInput1(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Tytuł:"
-        value={tytul}
-        onChangeText={(text) => setInput2(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Opis:"
-        value={opis}
-        onChangeText={(text) => setInput3(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Kwota:"
-        value={kwota}
-        onChangeText={(text) => setInput4(text)}
-      />
-      <TouchableOpacity style={styles.check} onPress={handleCheck}>
-        <Text style={styles.pp}>Check</Text>
-      </TouchableOpacity>
-        </View>
+          style={styles.input}
+          placeholder="Recipient's Phone Number:"
+          value={phoneNumber}
+          onChangeText={(text) => setPhoneNumber(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Title:"
+          value={title}
+          onChangeText={(text) => setTitle(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Description:"
+          value={description}
+          onChangeText={(text) => setDescription(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Amount:"
+          value={amount}
+          onChangeText={(text) => setAmount(text)}
+        />
+        <TouchableOpacity style={styles.check} onPress={handleCheck}>
+          <Text style={styles.pp}>Check</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-  );
+    );
 };
-
 
 export default Payment2;
