@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Pressable, TextInput, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import API_CONFIG from '../components/config'; // Import API_CONFIG
 
 const Edit7 = ({ navigation }) => {
     const [oldPass, setOldPass] = useState("");

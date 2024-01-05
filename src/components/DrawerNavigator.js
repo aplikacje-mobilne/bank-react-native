@@ -9,7 +9,6 @@ import History from '../screens/History';
 import Payment from '../screens/Payment';
 import Offers from '../screens/Offers';
 import Edit from '../screens/Edit';
-
 import AddScreen from '../screens/AddScreen';
 import EditScreen from '../screens/EditScreen';
 import { Ionicons } from '@expo/vector-icons';

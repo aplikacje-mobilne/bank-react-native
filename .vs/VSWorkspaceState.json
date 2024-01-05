@@ -1,14 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\components",
-    "\\src\\screens"
+    ""
   ],
-<<<<<<< HEAD
-  "SelectedNode": "\\src\\screens\\RegisterScreen.js",
-=======
-  "SelectedNode": "\\src\\screens\\Edit4.js",
->>>>>>> cd9fa926affa4d40815cf8f202daf1e5822e9351
+  "SelectedNode": "\\ReactNativeAsyncStorage.sln",
   "PreviewInSolutionExplorer": false
 }
