@@ -3,8 +3,26 @@ import { View, Text, StyleSheet } from 'react-native';
 import CheckBox from 'react-native-checkbox';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
-const Edit4 = ({ navigation }) => {
+import { useNavigation } from '@react-navigation/native';
+import Login from '../screens/Login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const Edit5 = () => {
+    const navigation = useNavigation();
     const [isChecked, setChecked] = useState(false);
+    const handleLogout = async () => {
+        try {
+            // Clear user data from AsyncStorage or perform any other necessary cleanup
+            await AsyncStorage.removeItem('token');
+            await AsyncStorage.removeItem('loggedInUser');
+
+            // Przejdź do ekranu "Login" przy użyciu nawigacji prop
+            navigation.navigate('Login');
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
+
+
     return (
         <View style={styles.container}>
             <View style={styles.div}>
@@ -16,10 +34,7 @@ const Edit4 = ({ navigation }) => {
 
                 <TouchableOpacity
                     style={styles.wyrejestrujBtn}
-                    onPress={() => {
-                        console.log("Navigating to frame_one");
-                        navigation.navigate('DrawerNavigator', { screen: 'frame_one' });
-                    }}
+                    onPress={handleLogout}
                 >
                     <Text style={styles.wyrejestrujText}>Wyrejestruj KRW</Text>
                 </TouchableOpacity>
@@ -92,4 +107,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Edit4;
+export default Edit5;

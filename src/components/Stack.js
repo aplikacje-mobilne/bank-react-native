@@ -57,7 +57,7 @@ const StackNav = () => {
                   <Stack.Screen name="Edit7" component={Edit7} />
                   <Stack.Screen name="Payment1" component={Payment1} />
                   <Stack.Screen name="Payment2" component={Payment2} />
-         
+
                   <Stack.Screen name="OfferFirst" component={OfferFirst} />
                   <Stack.Screen name="OfferSecond" component={OfferSecond} />
                   <Stack.Screen name="OfferThird" component={OfferThird} />
