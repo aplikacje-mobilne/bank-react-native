@@ -52,6 +52,22 @@ const Payment2 = ({navigation}) => {
     fetchData();
   }, [nr_telefonu]);
 
+    useEffect(() => {
+        const fetchCheckboxState = async () => {
+            try {
+                const receiveTransfersOnPhoneJson = await AsyncStorage.getItem('receiveTransfersOnPhone');
+                if (receiveTransfersOnPhoneJson) {
+                    const receiveTransfersOnPhone = JSON.parse(receiveTransfersOnPhoneJson);
+                    // Use the checkbox state as needed
+                }
+            } catch (error) {
+                console.error('Error fetching checkbox state:', error);
+            }
+        };
+
+        fetchCheckboxState();
+    }, []);
+
   const checknrtel = async (nrtel) => {
     try {
       const response = await axios.get(`${API_CONFIG.BASE_URL}/users?tel=${nrtel}`);

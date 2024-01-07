@@ -1,13 +1,15 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Portret from "./zdj.png";
+import { useRoute } from '@react-navigation/native';
+
 const Edit2 = ({ navigation }) => {
     const [userData, setUserData] = useState(null);
+    const [capturedPhotoUri, setCapturedPhotoUri] = useState(null);
+    const route = useRoute();
 
     useEffect(() => {
-        // Fetch user data from AsyncStorage
         const fetchUserData = async () => {
             try {
                 const userJson = await AsyncStorage.getItem('loggedInUser');
@@ -16,23 +18,60 @@ const Edit2 = ({ navigation }) => {
                     setUserData(user);
                 }
             } catch (error) {
-                console.error("Error fetching user data:", error);
+                console.error('Error fetching user data:', error);
             }
         };
 
         fetchUserData();
     }, []);
 
+    useEffect(() => {
+        if (route.params && route.params.capturedPhotoUri) {
+            console.log('Captured Photo URI from route:', route.params.capturedPhotoUri);
+            setCapturedPhotoUri(route.params.capturedPhotoUri);
+        }
+    }, [route.params]);
+
+    useEffect(() => {
+        const fetchCapturedPhotoUri = async () => {
+            try {
+                const userId = userData ? userData.id : null;
+                const uri = await AsyncStorage.getItem(`capturedPhotoUri_${userId}`);
+                if (uri) {
+                    setCapturedPhotoUri(uri);
+                }
+            } catch (error) {
+                console.error('Error fetching captured photo URI:', error);
+            }
+        };
+
+        fetchCapturedPhotoUri();
+    }, [userData]);
+
+    const openCamera = () => {
+        navigation.navigate('TakePhoto');
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.div}>
-                <View style={styles.wiersz2b}>
-                    <View style={styles.wiersz2}>
-                        <Image style={styles.zdj} source={Portret} />
-                    </View>
-                    <Icon name="camera" size={60}></Icon>
-                </View>
+                    <View style={styles.wiersz2b}>
 
+                        {capturedPhotoUri && (
+                            <Image
+                                source={{ uri: capturedPhotoUri }}
+                                style={styles.previewImage}
+                                width={200}
+                                height={200}
+                            />
+                    )}
+                    <TouchableOpacity
+                        style={styles.wiersz2b}
+                        onPress={() => navigation.navigate('TakePhoto')}
+                    >
+                        <Icon name="camera" size={60} color="#fff" style={styles.cameraIcon} />
+                </TouchableOpacity>
+                </View>
                 <View style={styles.wiersz1b}>
                     <View style={styles.wiersz1}>
                         <Text style={styles.text2}>Imię i nazwisko</Text>
@@ -77,7 +116,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        backgroundColor: 'f7f7f7',
+        backgroundColor: '#f7f7f7',
         width: '100%',
     },
     wiersz1: {
@@ -93,7 +132,8 @@ const styles = StyleSheet.create({
     },
     wiersz2: {
         display: 'flex',
-
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     wiersz2b: {
         backgroundColor: '#323643',
@@ -103,13 +143,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: '50%',
         justifyContent: 'flex-start',
-        alignItems:'center',
+        alignItems: 'center',
     },
-    zdj: {
-
+    previewImage: {
         objectFit: 'scale-down',
-        height: '80%',
-
     },
 });
 

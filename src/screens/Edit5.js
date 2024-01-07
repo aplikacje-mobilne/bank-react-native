@@ -1,22 +1,27 @@
 ﻿import { TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
-import CheckBox from 'react-native-checkbox';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Login from '../screens/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CommonActions } from '@react-navigation/native';
 const Edit5 = () => {
     const navigation = useNavigation();
     const [isChecked, setChecked] = useState(false);
     const handleLogout = async () => {
         try {
             // Clear user data from AsyncStorage or perform any other necessary cleanup
-            await AsyncStorage.removeItem('token');
-            await AsyncStorage.removeItem('loggedInUser');
+            //await AsyncStorage.removeItem('token');
+            //await AsyncStorage.removeItem('loggedInUser');
 
             // Przejdź do ekranu "Login" przy użyciu nawigacji prop
-            navigation.navigate('Login');
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'frame_one' }],
+                })
+            );
         } catch (error) {
             console.error('Error during logout:', error);
         }
@@ -29,14 +34,14 @@ const Edit5 = () => {
                 <View style={styles.div2}>
                     <Icon name="exclamation" size={100} color="#606470" />
                     </View>
-                <Text style={styles.tekst1} >Czy na pewno chcesz wyrejestrować aplikację na tym urządzeniu?</Text>
-                <Text style={styles.tekst2} >Po wyrejestrowaniu korzystanie z aplikacji KRW nie będzie możliwe - będzie trzeba ją ponownie zarejestrować i aktywnować.</Text>
+                <Text style={styles.tekst1} >Czy na pewno chcesz wylogować się na tym urządzeniu?</Text>
+                <Text style={styles.tekst2} >Po wylogowaniu korzystanie z aplikacji KRW nie będzie możliwe - będzie trzeba się ponownie zalogować.</Text>
 
                 <TouchableOpacity
                     style={styles.wyrejestrujBtn}
                     onPress={handleLogout}
                 >
-                    <Text style={styles.wyrejestrujText}>Wyrejestruj KRW</Text>
+                    <Text style={styles.wyrejestrujText}>Wyloguj</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -60,6 +65,7 @@ const styles = StyleSheet.create({
         marginTop: '1%',
         alignSelf: 'center',
         paddingTop: '10%',
+        borderRadius: 6,
     },
     tekst1: {
         fontSize: 18,

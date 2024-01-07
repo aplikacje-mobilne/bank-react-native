@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import API_CONFIG from '../components/config'
+import { CommonActions } from '@react-navigation/native';
 export function Login({ setIsLoggedIn }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +21,9 @@ export function Login({ setIsLoggedIn }) {
       const user = users.find((user) => user.login === login && user.pass === password);
 
       if (user) {
-        await AsyncStorage.setItem('loggedInUser', JSON.stringify(user));
-        setIsLoggedIn(true);
+          await AsyncStorage.setItem('loggedInUser', JSON.stringify(user));
+          setIsLoggedIn(true);
+
       } else {
         alert('Invalid login or password');
       }
