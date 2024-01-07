@@ -24,6 +24,8 @@ const StackNavigator = () => {
             <Stack.Screen
                 name="Login"
                 component={Login}
+                options={optionScreen}
+                initialParams={{ setIsLoggedIn }}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>

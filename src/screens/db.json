@@ -10,6 +10,7 @@
       "nrkonta": "123456",
       "balance": 1000,
       "id": 1
+
     },
     {
       "name": "jakub",
@@ -21,6 +22,7 @@
       "nrkonta": "666333",
       "balance": 500,
       "id": 2
+
     },
     {
       "name": "qwe",
@@ -32,6 +34,7 @@
       "balance": 1000,
       "nrkonta": "909090",
       "id": 3
+
     }
   ],
   "transaction": [
@@ -164,16 +167,6 @@
       "recipientAccountNumber": "666333",
       "dataTransakcji": "2023-12-22T08:51:48.839Z",
       "id": 13
-    },
-    {
-      "loggedInUser": "admin",
-      "tytul": "Mozna",
-      "opis": "Test checkbox",
-      "kwota": "102",
-      "toUserLogin": "qwe",
-      "recipientAccountNumber": "909090",
-      "dataTransakcji": "2024-01-07T18:00:02.501Z",
-      "id": 14
     }
   ]
 }
