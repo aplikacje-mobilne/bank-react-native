@@ -8,35 +8,25 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CommonActions } from '@react-navigation/native';
 const Edit5 = () => {
     const navigation = useNavigation();
-    const [isChecked, setChecked] = useState(false);
+
     const handleLogout = async () => {
         try {
-            // Clear user data from AsyncStorage or perform any other necessary cleanup
-            //await AsyncStorage.removeItem('token');
-            //await AsyncStorage.removeItem('loggedInUser');
+            await AsyncStorage.removeItem('loggedInUser');
 
-            // Przejdź do ekranu "Login" przy użyciu nawigacji prop
-            navigation.dispatch(
-                CommonActions.reset({
-                    index: 0,
-                    routes: [{ name: 'frame_one' }],
-                })
-            );
+            navigation.navigate('frame_one');
         } catch (error) {
-            console.error('Error during logout:', error);
+            console.error("Error during logout:", error);
         }
     };
-
 
     return (
         <View style={styles.container}>
             <View style={styles.div}>
                 <View style={styles.div2}>
                     <Icon name="exclamation" size={100} color="#606470" />
-                    </View>
-                <Text style={styles.tekst1} >Czy na pewno chcesz wylogować się na tym urządzeniu?</Text>
-                <Text style={styles.tekst2} >Po wylogowaniu korzystanie z aplikacji KRW nie będzie możliwe - będzie trzeba się ponownie zalogować.</Text>
-
+                </View>
+                <Text style={styles.tekst1}>Czy na pewno chcesz wylogować się na tym urządzeniu?</Text>
+                <Text style={styles.tekst2}>Po wylogowaniu korzystanie z aplikacji KRW nie będzie możliwe - będzie trzeba się ponownie zalogować.</Text>
                 <TouchableOpacity
                     style={styles.wyrejestrujBtn}
                     onPress={handleLogout}
@@ -47,6 +37,7 @@ const Edit5 = () => {
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {

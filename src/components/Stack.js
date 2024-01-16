@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState, useRef } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DrawerNavigator from './DrawerNavigator';
@@ -19,6 +19,7 @@ import OfferThird from '../screens/OfferThird';
 import TakePhoto from '../screens/TakePhoto';
 import PhotoDisplay from '../screens/PhotoDisplay';
 
+
 const Stack = createNativeStackNavigator();
 
 const optionScreen = {
@@ -27,6 +28,7 @@ const optionScreen = {
 
 const StackNav = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const stackRef = useRef(null);
 
     useEffect(() => {
         const checkLoginStatus = async () => {
@@ -38,33 +40,31 @@ const StackNav = () => {
     }, []);
 
     return (
-        <Stack.Navigator>
+        <Stack.Navigator ref={stackRef}>
             {isLoggedIn ? (
                 <Stack.Screen
                     name="DrawerNavigator"
                     component={DrawerNavigator}
                     options={{ headerShown: false }}
                 />
-            ) : (
-                <>
-                    <Stack.Screen
-                        name="frame_one"
-                        component={frame_one}
-                        options={optionScreen}
+            ) : null}
+
+            <Stack.Screen
+                name="frame_one"
+                component={frame_one}
+                options={optionScreen}
+            />
+            <Stack.Screen
+                name="Login"
+                options={optionScreen}
+                children={({ navigation }) => (
+                    <Login
+                        setIsLoggedIn={setIsLoggedIn}
+                        navigation={navigation}
                     />
-                    <Stack.Screen
-                        name="Login"
-                        options={optionScreen}
-                        children={({ navigation }) => (
-                            <Login
-                                setIsLoggedIn={setIsLoggedIn}
-                                navigation={navigation}
-                            />
-                        )}
-                    />
-                    <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-                </>
-            )}
+                )}
+            />
+            <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
             <Stack.Screen name="Edit2" component={Edit2} options={{ title: 'Dane i personalizacja' }} />
             <Stack.Screen name="Edit3" component={Edit3} options={{ title: 'Bezpieczeństwo' }} />
             <Stack.Screen name="Edit4" component={Edit4} options={{ title: 'Płatność' }} />

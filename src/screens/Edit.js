@@ -46,7 +46,7 @@ const Edit = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="power-off" size={30} marginLeft={10} color="black" />
-                            <Text style={styles.text}>Wyrejestruj aplikację</Text>
+                            <Text style={styles.text}>Wyloguj się z aplikacji</Text>
                         </View>
                         <Text style={styles.text2}>Gdy zmieniasz numer telefonu lub urządzenie</Text>
                     </View>

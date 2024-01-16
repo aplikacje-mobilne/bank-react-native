@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\screens"
   ],
-  "SelectedNode": "\\ReactNativeAsyncStorage.sln",
+  "SelectedNode": "\\src\\screens\\TakePhoto.js",
   "PreviewInSolutionExplorer": false
 }
