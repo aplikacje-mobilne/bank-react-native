@@ -1,86 +1,272 @@
 {
-  "user": [
-    {
-      "login": "123",
-      "password": "123"
-    },
-    {
-      "login": "456",
-      "password": "456"
-    }
-  ],
-  "items": [
-    {
-      "name": "jjjjjjjjewq",
-      "quantity": "126",
-      "id": 11
-    },
-    {
-      "name": "fds",
-      "quantity": 5,
-      "id": 12
-    }
-  ],
   "users": [
     {
-      "id": 1,
       "name": "patryk",
+      "surname": "g",
       "login": "admin",
-      "pass": "pass"
+      "pass": "pass",
+      "email": "patry.gubala",
+      "phoneNumber": "111222333",
+      "accountNumber": "123456",
+      "balance": 1012,
+      "id": 1,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false
     },
     {
-      "id": 2,
-      "name": "3",
+      "name": "jakub",
+      "surname": "h",
       "login": "admin2",
-      "pass": "pass2"
+      "pass": "pass2",
+      "email": "jakub.h",
+      "phoneNumber": "333222111",
+      "accountNumber": "666333",
+      "balance": 1055,
+      "id": 2,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false
     },
     {
-      "name": "ff",
-      "login": "f",
-      "pass": "12",
+      "name": "qwe",
+      "surname": "qwe",
+      "login": "qwe",
+      "pass": "qwe",
+      "email": "qwe",
+      "phoneNumber": "123123123",
+      "balance": 933,
+      "id": 3,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false
+    }
+  ],
+  "transactions": [
+    {
+      "loggedInUser": "admin",
+      "title": "title1",
+      "toUserLogin": "admin2",
+      "description": "description1",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-18T12:34:44",
+      "id": 1
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "title2",
+      "toUserLogin": "admin2",
+      "description": "description2",
+      "type": "mobile",
+      "amount": 100,
+      "transactionDate": "2023-12-20T12:34:44",
+      "id": 2
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "title3",
+      "toUserLogin": "admin2",
+      "description": "description3",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:44",
       "id": 3
     },
     {
-      "name": "123",
-      "login": "ff",
-      "pass": "12",
+      "loggedInUser": "admin2",
+      "title": "dsd",
+      "toUserLogin": "admin",
+      "description": "dsd",
+      "type": "mobile",
+      "amount": 12345,
+      "transactionDate": "2023-12-21T12:34:56",
       "id": 4
     },
     {
-      "name": "kuba",
-      "login": "kubson",
-      "pass": "123",
+      "loggedInUser": "admin2",
+      "title": "title",
+      "toUserLogin": "admin",
+      "description": "description",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:36",
       "id": 5
     },
     {
-      "name": "patryk",
-      "login": "fff",
-      "pass": "12",
+      "loggedInUser": "admin",
+      "title": "title1",
+      "toUserLogin": "admin2",
+      "description": "description1",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-18T12:34:44",
       "id": 6
     },
     {
-      "name": "p",
-      "login": "p",
-      "pass": "p",
+      "loggedInUser": "admin",
+      "title": "title2",
+      "toUserLogin": "admin2",
+      "description": "description2",
+      "type": "mobile",
+      "amount": 100,
+      "transactionDate": "2023-12-20T12:34:44",
       "id": 7
     },
     {
-      "name": "kuba123",
-      "login": "kuba",
-      "pass": "kuba",
+      "loggedInUser": "admin",
+      "title": "title3",
+      "toUserLogin": "admin2",
+      "description": "description3",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:44",
       "id": 8
     },
     {
-      "name": "",
-      "login": "",
-      "pass": "",
+      "loggedInUser": "admin2",
+      "title": "dsd",
+      "toUserLogin": "admin",
+      "description": "dsd",
+      "type": "mobile",
+      "amount": 12345,
+      "transactionDate": "2023-12-21T12:34:56",
       "id": 9
     },
     {
-      "name": "1",
-      "login": "1",
-      "pass": "1",
+      "loggedInUser": "admin2",
+      "title": "title",
+      "toUserLogin": "admin",
+      "description": "description",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:36",
       "id": 10
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Payment1",
+      "toUserLogin": "admin2",
+      "description": "Description payment1",
+      "type": "normal",
+      "amount": 10,
+      "transactionDate": "2023-12-22T08:31:51.051Z",
+      "id": 11
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Phonepayment",
+      "description": "Description phone payment",
+      "type": "mobile",
+      "amount": 10,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2023-12-22T08:47:02.402Z",
+      "id": 12
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Tytulll",
+      "description": "Description",
+      "amount": 5,
+      "type": "normal",
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2023-12-22T08:51:48.839Z",
+      "id": 13
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Telefon1",
+      "description": "Test",
+      "type": "mobile",
+      "amount": 10,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2023-12-27T14:32:55.980Z",
+      "id": 14
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Eng trn",
+      "description": "Desc",
+      "type": "mobile",
+      "amount": 5,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2023-12-27T18:29:12.453Z",
+      "id": 15
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Ppp",
+      "toUserLogin": "admin2",
+      "description": "Ppp",
+      "type": "ordinary",
+      "amount": 213,
+      "transactionDate": "2024-01-17T19:18:04.709Z",
+      "id": 16
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Pppppp",
+      "description": "Llll",
+      "type": "mobile",
+      "amount": 12,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2024-01-17T19:47:23.624Z",
+      "id": 17
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Pppppp",
+      "description": "Llll",
+      "type": "mobile",
+      "amount": 12,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2024-01-17T19:48:08.945Z",
+      "id": 18
+    },
+    {
+      "loggedInUser": "qwe",
+      "title": "Ppndfhh",
+      "description": "Xxxx",
+      "type": "mobile",
+      "amount": 32,
+      "toUserLogin": "admin",
+      "recipientAccountNumber": "123456",
+      "transactionDate": "2024-01-17T19:50:26.021Z",
+      "id": 19
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Pl.",
+      "description": "To na ss",
+      "type": "mobile",
+      "amount": 32,
+      "toUserLogin": "qwe",
+      "transactionDate": "2024-01-17T19:58:17.100Z",
+      "id": 20
+    },
+    {
+      "loggedInUser": "qwe",
+      "title": "Zakupy",
+      "toUserLogin": "admin2",
+      "description": "Na obiad",
+      "type": "normal",
+      "amount": 55,
+      "transactionDate": "2024-01-17T20:00:21.805Z",
+      "id": 21
+    },
+    {
+      "loggedInUser": "qwe",
+      "title": "Patryk",
+      "description": "Lll",
+      "type": "mobile",
+      "amount": 12,
+      "toUserLogin": "admin",
+      "recipientAccountNumber": "123456",
+      "transactionDate": "2024-01-17T20:46:09.284Z",
+      "id": 22
     }
   ]
 }

@@ -1,37 +1,48 @@
 import React, { useState } from 'react';
 import { Text, View, Pressable, TextInput, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import API_CONFIG from '../components/config';
 
 const RegisterScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
   const [pass2, setPass2] = useState("");
   const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [balance, setBalance] = useState(1000);
+
+
 
   const handleRegister = async () => {
     try {
       if (pass !== pass2) {
-        Alert.alert("Błąd", "Hasła nie są identyczne");
+        Alert.alert("Error", "Password are not the same");
         return;
       }
-      const loginCheckResponse = await axios.get(`http://192.168.1.20:3001/users?login=${login}`);
+      const loginCheckResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?login=${login}`);
       const isLoginUnique = !loginCheckResponse.data || loginCheckResponse.data.length === 0;
 
       if (!isLoginUnique) {
-        Alert.alert("Błąd", "Podany login już istnieje. Wybierz inny login.");
+        Alert.alert("Error", "This login already exists.");
         return;
       }
 
-      await axios.post("http://192.168.1.20:3001/users", {
+      await axios.post(`${API_CONFIG.BASE_URL}/users`, {
         name,
+        surname,
         login,
         pass,
+        email,
+        phoneNumber,
+        balance,
       });
 
-      alert('Rejestracja udana');
+      alert('Registration successful');
       navigation.goBack();
     } catch (error) {
-      console.error("Błąd podczas rejestracji:", error);
+      console.error("Registration error ", error);
     }
   };
 
@@ -40,21 +51,42 @@ const RegisterScreen = ({ navigation }) => {
           <View style={registerStyles.inputy}>
       <TextInput
         style={registerStyles.input}
-        placeholder="NAME"
+        placeholder="Imię"
         placeholderTextColor="#808080"
         value={name}
         onChangeText={(text) => setName(text)}
       />
+       <TextInput
+        style={registerStyles.input}
+        placeholder="Nazwisko"
+        placeholderTextColor="#808080"
+        value={surname}
+        onChangeText={(text) => setSurname(text)}
+      />
+        <TextInput
+        style={registerStyles.input}
+        placeholder="E-mail"
+        placeholderTextColor="#808080"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
+        <TextInput
+        style={registerStyles.input}
+        placeholder="Numer telefonu"
+        placeholderTextColor="#808080"
+        value={phoneNumber}
+        onChangeText={(text) => setPhoneNumber(text)}
+      />
       <TextInput
         style={registerStyles.input}
-        placeholder="LOGIN"
+        placeholder="Login"
         placeholderTextColor="#808080"
         value={login}
         onChangeText={(text) => setLogin(text)}
       />
       <TextInput
         style={registerStyles.input}
-        placeholder="PASS"
+        placeholder="Hasło"
         placeholderTextColor="#808080"
         secureTextEntry
         value={pass}
@@ -62,7 +94,7 @@ const RegisterScreen = ({ navigation }) => {
       />
       <TextInput
         style={registerStyles.input}
-        placeholder="PASS2"
+        placeholder="Powtórz hasło"
         placeholderTextColor="#808080"
         secureTextEntry
         value={pass2}

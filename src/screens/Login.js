@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
-import { Text, View, Pressable, TextInput, StyleSheet, Button } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import API_CONFIG from '../components/config'
+import { CommonActions } from '@react-navigation/native';
 export function Login({ setIsLoggedIn }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-  const handleLogin = async () => {
-    try {
-      const response = await axios.get("http://192.168.8.179:3001/users");
+    const handleLogin = async () => {
+        try {
+            const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
 
-      if (!response.data) {
-        console.log("User not found.");
-      }
+            if (!response.data) {
+                console.log("User not found.");
+                return;
+            }
 
-      const users = response.data || [];
-      const user = users.find((user) => user.login === login && user.pass === password);
+            const users = response.data || [];
+            const user = users.find((user) => user.login === login && user.pass === password);
 
-      if (user) {
-        await AsyncStorage.setItem('loggedInUser', JSON.stringify(user));
-        setIsLoggedIn(true);
+            if (user) {
+                await AsyncStorage.setItem('loggedInUser', JSON.stringify(user));
+                setIsLoggedIn(true);
+
+                // Przykładowy kod nawigacji do ekranu DrawerNavigator po zalogowaniu
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [{ name: 'DrawerNavigator' }],
+                    })
+                );
+
       } else {
         alert('Invalid login or password');
       }
@@ -36,7 +48,7 @@ export function Login({ setIsLoggedIn }) {
 
   return (
     <View style={loginStyles.container}>
-      <Text style={loginStyles.title}>LOGOWANIE</Text>
+      <Text style={loginStyles.title}>Zaloguj się do konta</Text>
       <TextInput
         style={loginStyles.input}
         placeholder="Login"
@@ -52,12 +64,11 @@ export function Login({ setIsLoggedIn }) {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Pressable style={loginStyles.loginBtn} onPress={handleLogin}>
-        <Text style={loginStyles.loginText}>LOGIN</Text>
-      </Pressable>
-      <Pressable style={loginStyles.loginBtn} onPress={handleRegister}>
-        <Text style={loginStyles.loginText}>REGISTER</Text>
-      </Pressable>
+      <TouchableOpacity style={loginStyles.orangeButton} onPress={handleLogin}>
+        <Text style={loginStyles.buttonText}>Zaloguj</Text>
+      </TouchableOpacity>
+      
+     
     </View>
     );
 }
@@ -70,7 +81,6 @@ const loginStyles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
     marginBottom: 20,
   },
   input: {
@@ -81,15 +91,21 @@ const loginStyles = StyleSheet.create({
     marginBottom: 20,
     padding: 10,
   },
-  loginBtn: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
+  
+  orangeButton: {
+    backgroundColor: '#FF570C',
+    width: 200, 
+    height: 40, 
+    borderRadius: 50,
+    bottom: 5,
+    right: 10,
   },
-  loginText: {
+  buttonText: {
+    fontSize: 15,
     color: 'white',
-    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 10,
+    textAlign: 'center', 
   },
 });
 
