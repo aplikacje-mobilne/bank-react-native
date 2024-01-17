@@ -1,111 +1,78 @@
-﻿// navigation/DrawerNavigator.js
-
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text } from 'react-native';
+import { styles } from '../screens/styles';
 
 import ListScreen from '../screens/ListScreen';
 import History from '../screens/History';
 import Payment from '../screens/Payment';
 import Offers from '../screens/Offers';
 import Edit from '../screens/Edit';
-import frame_one from '../screens/frame_one';
-import AddScreen from '../screens/AddScreen';
-import EditScreen from '../screens/EditScreen';
-import { Ionicons } from '@expo/vector-icons';
-import { Octicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-
-
+import { Feather } from '@expo/vector-icons';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function MyDrawer() {
-    return (
-        /*
-        <Drawer.Navigator   >
-          <Drawer.Screen name="ListScreen" component={ListScreen} />
-          <Drawer.Screen name="AddScreen" component={AddScreen} />
-          
-        </Drawer.Navigator>
-        */
+const MyDrawer = ({setIsLoggedIn}) => {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarActiveTintColor: '#FF570C',
+        tabBarInactiveTintColor: '#606470',
+        tabBarStyle: styles.tabBar,
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+          switch (route.name) {
+            case 'Home':
+              iconName = 'home';
+              break;
+            case 'History':
+              iconName = 'clock';
+              break;
+            case 'Payment':
+              iconName = 'arrow-up-circle';
+              break;
+            case 'Offers':
+              iconName = 'credit-card';
+              break;
+            case 'Edit':
+              iconName = 'settings';
+              break;
+            default:
+              iconName = 'circle';
+          }
 
-        <Tab.Navigator screenOptions={{
-            tabBarActiveTintColor: '#FF570C',
-            tabBarStyle: [
-                {
-                    display: 'flex',
-                },
-                null,
-            ],
-        }}>
-
-            <Tab.Screen
-                name="Menu"
-                component={ListScreen}
-                options={{
-
-                    tabBarLabel: 'Menu',
-                    tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="ios-home" size={size} color={color} />
-                    ),
-                }}
+          return (
+            <Feather
+              name={iconName}
+              size={size}
+              color={color}
+              style={styles.tabBarIcon} // apply the custom style to the icon
             />
+          );
+        },
+        tabBarLabel: ({ focused, color, size }) => {
+          const labelStyle = focused ? styles.tabBarLabelFocused : styles.tabBarLabel;
 
-            <Tab.Screen
-                name="Historia"
-                component={History}
-                options={{
-                    tabBarLabel: 'Historia',
-                    tabBarIcon: ({ color, size }) => (
-                        <Octicons name="history" size={size} color={color} />
-                    ),
-                }}
-            />
-
-            <Tab.Screen
-                name="Płatność"
-                component={Payment}
-                options={{
-                    tabBarLabel: 'Płatność',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialIcons name="payment" size={size} color={color} />
-                    ),
-                }}
-
-
-            />
-
-
-            <Tab.Screen
-                name="Oferty"
-                component={Offers}
-                options={{
-                    tabBarLabel: 'Oferty',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="offer" size={size} color={color} />
-                    ),
-                }}
-            />
-
-
-            <Tab.Screen
-                name="Edytuj"
-                component={Edit}
-                options={{
-                    tabBarLabel: 'Edytuj',
-                    tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="ios-settings-outline" size={size} color={color} />
-                    ),
-
-                }}
-            />
-
-        </Tab.Navigator>
+          return <Text style={labelStyle}>{route.name}</Text>;
+        },
+        tabBarLabelStyle: {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+      })}
+    >
+      <Tab.Screen name="Home"  children={() => <ListScreen setIsLoggedIn={setIsLoggedIn}/>} />
+      <Tab.Screen name="History" component={History} />
+      <Tab.Screen name="Payment" component={Payment} />
+      <Tab.Screen name="Offers" component={Offers} />
+      <Tab.Screen name="Edit" component={Edit} />
+    </Tab.Navigator>
     );
-}
+};
 
 export default MyDrawer;

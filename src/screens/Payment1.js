@@ -7,11 +7,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
 
 const Payment1 = ({ navigation }) => {
-  const [dane, setInput1] = useState("");
-  const [nr_rachunku, setInput2] = useState("");
-  const [tytul, setInput3] = useState("");
-  const [opis, setInput4] = useState("");
-  const [kwota, setInput5] = useState("");
+<<<<<<< HEAD
+  const [recipientName, setRecipientName] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
+=======
+  const [recipientName, setInput1] = useState("");
+  const [accountNumber, setInput2] = useState("");
+  const [title, setInput3] = useState("");
+  const [description, setInput4] = useState("");
+  const [amount, setInput5] = useState("");
+>>>>>>> branchPatryk
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [toUserLogin, setUserLogin] = useState(null);
 
@@ -25,7 +33,11 @@ const Payment1 = ({ navigation }) => {
           setLoggedInUser(userLogin);
         }
       } catch (error) {
-        console.error('Błąd podczas pobierania loginu zalogowanego użytkownika:', error);
+<<<<<<< HEAD
+        console.error('Error fetching the logged-in user login:', error);
+=======
+        console.error('Error fetching the login of the logged-in user:', error);
+>>>>>>> branchPatryk
       }
     };
 
@@ -35,7 +47,7 @@ const Payment1 = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_CONFIG.BASE_URL}/users?name=${dane}`);
+        const response = await axios.get(`${API_CONFIG.BASE_URL}/users?name=${recipientName}`);
         if (response.data.length > 0) {
           const toUserLogin = response.data[0].login;
           setUserLogin(toUserLogin);
@@ -43,106 +55,177 @@ const Payment1 = ({ navigation }) => {
           await AsyncStorage.setItem('toUserLogin', JSON.stringify({ login: toUserLogin }));
         }
       } catch (error) {
-        console.error('Błąd podczas pobierania loginu odbiorcy:', error);
+<<<<<<< HEAD
+        console.error('Error fetching recipient login:', error);
+=======
+        console.error('Error fetching the recipient login:', error);
+>>>>>>> branchPatryk
       }
     };
 
     fetchData();
-  }, [dane]);
+  }, [recipientName]);
 
-  const nrName = async (Name) => {
+<<<<<<< HEAD
+  const checkAccountNumber = async (recipientName, accountNumber) => {
+    try {
+      const response = await axios.get(
+        `${API_CONFIG.BASE_URL}/users?name=${recipientName}&accountNumber=${accountNumber}`
+=======
+  const checkRecipientName = async (Name) => {
     try {
       const response = await axios.get(`${API_CONFIG.BASE_URL}/users?name=${Name}`);
       return response.data.length > 0;
     } catch (error) {
-      console.error('Błąd podczas sprawdzania odbiorcy:', error);
+      console.error('Error checking recipient:', error);
       return false;
     }
   };
 
-  const checknrkonta = async (Name, Number) => {
+  const checkAccountNumber = async (Name, Number) => {
     try {
       const response = await axios.get(
         `${API_CONFIG.BASE_URL}/users?name=${Name}&nrkonta=${Number}`
+>>>>>>> branchPatryk
       );
       return response.data.length > 0;
     } catch (error) {
-      console.error('Błąd podczas sprawdzania numeru rachunku:', error);
+      console.error('Error checking account number:', error);
       return false;
     }
   };
 
   const handleCheck = async () => {
-  const recipientExists = await checknrkonta(dane, nr_rachunku);
-  if (!recipientExists) {
-    Alert.alert('Błąd', 'Odbiorca o podanym numerze rachunku nie istnieje.');
-    return;
-  }
+    const recipientExists = await checkAccountNumber(recipientName, accountNumber);
+    if (!recipientExists) {
+      Alert.alert('Error', 'Recipient with the provided account number does not exist.');
+      return;
+    }
+<<<<<<< HEAD
 
-  try {
-    const response = await axios.post(`${API_CONFIG.BASE_URL}/transaction`, {
-      loggedInUser,
-      tytul,
-      toUserLogin,
-      opis,
-      typ: 'zwykly',
-      kwota: parseFloat(kwota),
-      dataTransakcji: new Date().toISOString(),
-    });
+=======
+  
+    const enteredAmount = parseFloat(amount);
+  
+    const senderResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?login=${loggedInUser}`);
+    const recipientResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?accountNumber=${accountNumber}`);
+  
+    if (enteredAmount <= 0 || enteredAmount > parseFloat(senderResponse.data[0].balance)) {
+      Alert.alert('Error', 'The entered amount is too large or too small.');
+      return;
+    }
+  
+    const recipientAccountNumber = recipientResponse.data[0].accountNumber;
+>>>>>>> branchPatryk
+    try {
+      const response = await axios.post(`${API_CONFIG.BASE_URL}/transactions`, {
+        loggedInUser,
+        title,
+<<<<<<< HEAD
+        toUserLogin,
+        description,
+        type: 'normal',
+        amount: parseFloat(amount),
+        transactionDate: new Date().toISOString(),
+      });
 
-    Alert.alert('Przelew udany');
-    navigation.goBack();
-    // console.log('Odpowiedź z serwera:', response.data);
-  } catch (error) {
-    console.error('Błąd podczas wysyłania danych:', error);
-  }
-};
+=======
+        toUserLogin: recipientResponse.data[0].login,
+        description,
+        type: 'normal',
+        amount: enteredAmount,
+        transactionDate: new Date().toISOString(),
+      });
+  
+      const senderId = senderResponse.data[0].id;
+      const senderNewBalance = senderResponse.data[0].balance - enteredAmount;
+      await axios.patch(`${API_CONFIG.BASE_URL}/users/${senderId}`, { balance: senderNewBalance });
+  
+      const recipientId = recipientResponse.data[0].id;
+      const recipientNewBalance = recipientResponse.data[0].balance + parseFloat(amount);
+      await axios.patch(`${API_CONFIG.BASE_URL}/users/${recipientId}`, { balance: recipientNewBalance });
+  
+>>>>>>> branchPatryk
+      Alert.alert('Transfer successful');
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error sending data:', error);
+    }
+  };
 
   return (
     <View style={styles.header}>
       <View style={styles.sectionContainerp1}>
         <View style={styles.sectionContent}>
           <Icon name="landmark" size={35} />
-          <Text style={styles.sectionText}>Przelew Krajowy</Text>
+          <Text style={styles.sectionText}>Domestic Transfer</Text>
         </View>
       </View>
       <View style={styles.sectionContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Imię i nazwisko odbiorcy:"
-          value={dane}
+<<<<<<< HEAD
+          placeholder="Recipient's Name:"
+          value={recipientName}
+          onChangeText={(text) => setRecipientName(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Account Number:"
+          value={accountNumber}
+          onChangeText={(text) => setAccountNumber(text)}
+=======
+          placeholder="Recipient's name and surname:"
+          value={recipientName}
           onChangeText={(text) => setInput1(text)}
         />
         <TextInput
           style={styles.input}
-          placeholder="Numer rachunku:"
-          value={nr_rachunku}
+          placeholder="Account number:"
+          value={accountNumber}
           onChangeText={(text) => setInput2(text)}
+>>>>>>> branchPatryk
         />
         <TextInput
           style={styles.input}
-          placeholder="Tytuł:"
-          value={tytul}
+          placeholder="Title:"
+          value={title}
+<<<<<<< HEAD
+          onChangeText={(text) => setTitle(text)}
+=======
           onChangeText={(text) => setInput3(text)}
+>>>>>>> branchPatryk
         />
         <TextInput
           style={styles.input}
-          placeholder="Opis:"
-          value={opis}
+          placeholder="Description:"
+          value={description}
+<<<<<<< HEAD
+          onChangeText={(text) => setDescription(text)}
+=======
           onChangeText={(text) => setInput4(text)}
+>>>>>>> branchPatryk
         />
         <TextInput
           style={styles.input}
-          placeholder="Kwota"
-          value={kwota}
+          placeholder="Amount"
+          value={amount}
+<<<<<<< HEAD
+          onChangeText={(text) => setAmount(text)}
+=======
           onChangeText={(text) => setInput5(text)}
+>>>>>>> branchPatryk
         />
         <TouchableOpacity style={styles.check} onPress={handleCheck}>
           <Text style={styles.pp}>Check</Text>
         </TouchableOpacity>
       </View>
     </View>
+<<<<<<< HEAD
+    );
+=======
   );
+>>>>>>> branchPatryk
 };
 
 export default Payment1;

@@ -7,9 +7,15 @@
       "pass": "pass",
       "email": "patry.gubala",
       "phoneNumber": "111222333",
-      "nrkonta": "123456",
+      "accountNumber": "123456",
+<<<<<<< HEAD
       "balance": 1000,
-      "id": 1
+=======
+      "balance": 1012,
+>>>>>>> branchPatryk
+      "id": 1,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false
     },
     {
       "name": "jakub",
@@ -18,10 +24,12 @@
       "pass": "pass2",
       "email": "jakub.h",
       "phoneNumber": "333222111",
-      "nrkonta": "666333",
+      "accountNumber": "666333",
+<<<<<<< HEAD
       "balance": 500,
-      "id": 2
-    },
+      "id": 2,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false    },
     {
       "name": "qwe",
       "surname": "qwe",
@@ -30,150 +38,273 @@
       "email": "qwe",
       "phoneNumber": "123123123",
       "balance": 1000,
-      "nrkonta": "909090",
-      "id": 3
-    }
+      "id": 3,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false    }
   ],
-  "transaction": [
+  "transactions": [
     {
       "loggedInUser": "admin",
-      "tytul": "tytul1",
+      "title": "title1",
       "toUserLogin": "admin2",
-      "opis": "opis1",
-      "typ": "zwykly",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-18T12:34:44",
+      "description": "description1",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-18T12:34:44",
       "id": 1
     },
     {
+=======
+      "balance": 1055,
+      "id": 2,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false
+    },
+    {
+      "name": "qwe",
+      "surname": "qwe",
+      "login": "qwe",
+      "pass": "qwe",
+      "email": "qwe",
+      "phoneNumber": "123123123",
+      "balance": 933,
+      "id": 3,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false
+    }
+  ],
+  "transactions": [
+    {
       "loggedInUser": "admin",
-      "tytul": "tytul2",
+      "title": "title1",
       "toUserLogin": "admin2",
-      "opis": "opis2",
-      "typ": "mobilny",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-20T12:34:44",
+      "description": "description1",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-18T12:34:44",
+      "id": 1
+    },
+    {
+>>>>>>> branchPatryk
+      "loggedInUser": "admin",
+      "title": "title2",
+      "toUserLogin": "admin2",
+      "description": "description2",
+      "type": "mobile",
+      "amount": 100,
+      "transactionDate": "2023-12-20T12:34:44",
       "id": 2
     },
     {
       "loggedInUser": "admin",
-      "tytul": "tytul3",
+      "title": "title3",
       "toUserLogin": "admin2",
-      "opis": "opis3",
-      "typ": "zwykly",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-21T12:34:44",
+      "description": "description3",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:44",
       "id": 3
     },
     {
       "loggedInUser": "admin2",
-      "tytul": "dsd",
+      "title": "dsd",
       "toUserLogin": "admin",
-      "opis": "dsd",
-      "typ": "mobilny",
-      "kwota": "12345",
-      "dataTransakcji": "2023-12-21T12:34:56",
+      "description": "dsd",
+      "type": "mobile",
+      "amount": 12345,
+      "transactionDate": "2023-12-21T12:34:56",
       "id": 4
     },
     {
       "loggedInUser": "admin2",
-      "tytul": "tytul",
+      "title": "title",
       "toUserLogin": "admin",
-      "opis": "opis",
-      "typ": "zwykly",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-21T12:34:36",
+      "description": "description",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:36",
       "id": 5
     },
     {
       "loggedInUser": "admin",
-      "tytul": "tytul1",
+      "title": "title1",
       "toUserLogin": "admin2",
-      "opis": "opis1",
-      "typ": "zwykly",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-18T12:34:44",
+      "description": "description1",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-18T12:34:44",
       "id": 6
     },
     {
       "loggedInUser": "admin",
-      "tytul": "tytul2",
+      "title": "title2",
       "toUserLogin": "admin2",
-      "opis": "opis2",
-      "typ": "mobilny",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-20T12:34:44",
+      "description": "description2",
+      "type": "mobile",
+      "amount": 100,
+      "transactionDate": "2023-12-20T12:34:44",
       "id": 7
     },
     {
       "loggedInUser": "admin",
-      "tytul": "tytul3",
+      "title": "title3",
       "toUserLogin": "admin2",
-      "opis": "opis3",
-      "typ": "zwykly",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-21T12:34:44",
+      "description": "description3",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:44",
       "id": 8
     },
     {
       "loggedInUser": "admin2",
-      "tytul": "dsd",
+      "title": "dsd",
       "toUserLogin": "admin",
-      "opis": "dsd",
-      "typ": "mobilny",
-      "kwota": "12345",
-      "dataTransakcji": "2023-12-21T12:34:56",
+      "description": "dsd",
+      "type": "mobile",
+      "amount": 12345,
+      "transactionDate": "2023-12-21T12:34:56",
       "id": 9
     },
     {
       "loggedInUser": "admin2",
-      "tytul": "tytul",
+      "title": "title",
       "toUserLogin": "admin",
-      "opis": "opis",
-      "typ": "zwykly",
-      "kwota": "100",
-      "dataTransakcji": "2023-12-21T12:34:36",
+      "description": "description",
+      "type": "normal",
+      "amount": 100,
+      "transactionDate": "2023-12-21T12:34:36",
       "id": 10
     },
     {
       "loggedInUser": "admin",
-      "tytul": "Payment1",
+      "title": "Payment1",
       "toUserLogin": "admin2",
-      "opis": "Opis payment1",
-      "typ": "zwykly",
-      "kwota": 10,
-      "dataTransakcji": "2023-12-22T08:31:51.051Z",
+      "description": "Description payment1",
+      "type": "normal",
+      "amount": 10,
+      "transactionDate": "2023-12-22T08:31:51.051Z",
       "id": 11
     },
     {
       "loggedInUser": "admin",
-      "tytul": "Phonepayment",
-      "opis": "Opis phone payment",
-      "kwota": "10",
+      "title": "Phonepayment",
+      "description": "Description phone payment",
+      "type": "mobile",
+      "amount": 10,
       "toUserLogin": "admin2",
       "recipientAccountNumber": "666333",
-      "dataTransakcji": "2023-12-22T08:47:02.402Z",
+      "transactionDate": "2023-12-22T08:47:02.402Z",
       "id": 12
     },
     {
       "loggedInUser": "admin",
-      "tytul": "Tytulll",
-      "opis": "Opiss",
-      "kwota": "5.0",
+      "title": "Tytulll",
+      "description": "Description",
+      "amount": 5,
+      "type": "normal",
       "toUserLogin": "admin2",
       "recipientAccountNumber": "666333",
-      "dataTransakcji": "2023-12-22T08:51:48.839Z",
+      "transactionDate": "2023-12-22T08:51:48.839Z",
       "id": 13
     },
     {
       "loggedInUser": "admin",
-      "tytul": "Mozna",
-      "opis": "Test checkbox",
-      "kwota": "102",
-      "toUserLogin": "qwe",
-      "recipientAccountNumber": "909090",
-      "dataTransakcji": "2024-01-07T18:00:02.501Z",
+      "title": "Telefon1",
+      "description": "Test",
+      "type": "mobile",
+      "amount": 10,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2023-12-27T14:32:55.980Z",
       "id": 14
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Eng trn",
+      "description": "Desc",
+      "type": "mobile",
+      "amount": 5,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2023-12-27T18:29:12.453Z",
+      "id": 15
+<<<<<<< HEAD
+=======
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Ppp",
+      "toUserLogin": "admin2",
+      "description": "Ppp",
+      "type": "ordinary",
+      "amount": 213,
+      "transactionDate": "2024-01-17T19:18:04.709Z",
+      "id": 16
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Pppppp",
+      "description": "Llll",
+      "type": "mobile",
+      "amount": 12,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2024-01-17T19:47:23.624Z",
+      "id": 17
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Pppppp",
+      "description": "Llll",
+      "type": "mobile",
+      "amount": 12,
+      "toUserLogin": "admin2",
+      "recipientAccountNumber": "666333",
+      "transactionDate": "2024-01-17T19:48:08.945Z",
+      "id": 18
+    },
+    {
+      "loggedInUser": "qwe",
+      "title": "Ppndfhh",
+      "description": "Xxxx",
+      "type": "mobile",
+      "amount": 32,
+      "toUserLogin": "admin",
+      "recipientAccountNumber": "123456",
+      "transactionDate": "2024-01-17T19:50:26.021Z",
+      "id": 19
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "Pl.",
+      "description": "To na ss",
+      "type": "mobile",
+      "amount": 32,
+      "toUserLogin": "qwe",
+      "transactionDate": "2024-01-17T19:58:17.100Z",
+      "id": 20
+    },
+    {
+      "loggedInUser": "qwe",
+      "title": "Zakupy",
+      "toUserLogin": "admin2",
+      "description": "Na obiad",
+      "type": "normal",
+      "amount": 55,
+      "transactionDate": "2024-01-17T20:00:21.805Z",
+      "id": 21
+    },
+    {
+      "loggedInUser": "qwe",
+      "title": "Patryk",
+      "description": "Lll",
+      "type": "mobile",
+      "amount": 12,
+      "toUserLogin": "admin",
+      "recipientAccountNumber": "123456",
+      "transactionDate": "2024-01-17T20:46:09.284Z",
+      "id": 22
+>>>>>>> branchPatryk
     }
   ]
 }

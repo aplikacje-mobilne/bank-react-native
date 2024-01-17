@@ -18,14 +18,14 @@ const RegisterScreen = ({ navigation }) => {
   const handleRegister = async () => {
     try {
       if (pass !== pass2) {
-        Alert.alert("Błąd", "Hasła nie są identyczne");
+        Alert.alert("Error", "Password are not the same");
         return;
       }
       const loginCheckResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?login=${login}`);
       const isLoginUnique = !loginCheckResponse.data || loginCheckResponse.data.length === 0;
 
       if (!isLoginUnique) {
-        Alert.alert("Błąd", "Podany login już istnieje. Wybierz inny login.");
+        Alert.alert("Error", "This login already exists.");
         return;
       }
 
@@ -39,10 +39,10 @@ const RegisterScreen = ({ navigation }) => {
         balance,
       });
 
-      alert('Rejestracja udana');
+      alert('Registration successful');
       navigation.goBack();
     } catch (error) {
-      console.error("Błąd podczas rejestracji:", error);
+      console.error("Registration error ", error);
     }
   };
 

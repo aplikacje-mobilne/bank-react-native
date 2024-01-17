@@ -38,7 +38,8 @@ export default function TakePhoto({ navigation }) {
     const takePicture = async () => {
         try {
             const photo = await cameraRef.current.takePictureAsync();
-            const fileName = 'capturedPhoto.jpg';
+            const currentTimestamp = new Date().getTime();
+            const fileName = `capturedPhoto_${currentTimestamp}.jpg`;
             const destination = `${FileSystem.documentDirectory}${fileName}`;
 
             try {
@@ -46,30 +47,6 @@ export default function TakePhoto({ navigation }) {
                     from: photo.uri,
                     to: destination,
                 });
-
-                const userId = userData ? userData.id : null;
-
-                // Save the captured photo URI in AsyncStorage
-                await AsyncStorage.setItem(`capturedPhotoUri_${userId}`, destination);
-
-                // Update the user's data in db.json with the photoUri
-                const userWithUpdatedPhoto = { ...userData, photoUri: destination };
-
-                // Update the local state with the updated user
-                setUserData(userWithUpdatedPhoto);
-
-                // Fetch the existing users from AsyncStorage
-                const existingUsersJson = await AsyncStorage.getItem('users');
-                const existingUsers = existingUsersJson ? JSON.parse(existingUsersJson) : [];
-
-                // Update the users array with the updated user
-                const updatedUsers = existingUsers.map(user => (user.id === userId ? userWithUpdatedPhoto : user));
-
-                // Save the updated users array to AsyncStorage
-                await AsyncStorage.setItem('users', JSON.stringify(updatedUsers));
-
-                // Update the state with the latest updatedUsers
-                setUpdatedUsers(updatedUsers);
 
                 console.log('Saved photo:', destination);
                 navigation.navigate("Edit2", {
