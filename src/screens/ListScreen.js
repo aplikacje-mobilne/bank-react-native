@@ -44,12 +44,8 @@ const ListScreen = ({ setIsLoggedIn }) => {
   }, [isFocused]);
   const handleLogout = async () => {
     try {
-      // Clear the user's authentication information
-      //await AsyncStorage.removeItem('loggedInUser');
-      //setLoggedInUser(null);
-      setIsLoggedIn(false);
 
-      // Navigate back to the login screen
+      setIsLoggedIn(false);
     } catch (error) {
       console.error('Error logging out:', error);
       Alert.alert('Error', 'An unexpected error occurred. Please try again.');
@@ -57,7 +53,6 @@ const ListScreen = ({ setIsLoggedIn }) => {
   };
   const handleDevicePairing = async () => {
     try {
-      // Authenticate using biometrics
       const { success } = await LocalAuthentication.authenticateAsync({
         promptMessage: 'Authenticate to pair your device with biometrics',
       });
@@ -65,16 +60,12 @@ const ListScreen = ({ setIsLoggedIn }) => {
       if (success) {
         Alert.alert('Success', 'Device paired successfully.');
 
-        // Update the user object with isBiometricEnabled set to true
         const updatedUser = { ...loggedInUser, isBiometricEnabled: true };
 
-        // Save the updated user to AsyncStorage
         await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
 
-        // Update the state with the new user information
         setLoggedInUser(updatedUser);
       } else {
-        // Biometric authentication failed
         Alert.alert('Error', 'Biometric authentication failed. Please try again.');
       }
     } catch (error) {
@@ -130,16 +121,12 @@ const ListScreen = ({ setIsLoggedIn }) => {
 
   const handleUnSetPin = async () => {
     try {
-      // Prompt the user to set a PIN
       const pin = null; // For simplicity, set the PIN to "1234" in this example
 
-      // Update the user object with isPinEnabled set to true and the PIN value
       const updatedUser = { ...loggedInUser, isPinEnabled: false, pin };
 
-      // Save the updated user to AsyncStorage
       await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
 
-      // Update the state with the new user information
       setLoggedInUser(updatedUser);
 
       Alert.alert('Success', 'PIN set successfully.');
@@ -253,7 +240,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   logoutButton: {
-    backgroundColor: '#ff0000', // Red color for logout button
+    backgroundColor: '#ff0000', 
     paddingVertical: 10,
     width: '80%',
     borderRadius: 8,
