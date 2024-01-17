@@ -26,6 +26,16 @@ const Edit7 = ({ navigation }) => {
         fetchLoggedInUser();
     }, []);
 
+    const handleLogout = async () => {
+        try {
+            await AsyncStorage.removeItem('loggedInUser');
+
+            navigation.navigate('Login');
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+    };
+
     const changePass = async () => {
         try {
             if (pass !== pass2) {
@@ -51,8 +61,9 @@ const Edit7 = ({ navigation }) => {
                 // Update the JSON file with the modified user data
                 await axios.put(`${API_CONFIG.BASE_URL}/users/${userToUpdate.id}`, userToUpdate);
 
-                Alert.alert("Sukces", "Hasło zostało zmienione pomyślnie");
-                navigation.goBack();
+                Alert.alert("Sukces", "Hasło zostało zmienione pomyślnie, zaloguj się ponownie");
+
+                handleLogout();
             } else {
                 Alert.alert("Błąd", "Nie można odnaleźć użytkownika w bazie danych");
             }

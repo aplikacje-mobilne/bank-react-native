@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useRoute } from '@react-navigation/native';
@@ -55,22 +55,22 @@ const Edit2 = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.div}>
-                    <View style={styles.wiersz2b}>
+                <View style={styles.wiersz2b}>
 
-                        {capturedPhotoUri && (
-                            <Image
-                                source={{ uri: capturedPhotoUri }}
-                                style={styles.previewImage}
-                                width={200}
-                                height={200}
-                            />
+                    {capturedPhotoUri && (
+                        <Image
+                            source={{ uri: capturedPhotoUri }}
+                            style={styles.previewImage}
+                            width={200}
+                            height={200}
+                        />
                     )}
                     <TouchableOpacity
                         style={styles.wiersz2b}
                         onPress={() => navigation.navigate('TakePhoto')}
                     >
                         <Icon name="camera" size={60} color="#fff" style={styles.cameraIcon} />
-                </TouchableOpacity>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.wiersz1b}>
                     <View style={styles.wiersz1}>
