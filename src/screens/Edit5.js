@@ -1,32 +1,43 @@
 ﻿import { TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
-import CheckBox from 'react-native-checkbox';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
-const Edit4 = ({ navigation }) => {
-    const [isChecked, setChecked] = useState(false);
+import { useNavigation } from '@react-navigation/native';
+import Login from '../screens/Login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CommonActions } from '@react-navigation/native';
+const Edit5 = () => {
+    const navigation = useNavigation();
+
+    const handleLogout = async () => {
+        try {
+            await AsyncStorage.removeItem('loggedInUser');
+
+            navigation.navigate('frame_one');
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.div}>
                 <View style={styles.div2}>
                     <Icon name="exclamation" size={100} color="#606470" />
-                    </View>
-                <Text style={styles.tekst1} >Czy na pewno chcesz wyrejestrować aplikację na tym urządzeniu?</Text>
-                <Text style={styles.tekst2} >Po wyrejestrowaniu korzystanie z aplikacji KRW nie będzie możliwe - będzie trzeba ją ponownie zarejestrować i aktywnować.</Text>
-
+                </View>
+                <Text style={styles.tekst1}>Czy na pewno chcesz wylogować się na tym urządzeniu?</Text>
+                <Text style={styles.tekst2}>Po wylogowaniu korzystanie z aplikacji KRW nie będzie możliwe - będzie trzeba się ponownie zalogować.</Text>
                 <TouchableOpacity
                     style={styles.wyrejestrujBtn}
-                    onPress={() => {
-                        console.log("Navigating to frame_one");
-                        navigation.navigate('DrawerNavigator', { screen: 'frame_one' });
-                    }}
+                    onPress={handleLogout}
                 >
-                    <Text style={styles.wyrejestrujText}>Wyrejestruj KRW</Text>
+                    <Text style={styles.wyrejestrujText}>Wyloguj</Text>
                 </TouchableOpacity>
             </View>
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {
@@ -45,6 +56,7 @@ const styles = StyleSheet.create({
         marginTop: '1%',
         alignSelf: 'center',
         paddingTop: '10%',
+        borderRadius: 6,
     },
     tekst1: {
         fontSize: 18,
@@ -92,4 +104,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Edit4;
+export default Edit5;

@@ -4,24 +4,35 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import API_CONFIG from '../components/config'
+import { CommonActions } from '@react-navigation/native';
 export function Login({ setIsLoggedIn }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-  const handleLogin = async () => {
-    try {
-      const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
+    const handleLogin = async () => {
+        try {
+            const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
 
-      if (!response.data) {
-        console.log("User not found.");
-      }
+            if (!response.data) {
+                console.log("User not found.");
+                return;
+            }
 
-      const users = response.data || [];
-      const user = users.find((user) => user.login === login && user.pass === password);
+            const users = response.data || [];
+            const user = users.find((user) => user.login === login && user.pass === password);
 
-      if (user) {
-        await AsyncStorage.setItem('loggedInUser', JSON.stringify(user));
-        setIsLoggedIn(true);
+            if (user) {
+                await AsyncStorage.setItem('loggedInUser', JSON.stringify(user));
+                setIsLoggedIn(true);
+
+                // Przykładowy kod nawigacji do ekranu DrawerNavigator po zalogowaniu
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [{ name: 'DrawerNavigator' }],
+                    })
+                );
+
       } else {
         alert('Invalid login or password');
       }
