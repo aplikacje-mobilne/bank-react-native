@@ -63,39 +63,17 @@ const Payment2 = ({ navigation }) => {
       return false;
     }
   };
-<<<<<<< HEAD
 
   const handleCheck = async () => {
     try {
       const recipientExists = await checkPhoneNumber(phoneNumber);
 
       if (!recipientExists) {
-=======
-  const [transactionResponse, setTransactionResponse] = useState(null);
-
-  const handleCheck = async () => {
-    try {
-      const recipientResponse = await await axios.get(`${API_CONFIG.BASE_URL}/users?phoneNumber=${phoneNumber}`);
-
-      if (!recipientResponse || recipientResponse.length === 0) {
->>>>>>> branchPatryk
         Alert.alert('Error', 'Recipient with the provided phone number does not exist.');
         return;
       }
 
-<<<<<<< HEAD
       const recipientAccountNumber = recipientExists[0].accountNumber;
-=======
-      const senderResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?login=${loggedInUser}`);
-      const validAmount = parseFloat(amount);
-
-      if (validAmount <= 0 || validAmount > parseFloat(senderResponse.data[0].balance)) {
-        Alert.alert('Error', 'The entered amount is too large or too small.');
-        return;
-      }
-
-      const recipientAccountNumber = recipientResponse.data[0].accountNumber;
->>>>>>> branchPatryk
 
       const transactionResponse = await axios.post(`${API_CONFIG.BASE_URL}/transactions`, {
         loggedInUser: loggedInUser,
@@ -103,16 +81,11 @@ const Payment2 = ({ navigation }) => {
         description: description,
         type: 'mobile',
         amount: parseFloat(amount),
-<<<<<<< HEAD
         toUserLogin: toUserLogin,
-=======
-        toUserLogin: recipientResponse.data[0].login,
->>>>>>> branchPatryk
         recipientAccountNumber: recipientAccountNumber,
         transactionDate: new Date().toISOString(),
       });
 
-<<<<<<< HEAD
       Alert.alert('Transfer successful');
       navigation.goBack();
       // console.log('Server response:', transactionResponse.data);
@@ -122,27 +95,6 @@ const Payment2 = ({ navigation }) => {
     }
   };
 
-=======
-      const senderId = senderResponse.data[0].id;
-      const senderNewBalance = senderResponse.data[0].balance - parseFloat(amount);
-      await axios.patch(`${API_CONFIG.BASE_URL}/users/${senderId}`, { balance: senderNewBalance });
-
-      const recipientId = recipientResponse.data[0].id;
-      const recipientNewBalance = recipientResponse.data[0].balance + parseFloat(amount);
-      await axios.patch(`${API_CONFIG.BASE_URL}/users/${recipientId}`, { balance: recipientNewBalance });
-
-      setTransactionResponse(transactionResponse.data);
-
-      Alert.alert('Transfer successful');
-      navigation.goBack();
-    } catch (error) {
-      console.error('Error handling transaction:', error);
-      Alert.alert('Error', 'An error occurred while processing the transaction.');
-    }
-  };
-
-
->>>>>>> branchPatryk
   return (
     <View style={styles.header}>
       <View style={styles.sectionContainerp1}>

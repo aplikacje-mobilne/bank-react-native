@@ -1,21 +1,42 @@
 ﻿import { TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Login from '../screens/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CommonActions } from '@react-navigation/native';
-const Edit5 = () => {
+import { Alert } from 'react-native';
+
+const Edit5 = ({ setIsLoggedIn }) => {
     const navigation = useNavigation();
+    const [loggedInUser, setLoggedInUser] = useState(null);
 
-    const handleLogout = async () => {
+    const handleUnRegister = async () => {
         try {
-            await AsyncStorage.removeItem('loggedInUser');
-
-            navigation.navigate('frame_one');
+            Alert.alert(
+                'Confirmation',
+                'Are you sure you want to unregister? This action cannot be undone.',
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'Confirm',
+                        onPress: async () => {
+                            const updatedUser = { ...loggedInUser, isBiometricEnabled: false, isPinEnabled: false };
+                            await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+                            setLoggedInUser(null);
+                            setIsLoggedIn(false);
+                        },
+                    },
+                ],
+                { cancelable: false }
+            );
         } catch (error) {
-            console.error("Error during logout:", error);
+            console.error('Error unregistering device:', error);
+            Alert.alert('Error', 'An unexpected error occurred. Please try again.');
         }
     };
 
@@ -25,26 +46,25 @@ const Edit5 = () => {
                 <View style={styles.div2}>
                     <Icon name="exclamation" size={100} color="#606470" />
                 </View>
-                <Text style={styles.tekst1}>Czy na pewno chcesz wylogować się na tym urządzeniu?</Text>
-                <Text style={styles.tekst2}>Po wylogowaniu korzystanie z aplikacji KRW nie będzie możliwe - będzie trzeba się ponownie zalogować.</Text>
+                <Text style={styles.text1}>Are you sure you want to unregister from this device?</Text>
+                <Text style={styles.text2}>After logging out, using the KRW app will not be possible - you will need to log in again.</Text>
                 <TouchableOpacity
-                    style={styles.wyrejestrujBtn}
-                    onPress={handleLogout}
+                    style={styles.unregisterBtn}
+                    onPress={handleUnRegister}
                 >
-                    <Text style={styles.wyrejestrujText}>Wyloguj</Text>
+                    <Text style={styles.unregisterText}>Unregister</Text>
                 </TouchableOpacity>
             </View>
         </View>
     );
 };
 
-
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         justifyContent: 'center',
         width: '100%',
-        backgroundColor: 'f7f7f7',
+        backgroundColor: '#f7f7f7',
     },
     div: {
         display: 'flex',
@@ -58,20 +78,19 @@ const styles = StyleSheet.create({
         paddingTop: '10%',
         borderRadius: 6,
     },
-    tekst1: {
+    text1: {
         fontSize: 18,
-        fontWeight: "500",
-        color: "#000000",
+        fontWeight: '500',
+        color: '#000000',
         backgroundColor: '#ffffff',
         textAlign: 'center',
         paddingTop: '10%',
     },
-    tekst2: {
+    text2: {
         fontSize: 16,
-        fontWeight: "400",
-        color: "#000000",
+        fontWeight: '400',
+        color: '#000000',
         backgroundColor: '#ffffff',
-        /*backgroundColor: 'red',*/
         textAlign: 'center',
         paddingTop: '5%',
     },
@@ -84,11 +103,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 112,
     },
-    wyrejestrujBtn: {
-        backgroundColor: "#ff570c",
+    unregisterBtn: {
+        backgroundColor: '#ff570c',
         borderRadius: 50,
         width: '85%',
-        position: "relative",
+        position: 'relative',
         justifyContent: 'center',
         alignSelf: 'center',
         height: '12%',
@@ -96,11 +115,11 @@ const styles = StyleSheet.create({
         marginTop: '10%',
         marginBottom: '5%',
     },
-    wyrejestrujText: {
-        color: "#f7f7f7",
+    unregisterText: {
+        color: '#f7f7f7',
         fontSize: 24,
-        fontWeight: "400",
-        position: "absolute",
+        fontWeight: '400',
+        position: 'absolute',
     },
 });
 

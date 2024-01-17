@@ -8,25 +8,25 @@ const Edit = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.div}>
-                
+
                 <TouchableOpacity onPress={() => navigation.navigate('Edit2')}>
                     <View style={styles.wiersz1b}>
-                    <View style={styles.wiersz1}>
+                        <View style={styles.wiersz1}>
                             <Icon name="user" size={30} marginLeft={10} color="black" />
-                        <Text style={styles.text}>Dane i personalizacja</Text>
+                            <Text style={styles.text}>Data and Personalization</Text>
+                        </View>
+                        <Text style={styles.text2}>Your data, in-app notifications</Text>
                     </View>
-                        <Text style={styles.text2}>Twoje dane, powiadomienia w aplikacji</Text>
-                    </View>
-                    </TouchableOpacity>
-                    
+                </TouchableOpacity>
+
 
                 <TouchableOpacity onPress={() => navigation.navigate('Edit3')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="lock" size={30} marginLeft={10} color="black" />
-                            <Text style={styles.text}>Bezpieczeństwo i dostępy</Text>
+                            <Text style={styles.text}>Security and Access</Text>
                         </View>
-                        <Text style={styles.text2}>Logowanie, biometria, narzędzia autoryzacji, PIN do aplikacji</Text>
+                        <Text style={styles.text2}>Login, biometrics, authorization tools, app PIN</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -35,9 +35,9 @@ const Edit = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="money" size={30} marginLeft={10} marginTop={'1%'} color="black" />
-                            <Text style={styles.text}>Płatności</Text>
+                            <Text style={styles.text}>Payments</Text>
                         </View>
-                        <Text style={styles.text2}>Ustawienia płatności</Text>
+                        <Text style={styles.text2}>Payment settings</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -46,9 +46,9 @@ const Edit = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="power-off" size={30} marginLeft={10} color="black" />
-                            <Text style={styles.text}>Wyloguj się z aplikacji</Text>
+                            <Text style={styles.text}>Log out of the application</Text>
                         </View>
-                        <Text style={styles.text2}>Gdy zmieniasz numer telefonu lub urządzenie</Text>
+                        <Text style={styles.text2}>When changing your phone number or device</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -77,14 +77,12 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        backgroundColor: 'f7f7f7',
-/*        backgroundColor: 'red',*/
+        backgroundColor: '#f7f7f7',
         width: '100%',
     },
     wiersz1: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         width: '100%',
-
     },
     wiersz1b: {
         backgroundColor: '#ffffff',

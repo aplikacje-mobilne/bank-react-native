@@ -56,7 +56,6 @@ const Edit2 = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.div}>
                 <View style={styles.wiersz2b}>
-
                     {capturedPhotoUri && (
                         <Image
                             source={{ uri: capturedPhotoUri }}
@@ -74,21 +73,21 @@ const Edit2 = ({ navigation }) => {
                 </View>
                 <View style={styles.wiersz1b}>
                     <View style={styles.wiersz1}>
-                        <Text style={styles.text2}>Imię i nazwisko</Text>
+                        <Text style={styles.text2}>Full Name</Text>
                     </View>
                     <Text style={styles.text}>{userData ? `${userData.name} ${userData.surname}` : ''}</Text>
                 </View>
 
                 <View style={styles.wiersz1b}>
                     <View style={styles.wiersz1}>
-                        <Text style={styles.text2}>Adres e-mail</Text>
+                        <Text style={styles.text2}>Email Address</Text>
                     </View>
                     <Text style={styles.text}>{userData ? userData.email : ''}</Text>
                 </View>
 
                 <View style={styles.wiersz1b}>
                     <View style={styles.wiersz1}>
-                        <Text style={styles.text2}>Główny telefon komórkowy</Text>
+                        <Text style={styles.text2}>Primary Mobile Phone</Text>
                     </View>
                     <Text style={styles.text}>{userData ? userData.phoneNumber : ''}</Text>
                 </View>

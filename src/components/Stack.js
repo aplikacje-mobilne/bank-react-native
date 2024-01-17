@@ -16,11 +16,8 @@ import Edit7 from '../screens/Edit7';
 import Payment1 from '../screens/Payment1';
 import Payment2 from '../screens/Payment2';
 import Start from '../screens/Start';
-
 import TakePhoto from '../screens/TakePhoto';
 import PhotoDisplay from '../screens/PhotoDisplay';
-
-
 import OfferFirst from '../screens/OfferFirst';
 import OfferSecond from '../screens/OfferSecond';
 import OfferThird from '../screens/OfferThird';
@@ -55,7 +52,6 @@ const StackNav = () => {
           options={{ headerShown: false }}
           children={() => <DrawerNavigator setIsLoggedIn={setIsLoggedIn}/>}
         />
-
                   <Stack.Screen name="Edit2" component={Edit2} options={{ title: 'Data and Customization' }} />
                   <Stack.Screen name="Edit3" component={Edit3} options={{ title: 'Security' }} />
                   <Stack.Screen name="Edit4" component={Edit4} options={{ title: 'Payment' }} />
@@ -69,19 +65,6 @@ const StackNav = () => {
                   <Stack.Screen name="OfferFirst" component={OfferFirst} options={{ title: 'Offers' }} />
                   <Stack.Screen name="OfferSecond" component={OfferSecond} options={{ title: 'Offers' }} />
                   <Stack.Screen name="OfferThird" component={OfferThird} options={{ title: 'Offers' }} />
-                  <Stack.Screen name="Edit2" component={Edit2} />
-                  <Stack.Screen name="Edit3" component={Edit3} />
-                  <Stack.Screen name="Edit4" component={Edit4} />
-                  <Stack.Screen name="Edit5" component={Edit5} />
-                  <Stack.Screen name="Edit6" component={Edit6} />
-                  <Stack.Screen name="Edit7" component={Edit7} />
-                  <Stack.Screen name="Payment1" component={Payment1} />
-                  <Stack.Screen name="Payment2" component={Payment2} />
-         
-                  <Stack.Screen name="OfferFirst" component={OfferFirst} />
-                  <Stack.Screen name="OfferSecond" component={OfferSecond} />
-                  <Stack.Screen name="OfferThird" component={OfferThird} />
-
 
 
         </>

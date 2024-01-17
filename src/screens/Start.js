@@ -50,11 +50,7 @@ const Frame = ({ setIsLoggedIn }) => {
           }
         }
       } else {
-<<<<<<< HEAD
-        Alert.alert('Error', 'Unable to retrieve user information.');
-=======
-        navigation.navigate('Login');
->>>>>>> branchPatryk
+          navigation.navigate('Login');
       }
     } catch (error) {
       console.error('Error during authentication:', error);

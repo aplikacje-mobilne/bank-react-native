@@ -4,30 +4,17 @@ import axios from 'axios';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
-<<<<<<< HEAD
 import * as LocalAuthentication from 'expo-local-authentication'; // Import LocalAuthentication
-=======
-import * as LocalAuthentication from 'expo-local-authentication'; 
->>>>>>> branchPatryk
 
 const ListScreen = ({ setIsLoggedIn }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const isFocused = useIsFocused();
   const navigation = useNavigation();
-<<<<<<< HEAD
   const [lastTransactions, setLastTransactions] = useState([]); // Add this line
-=======
-  const [lastTransactions, setLastTransactions] = useState([]); 
-  //const [transactionHistory, setTransactionHistory] = useState([]);
->>>>>>> branchPatryk
 
   useEffect(() => {
     const fetchData = async () => {
       await fetchLoggedInUser();
-<<<<<<< HEAD
-=======
-      //await fetchTransactionHistory();
->>>>>>> branchPatryk
       try {
         const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
         setLastTransactions(response.data);
@@ -64,37 +51,6 @@ const ListScreen = ({ setIsLoggedIn }) => {
       Alert.alert('Error', 'An unexpected error occurred. Please try again.');
     }
   };
-<<<<<<< HEAD
-=======
-
-  // const fetchTransactionHistory = async () => {
-  //   try {
-  //     const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
-  //     console.log('Stored Logged In User for Transaction:', storedLoggedInUser);
-  //     if (storedLoggedInUser) {
-  //       const loggedInUser = JSON.parse(storedLoggedInUser).login;
-  //       console.log('Parsed Logged In User for Transaction:', loggedInUser);
-  
-  //       const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
-  //       console.log('Transaction Response:', response.data);
-  
-  //       const userTransactions = response.data
-  //         .filter(
-  //           (transaction) =>
-  //             transaction.loggedInUser === loggedInUser || transaction.toUserLogin === loggedInUser
-  //         )
-  //         .reverse()
-  //         .slice(0, 4);
-  
-  //       setTransactionHistory(userTransactions);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching transaction history:', error);
-  //   }
-  // };
-  
-
->>>>>>> branchPatryk
   const handleDevicePairing = async () => {
     try {
       const { success } = await LocalAuthentication.authenticateAsync({
@@ -144,7 +100,6 @@ const ListScreen = ({ setIsLoggedIn }) => {
 
   const handleSetPin = async () => {
     try {
-<<<<<<< HEAD
       // Prompt the user to set a PIN
       const pin = "1234"; // For simplicity, set the PIN to "1234" in this example
 
@@ -155,14 +110,6 @@ const ListScreen = ({ setIsLoggedIn }) => {
       await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
 
       // Update the state with the new user information
-=======
-      
-      const pin = "1234"; 
-
-     
-      const updatedUser = { ...loggedInUser, isPinEnabled: true, pin };  
-      await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
->>>>>>> branchPatryk
       setLoggedInUser(updatedUser);
 
       Alert.alert('Success', 'PIN set successfully.');
@@ -174,11 +121,7 @@ const ListScreen = ({ setIsLoggedIn }) => {
 
   const handleUnSetPin = async () => {
     try {
-<<<<<<< HEAD
       const pin = null; // For simplicity, set the PIN to "1234" in this example
-=======
-      const pin = null; 
->>>>>>> branchPatryk
 
       const updatedUser = { ...loggedInUser, isPinEnabled: false, pin };
 

@@ -1,7 +1,6 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native';
-import CheckBox from 'expo-checkbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -57,33 +56,28 @@ const Edit4 = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.div}>
-                <Text style={styles.tekst1}>Przelewy na telefon</Text>
+                <Text style={styles.text1}>Transfers to Phone</Text>
             </View>
             <View style={styles.div}>
-                <View style={styles.pom}>
-                    <Text style={styles.tekst1}>Odbieraj przelewy na telefon </Text>
-                    <CheckBox
-                        value={isChecked}
-                        onValueChange={() => setChecked(handleCheckboxChange)}
-                        label=""
-                        style={styles.chkbx}
-                    />
+                <View style={styles.row}>
+                    <Text style={styles.text1}>Receive Transfers on Phone </Text>
                 </View>
-                <Text style={styles.tekst2}>
-                    Zarejestruj swój numer telefonu w systemie. Nadawca nie musi znać
-                    Twojego numeru konta, wystarczy numer telefonu.
+                <Text style={styles.text2}>
+                    Register your phone number in the system. The sender doesn't need to know
+                    your account number, just your phone number.
                 </Text>
-                <Text style={styles.tekst3}>
-                    Numer konta KRW: {userData ? `${userData.nrkonta}` : ''}
+                <Text style={styles.text3}>
+                    KRW Account Number: {userData ? `${userData.accountNumber}` : ''}
                 </Text>
-                <Text style={styles.tekst3}>
-                    To konto jest przypisane do numeru telefonu:{' '}
+                <Text style={styles.text3}>
+                    This account is linked to the phone number:{' '}
                     {userData ? `${userData.phoneNumber}` : ''}
                 </Text>
             </View>
         </View>
     );
 };
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
@@ -102,16 +96,16 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         overflow: 'hidden',
     },
-    pom: {
+    row: {
         flexDirection: 'row',
         backgroundColor: '#ffffff',
         borderRadius: 6,
         overflow: 'hidden',
     },
-    chkbx: {
+    checkbox: {
         alignSelf: 'center',
     },
-    tekst1: {
+    text1: {
         fontSize: 24,
         fontWeight: '600',
         color: '#000000',
@@ -120,7 +114,7 @@ const styles = StyleSheet.create({
         paddingLeft: '2%',
         paddingRight: '2%',
     },
-    tekst2: {
+    text2: {
         fontSize: 18,
         fontWeight: '300',
         color: '#000000',
@@ -128,7 +122,7 @@ const styles = StyleSheet.create({
         paddingLeft: '2%',
         paddingRight: '2%',
     },
-    tekst3: {
+    text3: {
         fontSize: 18,
         fontWeight: '300',
         color: '#000000',
@@ -137,6 +131,5 @@ const styles = StyleSheet.create({
         paddingRight: '2%',
     },
 });
-
 
 export default Edit4;

@@ -13,9 +13,9 @@ const Edit3 = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
 
-                            <Text style={styles.text}>Zmiana kodu PIN</Text>
+                            <Text style={styles.text}>Change PIN</Text>
                         </View>
-                        <Text style={styles.text2}>Zmiana PIN-u do logowania i potwierdzenia transakcji</Text>
+                        <Text style={styles.text2}>Change your login and transaction confirmation PIN</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -24,9 +24,9 @@ const Edit3 = ({ navigation }) => {
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
 
-                            <Text style={styles.text}>Zmiana hasła do konta</Text>
+                            <Text style={styles.text}>Change Account Password</Text>
                         </View>
-                        <Text style={styles.text2}>Zmiana hasła do bankowości internetowej KRW</Text>
+                        <Text style={styles.text2}>Change your KRW online banking password</Text>
                     </View>
                 </TouchableOpacity>
 
@@ -34,10 +34,10 @@ const Edit3 = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('Edit4')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
-                        
-                            <Text style={styles.text}>Biometria - logowanie i autoryzacja</Text>
+
+                            <Text style={styles.text}>Biometrics - Login and Authorization</Text>
                         </View>
-                        <Text style={styles.text2}>Logowanie i autoryzacja odciskiem palca</Text>
+                        <Text style={styles.text2}>Login and authorize with fingerprint</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft: '2%', 
+        marginLeft: '2%',
     },
     text2: {
         fontSize: 15,
@@ -64,8 +64,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        backgroundColor: 'f7f7f7',
-        /*        backgroundColor: 'red',*/
+        backgroundColor: '#f7f7f7',
         width: '100%',
     },
     wiersz1: {

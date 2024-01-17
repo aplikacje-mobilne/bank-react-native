@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import API_CONFIG from '../components/config'; // Import API_CONFIG
 
-const Edit7 = ({ navigation }) => {
+const Edit7 = ({ navigation, setIsLoggedIn }) => {
     const [oldPass, setOldPass] = useState("");
     const [pass, setPass] = useState("");
     const [pass2, setPass2] = useState("");
@@ -26,26 +26,16 @@ const Edit7 = ({ navigation }) => {
         fetchLoggedInUser();
     }, []);
 
-    const handleLogout = async () => {
-        try {
-            await AsyncStorage.removeItem('loggedInUser');
-
-            navigation.navigate('Login');
-        } catch (error) {
-            console.error("Error during logout:", error);
-        }
-    };
-
     const changePass = async () => {
         try {
             if (pass !== pass2) {
-                Alert.alert("Błąd", "Nowe hasła nie są identyczne");
+                Alert.alert("Error", "New passwords do not match");
                 return;
             }
 
-            // Check if old password matches the stored old password
+            // Check if the old password matches the stored old password
             if (loggedInUser && oldPass !== loggedInUser.pass) {
-                Alert.alert("Błąd", "Stare hasło nie jest poprawne");
+                Alert.alert("Error", "Old password is incorrect");
                 return;
             }
 
@@ -61,57 +51,57 @@ const Edit7 = ({ navigation }) => {
                 // Update the JSON file with the modified user data
                 await axios.put(`${API_CONFIG.BASE_URL}/users/${userToUpdate.id}`, userToUpdate);
 
-                Alert.alert("Sukces", "Hasło zostało zmienione pomyślnie, zaloguj się ponownie");
-
-                handleLogout();
+                Alert.alert("Success", "Password changed successfully, please log in again");
+                setIsLoggedIn(false);
             } else {
-                Alert.alert("Błąd", "Nie można odnaleźć użytkownika w bazie danych");
+                Alert.alert("Error", "Unable to locate the user in the database");
             }
         } catch (error) {
-            console.error("Błąd podczas zmiany hasła:", error);
+            console.error("Error changing password:", error);
         }
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.div}>
-            <View style={styles.inputy}>
-                <View style={styles.inputy1}>
-                <Text style={styles.tekst1}>Podaj stare hasło</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Stare hasło"
-                    placeholderTextColor="#808080"
-                    value={oldPass}
-                    onChangeText={(text) => setOldPass(text)}
-                    />
+                <View style={styles.inputs}>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.text}>Enter old password</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Old password"
+                            placeholderTextColor="#808080"
+                            secureTextEntry
+                            value={oldPass}
+                            onChangeText={(text) => setOldPass(text)}
+                        />
                     </View>
-                    <View style={styles.inputy1}>
-                <Text style={styles.tekst1}>Podaj nowe hasło</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nowe hasło"
-                    placeholderTextColor="#808080"
-                    secureTextEntry
-                    value={pass}
-                    onChangeText={(text) => setPass(text)}
-                    />
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.text}>Enter new password</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="New password"
+                            placeholderTextColor="#808080"
+                            secureTextEntry
+                            value={pass}
+                            onChangeText={(text) => setPass(text)}
+                        />
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.text}>Confirm new password</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Repeat password"
+                            placeholderTextColor="#808080"
+                            secureTextEntry
+                            value={pass2}
+                            onChangeText={(text) => setPass2(text)}
+                        />
+                    </View>
                 </View>
-                <View style={styles.inputy1}>
-                <Text style={styles.tekst1}>Potwierdź nowe hasło</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Powtórz hasło"
-                    placeholderTextColor="#808080"
-                    secureTextEntry
-                    value={pass2}
-                    onChangeText={(text) => setPass2(text)}
-                />
-                </View>
-            </View>
-            <Pressable style={styles.potBtn} onPress={changePass}>
-                <Text style={styles.potText}>Potwierdź</Text>
-            </Pressable>
+                <Pressable style={styles.confirmBtn} onPress={changePass}>
+                    <Text style={styles.confirmText}>Confirm</Text>
+                </Pressable>
             </View>
         </View>
     );
@@ -122,7 +112,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
     },
-    inputy: {
+    inputs: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
@@ -139,9 +129,8 @@ const styles = StyleSheet.create({
         position: "relative",
         marginVertical: 10,
         paddingLeft: 10,
-
     },
-    potBtn: {
+    confirmBtn: {
         backgroundColor: "#ff570c",
         borderRadius: 50,
         width: '90%',
@@ -150,19 +139,18 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: '8%',
         alignItems: 'center',
-
     },
-    potText: {
+    confirmText: {
         color: "#f7f7f7",
         fontSize: 24,
         fontWeight: "400",
         position: "absolute",
     },
-    tekst1: {
+    text: {
         fontSize: 20,
         color: "#000000",
     },
-    inputy1: {
+    inputContainer: {
         marginBottom: '5%',
     },
     div: {

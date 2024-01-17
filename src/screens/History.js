@@ -31,7 +31,6 @@ const History = () => {
   }, []);
 
   useEffect(() => {
-<<<<<<< HEAD
     fetchTransactionHistory();
   }, [fetchTransactionHistory]);
 
@@ -40,60 +39,6 @@ const History = () => {
     await fetchTransactionHistory();
     setIsRefreshing(false);
   };
-=======
-    const fetchTransactionHistory = async () => {
-      try {
-        const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
-        if (storedLoggedInUser) {
-          const loggedInUser = JSON.parse(storedLoggedInUser).login;
-          setLoggedInUser(loggedInUser);
-  
-          const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
-          const allTransactions = response.data.reverse();
-  
-          const userTransactions = allTransactions.filter(
-            (transaction) =>
-              transaction.loggedInUser === loggedInUser || transaction.toUserLogin === loggedInUser
-          );
-  
-          setTransactionHistory(userTransactions);
-        }
-      } catch (error) {
-        console.error('Error fetching transaction history:', error);
-      }
-    };
-  
-    fetchTransactionHistory();
-  }, []);
-  
-  const onRefresh = async () => {
-    try {
-      setIsRefreshing(true);
-  
-      const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
-      if (storedLoggedInUser) {
-        const loggedInUser = JSON.parse(storedLoggedInUser).login;
-        setLoggedInUser(loggedInUser);
-  
-        const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
-        const allTransactions = response.data.reverse();
-  
-        const userTransactions = allTransactions.filter(
-          (transaction) =>
-            transaction.loggedInUser === loggedInUser || transaction.toUserLogin === loggedInUser
-        );
-  
-        setTransactionHistory(userTransactions);
-      }
-  
-      setIsRefreshing(false);
-    } catch (error) {
-      console.error('Error refreshing transaction history:', error);
-      setIsRefreshing(false);
-    }
-  };
-  
->>>>>>> branchPatryk
 
   const handleScroll = Animated.event([{ nativeEvent: { contentOffset: { y: translateY } } }], {
     useNativeDriver: false,
