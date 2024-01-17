@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
-import Header from '../components/Header';
+import * as LocalAuthentication from 'expo-local-authentication'; // Import LocalAuthentication
 
-const ListScreen = () => {
-  const [users, setUsers] = useState([]);
+const ListScreen = ({ setIsLoggedIn }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [transactionHistory, setTransactionHistory] = useState([]);
   const isFocused = useIsFocused();
   const navigation = useNavigation();
+  const [lastTransactions, setLastTransactions] = useState([]); // Add this line
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
-      console.log('Users Response:', response.data);
-      setUsers(response.data || []);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchLoggedInUser();
+      try {
+        const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
+        setLastTransactions(response.data);
+      } catch (error) {
+        console.error('Error fetching last transactions:', error);
+      }
+    };
 
+    fetchData();
+    }, [isFocused]);
   const fetchLoggedInUser = async () => {
     try {
       const userString = await AsyncStorage.getItem('loggedInUser');
@@ -37,24 +39,117 @@ const ListScreen = () => {
     }
   };
 
-  const fetchTransactionHistory = async () => {
+  useEffect(() => {
+    fetchLoggedInUser();
+  }, [isFocused]);
+  const handleLogout = async () => {
     try {
-      const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
-      console.log('Transaction Response:', response.data);
-      setTransactionHistory(response.data.reverse().slice(0, 4));
+      // Clear the user's authentication information
+      //await AsyncStorage.removeItem('loggedInUser');
+      //setLoggedInUser(null);
+      setIsLoggedIn(false);
+
+      // Navigate back to the login screen
     } catch (error) {
-      console.error('Error fetching transaction history:', error);
+      console.error('Error logging out:', error);
+      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
+    }
+  };
+  const handleDevicePairing = async () => {
+    try {
+      // Authenticate using biometrics
+      const { success } = await LocalAuthentication.authenticateAsync({
+        promptMessage: 'Authenticate to pair your device with biometrics',
+      });
+
+      if (success) {
+        Alert.alert('Success', 'Device paired successfully.');
+
+        // Update the user object with isBiometricEnabled set to true
+        const updatedUser = { ...loggedInUser, isBiometricEnabled: true };
+
+        // Save the updated user to AsyncStorage
+        await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+        // Update the state with the new user information
+        setLoggedInUser(updatedUser);
+      } else {
+        // Biometric authentication failed
+        Alert.alert('Error', 'Biometric authentication failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error pairing device:', error);
+      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
     }
   };
 
-  useEffect(() => {
-    fetchUsers();
-    fetchLoggedInUser();
-    fetchTransactionHistory();
-  }, [isFocused]);
 
+  const handleDeviceUnpairing = async () => {
+    try {
+      const { success } = await LocalAuthentication.authenticateAsync({
+        promptMessage: 'Authenticate to pair your device with biometrics',
+      });
+
+      if (success) {
+        Alert.alert('Success', 'Device paired successfully.');
+
+        const updatedUser = { ...loggedInUser, isBiometricEnabled: false};
+
+        await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+        setLoggedInUser(updatedUser);
+      } else {
+        Alert.alert('Error', 'Biometric authentication failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error pairing device:', error);
+      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
+    }
+  };
+
+  const handleSetPin = async () => {
+    try {
+      // Prompt the user to set a PIN
+      const pin = "1234"; // For simplicity, set the PIN to "1234" in this example
+
+      // Update the user object with isPinEnabled set to true and the PIN value
+      const updatedUser = { ...loggedInUser, isPinEnabled: true, pin };
+
+      // Save the updated user to AsyncStorage
+      await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+      // Update the state with the new user information
+      setLoggedInUser(updatedUser);
+
+      Alert.alert('Success', 'PIN set successfully.');
+    } catch (error) {
+      console.error('Error setting PIN:', error);
+      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
+    }
+  };
+
+  const handleUnSetPin = async () => {
+    try {
+      // Prompt the user to set a PIN
+      const pin = null; // For simplicity, set the PIN to "1234" in this example
+
+      // Update the user object with isPinEnabled set to true and the PIN value
+      const updatedUser = { ...loggedInUser, isPinEnabled: false, pin };
+
+      // Save the updated user to AsyncStorage
+      await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+      // Update the state with the new user information
+      setLoggedInUser(updatedUser);
+
+      Alert.alert('Success', 'PIN set successfully.');
+    } catch (error) {
+      console.error('Error setting PIN:', error);
+      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
+    }
+  };
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.userContainer}>
         {loggedInUser ? (
           <Text style={styles.loggedInUserText}>Hello, {loggedInUser.name}!</Text>
@@ -68,130 +163,108 @@ const ListScreen = () => {
           )}
         </View>
       </View>
-      <View style={styles.transactionContainer}>
-        <Text style={styles.transactionTitle}>Recent Transactions:</Text>
-        {transactionHistory.map((transaction, index) => (
-          <View key={index} style={styles.transactionItem}>
-            <Text style={styles.transactionDetail}>{transaction.title}</Text>
-            <Text style={styles.transactionAmount}>
-              {loggedInUser && transaction.toUserLogin === loggedInUser.login
-                ? `+${transaction.amount} PLN`
-                : `-${transaction.amount} PLN`}
-            </Text>
-          </View>
-        ))}
-        <TouchableOpacity onPress={() => navigation.navigate('History')}>
-          <View style={styles.moreButton}>
-            <Text style={styles.moreButtonText}>More</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+
+      <TouchableOpacity onPress={handleDevicePairing}>
+        <View style={styles.pairDeviceButton}>
+          <Text style={styles.pairDeviceButtonText}>Pair Device with Biometrics</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleDeviceUnpairing}>
+        <View style={styles.pairDeviceButton}>
+          <Text style={styles.pairDeviceButtonText}>Unpair Device with Biometrics</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleSetPin}>
+        <View style={styles.pairDeviceButton}>
+          <Text style={styles.pairDeviceButtonText}>Set PIN for account</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleUnSetPin}>
+        <View style={styles.pairDeviceButton}>
+          <Text style={styles.pairDeviceButtonText}>Unset PIN for account</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleLogout}>
+        <View style={styles.logoutButton}>
+          <Text style={styles.logoutButtonText}>Logout</Text>
+        </View>
+      </TouchableOpacity>
     </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
   userContainer: {
     backgroundColor: '#323643',
-    width: 390,
+    width: '100%',
     height: 200,
     borderRadius: 8,
     marginVertical: 20,
-    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loggedInUserText: {
-    fontSize: 40,
-    marginTop: 8,
-    marginBottom: 8,
-    marginLeft: 20,
+    fontSize: 24,
     color: 'white',
+    marginBottom: 10,
   },
   balanceContainer: {
     backgroundColor: '#606470',
-    width: 300,
+    width: '80%',
     height: 80,
     borderRadius: 8,
     marginVertical: 20,
-    marginLeft: 70,
-    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   balanceLabel: {
-    fontSize: 20,
-    marginTop: 5,
-    marginBottom: 10,
-    marginLeft: 10,
+    fontSize: 18,
     color: 'white',
+    marginBottom: 10,
   },
   balanceAmount: {
-    fontSize: 32,
-    marginTop: -15,
-    marginLeft: 10,
+    fontSize: 28,
     color: 'white',
   },
   transactionContainer: {
     backgroundColor: '#323643',
-    width: 390,
-    height: 400,
+    width: '100%',
     borderRadius: 8,
     marginVertical: 20,
-    marginTop: 0,
-    alignSelf: 'center',
+    padding: 15,
   },
-  transactionTitle: {
-    fontSize: 20,
-    marginTop: 5,
-    marginBottom: 8,
-    alignSelf: 'center',
-    color: 'white',
-  },
-  transactionItem: {
-    backgroundColor: 'white',
-    width: 370,
-    height: 70,
+  pairDeviceButton: {
+    backgroundColor: '#ff570c',
+    paddingVertical: 10,
+    width: '80%',
     borderRadius: 8,
-    marginVertical: 10,
-    marginTop: 0,
-    paddingLeft: 0,
+    marginTop: 20,
     alignSelf: 'center',
-    overflow: 'hidden',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
   },
-  transactionDetail: {
-    textAlign: 'left',
-    position: 'absolute',
-    marginTop: -15,
-    left: 10,
-    width: 240,
-    fontWeight: '500',
-    height: 34,
-    fontSize: 24,
-    top: '50%',
-    letterSpacing: 0,
-  },
-  transactionAmount: {
-    marginTop: 23,
-    fontSize: 24,
-    fontWeight: '500',
-    position: 'absolute',
-    right: 10,
-    textAlign: 'right',
-  },
-  moreButton: {
-    backgroundColor: '#606470',
-    width: 90,
-    height: 40,
-    borderRadius: 50,
-    marginTop: -5,
-    alignSelf: 'center',
-  },
-  moreButtonText: {
-    fontSize: 17,
+  pairDeviceButtonText: {
+    fontSize: 16,
     color: 'white',
-    marginTop: 10,
-    textAlign: 'center',
+  },
+  logoutButton: {
+    backgroundColor: '#ff0000', // Red color for logout button
+    paddingVertical: 10,
+    width: '80%',
+    borderRadius: 8,
+    marginTop: 20,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoutButtonText: {
+    fontSize: 16,
+    color: 'white',
   },
 });
 

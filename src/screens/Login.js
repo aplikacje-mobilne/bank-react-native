@@ -53,9 +53,10 @@ export function Login({ setIsLoggedIn }) {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-        <TouchableOpacity style={loginStyles.orangeButton} onPress={handleLogin}>
-      <Text style={loginStyles.buttonText}>Zaloguj</Text>
-    </TouchableOpacity>
+      <TouchableOpacity style={loginStyles.orangeButton} onPress={handleLogin}>
+        <Text style={loginStyles.buttonText}>Zaloguj</Text>
+      </TouchableOpacity>
+      
      
     </View>
     );

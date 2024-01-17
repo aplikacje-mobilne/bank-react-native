@@ -9,7 +9,9 @@
       "phoneNumber": "111222333",
       "accountNumber": "123456",
       "balance": 1000,
-      "id": 1
+      "id": 1,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false
     },
     {
       "name": "jakub",
@@ -20,8 +22,9 @@
       "phoneNumber": "333222111",
       "accountNumber": "666333",
       "balance": 500,
-      "id": 2
-    },
+      "id": 2,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false    },
     {
       "name": "qwe",
       "surname": "qwe",
@@ -30,8 +33,9 @@
       "email": "qwe",
       "phoneNumber": "123123123",
       "balance": 1000,
-      "id": 3
-    }
+      "id": 3,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false    }
   ],
   "transactions": [
     {

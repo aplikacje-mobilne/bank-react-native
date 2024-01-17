@@ -18,13 +18,13 @@ import { Feather } from '@expo/vector-icons';
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-const MyDrawer = () => {
+const MyDrawer = ({setIsLoggedIn}) => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: '#FF570C',
-        tabBarInactiveTintColor: '#606470', // color for not clicked icons and text
-        tabBarStyle: styles.tabBar, // use the custom tabBar style
+        tabBarInactiveTintColor: '#606470',
+        tabBarStyle: styles.tabBar,
         tabBarIcon: ({ color, size }) => {
           let iconName;
           switch (route.name) {
@@ -68,7 +68,7 @@ const MyDrawer = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={ListScreen} />
+      <Tab.Screen name="Home"  children={() => <ListScreen setIsLoggedIn={setIsLoggedIn}/>} />
       <Tab.Screen name="History" component={History} />
       <Tab.Screen name="Payment" component={Payment} />
       <Tab.Screen name="Offers" component={Offers} />

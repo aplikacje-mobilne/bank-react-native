@@ -210,6 +210,7 @@ const styles = {
     backgroundColor: '#ff570c',
     padding: 12,
     borderRadius: 25,
+    marginTop: -4,
     alignItems: 'center',
     justifyContent: 'center',
   },
