@@ -56,7 +56,7 @@ const StackNav = () => {
                   <Stack.Screen name="Edit3" component={Edit3} options={{ title: 'Security' }} />
                   <Stack.Screen name="Edit4" component={Edit4} options={{ title: 'Payment' }} />
                   <Stack.Screen name="Edit5" children={() => <Edit5 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Log Out' }} />
-                  <Stack.Screen name="Edit6" component={Edit6} />
+                  <Stack.Screen name="Edit6" children={() => <Edit6 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Change PIN' }} />
                   <Stack.Screen name="Edit7" children={() => <Edit7 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Change Account Password' }} />
                   <Stack.Screen name="Payment1" component={Payment1} options={{ title: 'Transfer' }} />
                   <Stack.Screen name="Payment2" component={Payment2} options={{ title: 'Transfer' }} />
