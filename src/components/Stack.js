@@ -22,6 +22,8 @@ import PhotoDisplay from '../screens/PhotoDisplay';
 import OfferFirst from '../screens/OfferFirst';
 import OfferSecond from '../screens/OfferSecond';
 import OfferThird from '../screens/OfferThird';
+import History from '../screens/History';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -67,6 +69,7 @@ const StackNav = () => {
                   <Stack.Screen name="OfferFirst" component={OfferFirst} options={{ title: 'Offers' }} />
                   <Stack.Screen name="OfferSecond" component={OfferSecond} options={{ title: 'Offers' }} />
                   <Stack.Screen name="OfferThird" component={OfferThird} options={{ title: 'Offers' }} />
+                  <Stack.Screen name="History" component={History} options={{ title: 'History' }} />
 
 
         </>

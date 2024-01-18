@@ -63,7 +63,7 @@ const Payment1 = ({ navigation }) => {
   const checkAccountNumber = async (Name, Number) => {
     try {
       const response = await axios.get(
-        `${API_CONFIG.BASE_URL}/users?name=${Name}&nrkonta=${Number}`
+        `${API_CONFIG.BASE_URL}/users?name=${Name}&accountNumber=${Number}`
       );
       return response.data.length > 0;
     } catch (error) {
@@ -109,6 +109,14 @@ const Payment1 = ({ navigation }) => {
       const recipientNewBalance = recipientResponse.data[0].balance + parseFloat(amount);
       await axios.patch(`${API_CONFIG.BASE_URL}/users/${recipientId}`, { balance: recipientNewBalance });
   
+      // Update the logged-in user's balance in AsyncStorage
+      const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
+      if (storedLoggedInUser) {
+        const parsedLoggedInUser = JSON.parse(storedLoggedInUser);
+        const updatedLoggedInUser = { ...parsedLoggedInUser, balance: senderNewBalance };
+        await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedLoggedInUser));
+      }
+
       Alert.alert('Transfer successful');
       navigation.goBack();
     } catch (error) {
@@ -127,7 +135,7 @@ const Payment1 = ({ navigation }) => {
       <View style={styles.sectionContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Recipient's name and surname:"
+          placeholder="Recipient's name:"
           value={recipientName}
           onChangeText={(text) => setInput1(text)}
         />
@@ -156,7 +164,7 @@ const Payment1 = ({ navigation }) => {
           onChangeText={(text) => setInput5(text)}
         />
         <TouchableOpacity style={styles.check} onPress={handleCheck}>
-          <Text style={styles.pp}>Check</Text>
+          <Text style={styles.pp}>Send</Text>
         </TouchableOpacity>
       </View>
     </View>

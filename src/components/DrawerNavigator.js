@@ -50,7 +50,7 @@ const MyDrawer = ({setIsLoggedIn}) => {
               name={iconName}
               size={size}
               color={color}
-              style={styles.tabBarIcon} // apply the custom style to the icon
+              style={styles.tabBarIcon} 
             />
           );
         },

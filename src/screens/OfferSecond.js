@@ -10,21 +10,21 @@ const OfferFirst = () => {
           style={{ width: 120, height: 120, position: 'absolute', top: 10, right: 10 }}
         />
         <Text style={[styles.headerText, { marginRight: 140 }]}>
-        Masz szansę zarobić aż do 200 zł!
+          You have a chance to earn up to 200 PLN!
         </Text>
         <Text style={[styles.headerText2, { marginRight: 130 }]}>
-        Zakładając zlecenie stałe na swoje inwestycje, możesz otrzymać premie w wysokości do 200 zł
+          By creating a standing order for your investments, you can receive bonuses up to 200 PLN.
         </Text>
         <Text style={[styles.headerText2, { marginRight: 50 }]}>
-        Im większe jest Twoje zlecenie stałe, tym wyższy bonus możesz otrzymać.
+          The larger your standing order, the higher bonus you can receive.
         </Text>
         <Text style={[styles.headerText3]}>
-        Nawet do 200 zł!
+          Up to 200 PLN!
         </Text>
-        <Text style={styles.text}>Bonusy zostaną dodane do Twojego konta zgodnie z wybraną kwotą zlecenia stałego.</Text>
-        <Text style={styles.text}>Promocja jest dostępna przez ograniczony czas, więc nie przegap okazji, aby zmaksymalizować swoje nagrody.</Text>
+        <Text style={styles.text}>Bonuses will be added to your account based on the selected amount of the standing order.</Text>
+        <Text style={styles.text}>The promotion is available for a limited time, so don't miss the opportunity to maximize your rewards.</Text>
         <Text style={[styles.headerText4]}>
-        O więcej szczegółów zapytaj w punkcie banku
+          For more details, inquire at the bank branch.
         </Text>
       </View>
     </View>
@@ -39,11 +39,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   text: {
-    fontSize: 15, 
+    fontSize: 15,
     marginBottom: 5,
     marginLeft: 15,
     marginRight: 15,
-  
   },
   headerText: {
     fontSize: 20,

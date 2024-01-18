@@ -25,7 +25,6 @@ export function Login({ setIsLoggedIn }) {
                 await AsyncStorage.setItem('loggedInUser', JSON.stringify(user));
                 setIsLoggedIn(true);
 
-                // Przykładowy kod nawigacji do ekranu DrawerNavigator po zalogowaniu
                 navigation.dispatch(
                     CommonActions.reset({
                         index: 0,
@@ -48,7 +47,7 @@ export function Login({ setIsLoggedIn }) {
 
   return (
     <View style={loginStyles.container}>
-      <Text style={loginStyles.title}>Zaloguj się do konta</Text>
+      <Text style={loginStyles.title}>Login to your account</Text>
       <TextInput
         style={loginStyles.input}
         placeholder="Login"
@@ -65,7 +64,7 @@ export function Login({ setIsLoggedIn }) {
         onChangeText={(text) => setPassword(text)}
       />
       <TouchableOpacity style={loginStyles.orangeButton} onPress={handleLogin}>
-        <Text style={loginStyles.buttonText}>Zaloguj</Text>
+        <Text style={loginStyles.buttonText}>Sign in</Text>
       </TouchableOpacity>
       
      

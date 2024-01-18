@@ -8,7 +8,7 @@
       "email": "patry.gubala",
       "phoneNumber": "111222333",
       "accountNumber": "123456",
-      "balance": 1012,
+      "balance": 902,
       "id": 1,
       "isBiometricEnabled": false,
       "isPinEnabled": false
@@ -21,7 +21,7 @@
       "email": "jakub.h",
       "phoneNumber": "333222111",
       "accountNumber": "666333",
-      "balance": 1055,
+      "balance": 1056,
       "id": 2,
       "isBiometricEnabled": false,
       "isPinEnabled": false
@@ -33,10 +33,63 @@
       "pass": "qwe",
       "email": "qwe",
       "phoneNumber": "123123123",
-      "balance": 933,
+      "balance": 1042,
       "id": 3,
       "isBiometricEnabled": false,
       "isPinEnabled": false
+    },
+    {
+      "name": "3",
+      "surname": "3",
+      "login": "3",
+      "pass": "3",
+      "email": "3",
+      "phoneNumber": "3",
+      "balance": 1003,
+      "id": 4
+    },
+    {
+      "name": "4",
+      "surname": "4",
+      "login": "4",
+      "pass": "4",
+      "email": "4",
+      "phoneNumber": "4",
+      "balance": 997,
+      "id": 5
+    },
+    {
+      "name": "0",
+      "surname": "0",
+      "login": "0",
+      "pass": "0",
+      "email": "0",
+      "phoneNumber": "0",
+      "balance": 1000,
+      "id": 6
+    },
+    {
+      "name": "7",
+      "surname": "7",
+      "login": "7",
+      "pass": "7",
+      "email": "7",
+      "phoneNumber": "7",
+      "balance": 1000,
+      "id": 7
+    },
+    {
+      "name": "r",
+      "surname": "r",
+      "login": "r",
+      "pass": "r",
+      "email": "r",
+      "phoneNumber": "r",
+      "accountNumber": "623754",
+      "balance": 1000,
+      "isBiometricEnabled": false,
+      "isPinEnabled": false,
+      "id": 8
     }
   ],
   "transactions": [
@@ -267,6 +320,46 @@
       "recipientAccountNumber": "123456",
       "transactionDate": "2024-01-17T20:46:09.284Z",
       "id": 22
+    },
+    {
+      "loggedInUser": "4",
+      "title": "3",
+      "description": "3",
+      "type": "mobile",
+      "amount": 3,
+      "toUserLogin": "3",
+      "transactionDate": "2024-01-18T14:04:11.622Z",
+      "id": 23
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "1",
+      "toUserLogin": "admin2",
+      "description": "1",
+      "type": "normal",
+      "amount": 1,
+      "transactionDate": "2024-01-18T14:14:17.577Z",
+      "id": 24
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "1",
+      "description": "1",
+      "type": "mobile",
+      "amount": 10,
+      "toUserLogin": "qwe",
+      "transactionDate": "2024-01-18T14:15:19.141Z",
+      "id": 25
+    },
+    {
+      "loggedInUser": "admin",
+      "title": "1",
+      "description": "1",
+      "type": "mobile",
+      "amount": 99,
+      "toUserLogin": "qwe",
+      "transactionDate": "2024-01-18T14:17:11.996Z",
+      "id": 26
     }
   ]
 }

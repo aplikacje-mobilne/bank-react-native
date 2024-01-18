@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Pressable, TextInput, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import API_CONFIG from '../components/config'; // Import API_CONFIG
+import API_CONFIG from '../components/config'; 
 
 const Edit7 = ({ navigation, setIsLoggedIn }) => {
     const [oldPass, setOldPass] = useState("");
@@ -11,7 +11,7 @@ const Edit7 = ({ navigation, setIsLoggedIn }) => {
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     useEffect(() => {
-        // Fetch the logged-in user from AsyncStorage
+        
         const fetchLoggedInUser = async () => {
             try {
                 const userJson = await AsyncStorage.getItem('loggedInUser');
@@ -33,22 +33,18 @@ const Edit7 = ({ navigation, setIsLoggedIn }) => {
                 return;
             }
 
-            // Check if the old password matches the stored old password
             if (loggedInUser && oldPass !== loggedInUser.pass) {
                 Alert.alert("Error", "Old password is incorrect");
                 return;
             }
 
-            // Find the user in the JSON file based on the login
             const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
             const users = response.data || [];
             const userToUpdate = users.find((user) => user.login === loggedInUser.login);
 
             if (userToUpdate) {
-                // Update the user's password in the JSON file
                 userToUpdate.pass = pass;
 
-                // Update the JSON file with the modified user data
                 await axios.put(`${API_CONFIG.BASE_URL}/users/${userToUpdate.id}`, userToUpdate);
 
                 Alert.alert("Success", "Password changed successfully, please log in again");

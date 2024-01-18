@@ -10,23 +10,22 @@ const OfferFirst = () => {
           style={{ width: 120, height: 120, position: 'absolute', top: 10, right: 10 }}
         />
         <Text style={[styles.headerText, { marginRight: 140 }]}>
-        4,5% już od 10 000 zł!
+          4.5% from just 10,000 PLN!
         </Text>
         <Text style={[styles.headerText2, { marginRight: 140 }]}>
-        Dzięki tej specjalnej promocji możesz zyskać konkurencyjne odsetki od swojego depozytu w wysokości 4,5%
+          With this special promotion, you can earn competitive interest on your deposit at a rate of 4.5%.
         </Text>
         <Text style={[styles.headerText2, { marginRight: 20 }]}>
-        Aby wziąć udział wystarczy zacząć od minimalnego depozytu w wysokości 10 000 zł
+          To participate, all you need to do is start with a minimum deposit of 10,000 PLN.
         </Text>
 
-        <Text style={styles.text}>Opcje regularnego inwestowania są elastyczne i można je dostosować do Twoich preferencji i tolerancji ryzyka.</Text>
-        <Text style={styles.text}>Promocja ma na celu pomóc Ci osiągnąć Twoje cele finansowe przy jednoczesnej maksymalizacji zysków.</Text>
+        <Text style={styles.text}>Regular investment options are flexible and can be tailored to your preferences and risk tolerance.</Text>
+        <Text style={styles.text}>The promotion aims to help you achieve your financial goals while maximizing profits.</Text>
         <Text style={[styles.headerText3, { marginRight: 20 }]}>
-        Śpiesz się, ofreta ograniczona!
+          Hurry, the offer is limited!
         </Text>
         <Text style={[styles.headerText4]}>
-       
-        O więcej szczegółów zapytaj w punkcie banku
+          For more details, inquire at the bank branch.
         </Text>
       </View>
     </View>
@@ -41,11 +40,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   text: {
-    fontSize: 15, 
+    fontSize: 15,
     marginBottom: 5,
     marginLeft: 15,
     marginRight: 15,
-  
   },
   headerText: {
     fontSize: 20,
@@ -55,7 +53,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 10,
     textAlign: 'left',
-
   },
   headerText2: {
     fontSize: 18,

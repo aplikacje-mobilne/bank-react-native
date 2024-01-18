@@ -6,11 +6,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
 import Header from '../components/Header';
 
-const ListScreen = ({ navigation }) => {
+const ListScreen = () => {
   const [users, setUsers] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [transactionHistory, setTransactionHistory] = useState([]);
   const isFocused = useIsFocused();
+  const navigation = useNavigation();
+
 
   const fetchUsers = async () => {
     try {
@@ -105,6 +107,7 @@ const ListScreen = ({ navigation }) => {
           </View>
         ))}
         <TouchableOpacity onPress={() => navigation.navigate('History')}>
+          
           <View style={styles.rectangle5}>
             <Text style={styles.buttonText}>More</Text>
           </View>

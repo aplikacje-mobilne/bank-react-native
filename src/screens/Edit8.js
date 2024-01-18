@@ -4,13 +4,13 @@ import axios from 'axios';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
-import * as LocalAuthentication from 'expo-local-authentication'; // Import LocalAuthentication
+import * as LocalAuthentication from 'expo-local-authentication'; 
 
 const Edit8 = ({ setIsLoggedIn }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const isFocused = useIsFocused();
   const navigation = useNavigation();
-  const [lastTransactions, setLastTransactions] = useState([]); // Add this line
+  const [lastTransactions, setLastTransactions] = useState([]); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,16 +100,11 @@ const Edit8 = ({ setIsLoggedIn }) => {
 
   const handleSetPin = async () => {
     try {
-      // Prompt the user to set a PIN
-      const pin = "1234"; // For simplicity, set the PIN to "1234" in this example
-
-      // Update the user object with isPinEnabled set to true and the PIN value
+      const pin = "1234"; 
       const updatedUser = { ...loggedInUser, isPinEnabled: true, pin };
 
-      // Save the updated user to AsyncStorage
       await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
 
-      // Update the state with the new user information
       setLoggedInUser(updatedUser);
 
       Alert.alert('Success', 'PIN set successfully.');
@@ -121,7 +116,7 @@ const Edit8 = ({ setIsLoggedIn }) => {
 
   const handleUnSetPin = async () => {
     try {
-      const pin = null; // For simplicity, set the PIN to "1234" in this example
+      const pin = null; 
 
       const updatedUser = { ...loggedInUser, isPinEnabled: false, pin };
 

@@ -103,6 +103,13 @@ const Payment2 = ({ navigation }) => {
       const recipientNewBalance = recipientResponse.data[0].balance + parseFloat(amount);
       await axios.patch(`${API_CONFIG.BASE_URL}/users/${recipientId}`, { balance: recipientNewBalance });
 
+      const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
+      if (storedLoggedInUser) {
+        const parsedLoggedInUser = JSON.parse(storedLoggedInUser);
+        const updatedLoggedInUser = { ...parsedLoggedInUser, balance: senderNewBalance };
+        await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedLoggedInUser));
+      }
+
       setTransactionResponse(transactionResponse.data);
 
       Alert.alert('Transfer successful');
@@ -112,7 +119,6 @@ const Payment2 = ({ navigation }) => {
       Alert.alert('Error', 'An error occurred while processing the transaction.');
     }
   };
-
 
   return (
     <View style={styles.header}>
@@ -148,7 +154,7 @@ const Payment2 = ({ navigation }) => {
           onChangeText={(text) => setAmount(text)}
         />
         <TouchableOpacity style={styles.check} onPress={handleCheck}>
-          <Text style={styles.pp}>Check</Text>
+          <Text style={styles.pp}>Send</Text>
         </TouchableOpacity>
       </View>
     </View>

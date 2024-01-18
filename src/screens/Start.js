@@ -71,7 +71,7 @@ const Frame = ({ setIsLoggedIn }) => {
             source={require("./bank.png")}
             style={styles.logo}
           />
-          <Text style={styles.tekst1}>POLSKI BANK KRW</Text>
+          <Text style={styles.tekst1}>POLISH BANK KRW</Text>
           <TouchableOpacity style={styles.group} onPress={authenticate}>
             <View style={styles.overlapGroup}>
               <Text style={styles.tekst2}>Log IN</Text>

@@ -5,7 +5,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import PhotoDisplay from "./PhotoDisplay";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import db from "../screens/db";
 
 export default function TakePhoto({ navigation }) {
     const [type, setType] = useState(Camera.Constants.Type.back);

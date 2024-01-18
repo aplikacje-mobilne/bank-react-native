@@ -13,14 +13,17 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [balance, setBalance] = useState(1000);
 
-
+  const generateAccountNumber = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  };
 
   const handleRegister = async () => {
     try {
       if (pass !== pass2) {
-        Alert.alert("Error", "Password are not the same");
+        Alert.alert("Error", "Passwords are not the same");
         return;
       }
+
       const loginCheckResponse = await axios.get(`${API_CONFIG.BASE_URL}/users?login=${login}`);
       const isLoginUnique = !loginCheckResponse.data || loginCheckResponse.data.length === 0;
 
@@ -36,70 +39,74 @@ const RegisterScreen = ({ navigation }) => {
         pass,
         email,
         phoneNumber,
+        accountNumber: generateAccountNumber(),
         balance,
+        isBiometricEnabled: false,
+        isPinEnabled: false,
       });
 
-      alert('Registration successful');
+      Alert.alert('Registration successful');
       navigation.goBack();
     } catch (error) {
       console.error("Registration error ", error);
+      Alert.alert('Error', 'An error occurred during registration.');
     }
   };
 
   return (
-      <View style={registerStyles.container}>
-          <View style={registerStyles.inputy}>
-      <TextInput
-        style={registerStyles.input}
-        placeholder="Imię"
-        placeholderTextColor="#808080"
-        value={name}
-        onChangeText={(text) => setName(text)}
-      />
-       <TextInput
-        style={registerStyles.input}
-        placeholder="Nazwisko"
-        placeholderTextColor="#808080"
-        value={surname}
-        onChangeText={(text) => setSurname(text)}
-      />
+    <View style={registerStyles.container}>
+      <View style={registerStyles.inputy}>
         <TextInput
-        style={registerStyles.input}
-        placeholder="E-mail"
-        placeholderTextColor="#808080"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
+          style={registerStyles.input}
+          placeholder="Name"
+          placeholderTextColor="#808080"
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
         <TextInput
-        style={registerStyles.input}
-        placeholder="Numer telefonu"
-        placeholderTextColor="#808080"
-        value={phoneNumber}
-        onChangeText={(text) => setPhoneNumber(text)}
-      />
-      <TextInput
-        style={registerStyles.input}
-        placeholder="Login"
-        placeholderTextColor="#808080"
-        value={login}
-        onChangeText={(text) => setLogin(text)}
-      />
-      <TextInput
-        style={registerStyles.input}
-        placeholder="Hasło"
-        placeholderTextColor="#808080"
-        secureTextEntry
-        value={pass}
-        onChangeText={(text) => setPass(text)}
-      />
-      <TextInput
-        style={registerStyles.input}
-        placeholder="Powtórz hasło"
-        placeholderTextColor="#808080"
-        secureTextEntry
-        value={pass2}
-        onChangeText={(text) => setPass2(text)}
-      />
+          style={registerStyles.input}
+          placeholder="Surname"
+          placeholderTextColor="#808080"
+          value={surname}
+          onChangeText={(text) => setSurname(text)}
+        />
+        <TextInput
+          style={registerStyles.input}
+          placeholder="E-mail"
+          placeholderTextColor="#808080"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          style={registerStyles.input}
+          placeholder="Phone number"
+          placeholderTextColor="#808080"
+          value={phoneNumber}
+          onChangeText={(text) => setPhoneNumber(text)}
+        />
+        <TextInput
+          style={registerStyles.input}
+          placeholder="Login"
+          placeholderTextColor="#808080"
+          value={login}
+          onChangeText={(text) => setLogin(text)}
+        />
+        <TextInput
+          style={registerStyles.input}
+          placeholder="Password"
+          placeholderTextColor="#808080"
+          secureTextEntry
+          value={pass}
+          onChangeText={(text) => setPass(text)}
+        />
+        <TextInput
+          style={registerStyles.input}
+          placeholder="Repeat password"
+          placeholderTextColor="#808080"
+          secureTextEntry
+          value={pass2}
+          onChangeText={(text) => setPass2(text)}
+        />
       </View>
       <Pressable style={registerStyles.registerBtn} onPress={handleRegister}>
         <Text style={registerStyles.registerText}>REGISTER</Text>
@@ -107,6 +114,7 @@ const RegisterScreen = ({ navigation }) => {
     </View>
   );
 };
+
 
 const registerStyles = StyleSheet.create({
   container: {
