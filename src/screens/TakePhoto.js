@@ -1,12 +1,13 @@
 import { Camera } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
-import { useState, useRef, useEffect, useIsFocused } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import PhotoDisplay from "./PhotoDisplay";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import db from "../screens/db";
 
-export default function TakePhoto({ navigation, route }) {
+export default function TakePhoto({ navigation }) {
     const [type, setType] = useState(Camera.Constants.Type.back);
     const cameraRef = useRef();
     const [userData, setUserData] = useState(null);
@@ -34,25 +35,6 @@ export default function TakePhoto({ navigation, route }) {
         fetchUserData();
     }, []);
 
-    const isFocused = useIsFocused(); // Import useIsFocused hook
-
-    useEffect(() => {
-        const fetchCapturedPhotoUri = async () => {
-            try {
-                const capturedPhotoUri = await AsyncStorage.getItem('capturedPhotoUri');
-                if (capturedPhotoUri) {
-                    console.log('Retrieved captured photo URI:', capturedPhotoUri);
-                }
-            } catch (error) {
-                console.error('Error fetching captured photo URI:', error);
-            }
-        };
-
-        if (isFocused) {
-            fetchCapturedPhotoUri();
-        }
-    }, [isFocused, route.params?.capturedPhotoUri]);
-
     const takePicture = async () => {
         try {
             const photo = await cameraRef.current.takePictureAsync();
@@ -67,11 +49,8 @@ export default function TakePhoto({ navigation, route }) {
                 });
 
                 console.log('Saved photo:', destination);
-
-                await AsyncStorage.setItem('capturedPhotoUri', destination);
-
                 navigation.navigate("Edit2", {
-                    capturedPhotoUri: destination,
+                    capturedPhotoUri: destination
                 });
             } catch (error) {
                 console.error('Error saving photo:', error);
