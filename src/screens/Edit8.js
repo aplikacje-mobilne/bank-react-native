@@ -82,7 +82,7 @@ const Edit8 = ({ setIsLoggedIn }) => {
       });
 
       if (success) {
-        Alert.alert('Success', 'Device paired successfully.');
+        Alert.alert('Success', 'Device unpaired successfully.');
 
         const updatedUser = { ...loggedInUser, isBiometricEnabled: false};
 
@@ -129,7 +129,7 @@ const Edit8 = ({ setIsLoggedIn }) => {
 
       setLoggedInUser(updatedUser);
 
-      Alert.alert('Success', 'PIN set successfully.');
+      Alert.alert('Success', 'PIN unset successfully.');
     } catch (error) {
       console.error('Error setting PIN:', error);
       Alert.alert('Error', 'An unexpected error occurred. Please try again.');
