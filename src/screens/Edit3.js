@@ -31,13 +31,13 @@ const Edit3 = ({ navigation }) => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('Edit4')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Edit8')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
 
-                            <Text style={styles.text}>Biometrics - Login and Authorization</Text>
+                            <Text style={styles.text}>Biometrics, Pin, Logout</Text>
                         </View>
-                        <Text style={styles.text2}>Login and authorize with fingerprint</Text>
+                        <Text style={styles.text2}>Logout, Set or unset PIN, Pair/Unpair Device with Biometrics </Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     text: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 'bold',
         marginLeft: '2%',
     },

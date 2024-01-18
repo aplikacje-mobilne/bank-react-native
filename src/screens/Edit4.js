@@ -43,25 +43,12 @@ const Edit4 = ({ navigation }) => {
         }, [])
     );
 
-    const handleCheckboxChange = async () => {
-        try {
-            // Save the checkbox state in AsyncStorage
-            await AsyncStorage.setItem('receiveTransfersOnPhone', JSON.stringify(!isChecked));
-            setChecked(!isChecked);
-        } catch (error) {
-            console.error('Error saving checkbox state:', error);
-        }
-    };
-
     return (
         <View style={styles.container}>
             <View style={styles.div}>
                 <Text style={styles.text1}>Transfers to Phone</Text>
             </View>
             <View style={styles.div}>
-                <View style={styles.row}>
-                    <Text style={styles.text1}>Receive Transfers on Phone </Text>
-                </View>
                 <Text style={styles.text2}>
                     Register your phone number in the system. The sender doesn't need to know
                     your account number, just your phone number.
@@ -106,8 +93,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     text1: {
-        fontSize: 24,
-        fontWeight: '600',
+        fontSize: 25,
+        fontWeight: 'bold',
         color: '#000000',
         padding: '2%',
         textAlign: 'center',
@@ -115,16 +102,14 @@ const styles = StyleSheet.create({
         paddingRight: '2%',
     },
     text2: {
-        fontSize: 18,
-        fontWeight: '300',
+        fontSize: 15,
         color: '#000000',
         backgroundColor: '#ffffff',
         paddingLeft: '2%',
         paddingRight: '2%',
     },
     text3: {
-        fontSize: 18,
-        fontWeight: '300',
+        fontSize: 15,
         color: '#000000',
         paddingTop: '5%',
         paddingLeft: '2%',

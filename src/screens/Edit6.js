@@ -189,7 +189,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     enterPinText: {
-        fontSize: 18,
+        fontSize: 25,
+        fontWeight: 'bold',
         marginBottom: 10,
     },
     pinContainer: {

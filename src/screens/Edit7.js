@@ -137,17 +137,16 @@ const styles = StyleSheet.create({
         position: "relative",
         justifyContent: 'center',
         alignSelf: 'center',
-        height: '8%',
+        height: '10%',
         alignItems: 'center',
     },
     confirmText: {
-        color: "#f7f7f7",
         fontSize: 24,
-        fontWeight: "400",
         position: "absolute",
     },
     text: {
-        fontSize: 20,
+        fontSize: 25,
+        fontWeight: 'bold',
         color: "#000000",
     },
     inputContainer: {

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     text: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 'bold',
         marginLeft: '2%',
     },

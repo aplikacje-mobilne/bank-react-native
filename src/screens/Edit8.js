@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: '#ff570c',
     paddingVertical: 10,
-    width: '80%',
+    width: '90%',
     borderRadius: 50,
     marginTop: 5,
     marginBottom: 20,
@@ -215,12 +215,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnText: {
-    fontSize: 16,
-      color: 'white',
+    fontSize: 20,
+    color: 'white',
   },
     infoText: {
-        fontSize: 20,
-        color: "#000000",
+        fontSize: 15,
+        color: '#333',
         textAlign: 'center',
     },
     
