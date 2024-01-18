@@ -12,19 +12,6 @@ const Edit8 = ({ setIsLoggedIn }) => {
   const navigation = useNavigation();
   const [lastTransactions, setLastTransactions] = useState([]); 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchLoggedInUser();
-      try {
-        const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
-        setLastTransactions(response.data);
-      } catch (error) {
-        console.error('Error fetching last transactions:', error);
-      }
-    };
-
-    fetchData();
-    }, [isFocused]);
   const fetchLoggedInUser = async () => {
     try {
       const userString = await AsyncStorage.getItem('loggedInUser');

@@ -10,10 +10,8 @@ import Payment from '../screens/Payment';
 import Offers from '../screens/Offers';
 import Edit from '../screens/Edit';
 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
-const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 const MyDrawer = ({setIsLoggedIn}) => {

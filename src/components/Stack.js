@@ -6,7 +6,6 @@ import { Login } from '../screens/Login';
 import RegisterScreen from '../screens/RegisterScreen';
 import PinLogin from '../screens/PinLogin';
 
-import Edit from '../screens/Edit';
 import Edit2 from '../screens/Edit2';
 import Edit3 from '../screens/Edit3';
 import Edit4 from '../screens/Edit4';
@@ -61,7 +60,7 @@ const StackNav = () => {
                   <Stack.Screen name="Edit5" children={() => <Edit5 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Log Out' }} />
                   <Stack.Screen name="Edit6" children={() => <Edit6 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Change PIN' }} />
                   <Stack.Screen name="Edit7" children={() => <Edit7 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Change Account Password' }} />
-                  <Stack.Screen name="Edit8" children={() => <Edit8 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Set Biometrics' }} />
+                  <Stack.Screen name="Edit8" children={() => <Edit8 setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Set up authentication' }} />
                   <Stack.Screen name="Payment1" component={Payment1} options={{ title: 'Transfer' }} />
                   <Stack.Screen name="Payment2" component={Payment2} options={{ title: 'Transfer' }} />
                   <Stack.Screen name="TakePhoto" component={TakePhoto} />

@@ -67,7 +67,7 @@ const Payment2 = ({ navigation }) => {
 
   const handleCheck = async () => {
     try {
-      const recipientResponse = await await axios.get(`${API_CONFIG.BASE_URL}/users?phoneNumber=${phoneNumber}`);
+      const recipientResponse =  await axios.get(`${API_CONFIG.BASE_URL}/users?phoneNumber=${phoneNumber}`);
 
       if (!recipientResponse || recipientResponse.length === 0) {
         Alert.alert('Error', 'Recipient with the provided phone number does not exist.');

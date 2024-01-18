@@ -98,6 +98,7 @@ const Payment1 = ({ navigation }) => {
         description,
         type: 'normal',
         amount: enteredAmount,
+        recipientAccountNumber: recipientAccountNumber,
         transactionDate: new Date().toISOString(),
       });
   
@@ -109,7 +110,6 @@ const Payment1 = ({ navigation }) => {
       const recipientNewBalance = recipientResponse.data[0].balance + parseFloat(amount);
       await axios.patch(`${API_CONFIG.BASE_URL}/users/${recipientId}`, { balance: recipientNewBalance });
   
-      // Update the logged-in user's balance in AsyncStorage
       const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
       if (storedLoggedInUser) {
         const parsedLoggedInUser = JSON.parse(storedLoggedInUser);

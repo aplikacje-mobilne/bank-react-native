@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import {
     View,
     Text,
-    Image,
     StyleSheet,
     TouchableOpacity, Alert,
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 import { useNavigation } from "@react-navigation/native";
 import * as LocalAuthentication from "expo-local-authentication";
-import API_CONFIG from '../components/config';
 
 const Frame = ({ setIsLoggedIn }) => {
   const navigation = useNavigation();
@@ -67,11 +67,9 @@ const Frame = ({ setIsLoggedIn }) => {
         </View>
 
         <View style={styles.bla1}>
-          <Image
-            source={require("./bank.png")}
-            style={styles.logo}
-          />
-          <Text style={styles.tekst1}>POLISH BANK KRW</Text>
+          <Icon name="bank" size={86} color="#323643"/>
+
+          <Text style={styles.tekst1}>POLSKI BANK KRW</Text>
           <TouchableOpacity style={styles.group} onPress={authenticate}>
             <View style={styles.overlapGroup}>
               <Text style={styles.tekst2}>Log IN</Text>

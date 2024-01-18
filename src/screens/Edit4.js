@@ -21,7 +21,6 @@ const Edit4 = ({ navigation }) => {
     };
 
     useEffect(() => {
-        // Fetch user data from AsyncStorage
         const fetchUserData = async () => {
             try {
                 const userJson = await AsyncStorage.getItem('loggedInUser');

@@ -93,27 +93,27 @@ const History = () => {
     const isReceivedByLoggedInUser = item.toUserLogin === loggedInUser;
     const formattedAmount = isReceivedByLoggedInUser ? `+${item.amount} PLN` : `-${item.amount} PLN`;
     const amountColor = isReceivedByLoggedInUser ? 'green' : 'black';
-    const showDateRow =
-      index === 0 || new Date(item.transactionDate).toDateString() !== new Date(transactionHistory[index - 1].transactionDate).toDateString();
+
 
 
     const isSender = item.loggedInUser === loggedInUser;
   const isRecipient = item.toUserLogin === loggedInUser;
 
-  if (selectedFilter === 'positive' && !isRecipient) {
+  if (selectedFilter === 'negative' && !isSender) {
+    return null;
+  } else if (selectedFilter === 'positive' && !isRecipient) {
+    return null;
+  } else if (selectedFilter === 'mobile' && item.type === 'normal') {
+    return null;
+  } else if (selectedFilter === 'normal' && item.type === 'mobile') {
     return null;
   }
 
-  else if (selectedFilter === 'negative' && !isSender) {
-    return null;
-  }
-
-    else if ( selectedFilter ==='mobile' && item.type==='mobile') {
-      return null;
-    }
-    else if ( selectedFilter ==='normal' && item.type==='normal') {
-      return null;
-    }
+    const showDateRow =
+    index === 0 ||
+    (index > 0 &&
+      new Date(item.transactionDate).toDateString() !==
+        new Date(transactionHistory[index - 1].transactionDate).toDateString());
 
     return (
       <View>
@@ -124,6 +124,7 @@ const History = () => {
           )}
         <View style={styles.transactionContainers}>
           <View style={styles.transactionIcon}>
+            {console.log(item.type)}
             {item.type === 'mobile' ? (
               <Feather name="smartphone" size={27} />
               ) : (
