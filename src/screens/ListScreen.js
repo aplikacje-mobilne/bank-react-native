@@ -51,90 +51,7 @@ const ListScreen = ({ setIsLoggedIn }) => {
       Alert.alert('Error', 'An unexpected error occurred. Please try again.');
     }
   };
-  const handleDevicePairing = async () => {
-    try {
-      const { success } = await LocalAuthentication.authenticateAsync({
-        promptMessage: 'Authenticate to pair your device with biometrics',
-      });
-
-      if (success) {
-        Alert.alert('Success', 'Device paired successfully.');
-
-        const updatedUser = { ...loggedInUser, isBiometricEnabled: true };
-
-        await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-
-        setLoggedInUser(updatedUser);
-      } else {
-        Alert.alert('Error', 'Biometric authentication failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error pairing device:', error);
-      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
-    }
-  };
-
-
-  const handleDeviceUnpairing = async () => {
-    try {
-      const { success } = await LocalAuthentication.authenticateAsync({
-        promptMessage: 'Authenticate to pair your device with biometrics',
-      });
-
-      if (success) {
-        Alert.alert('Success', 'Device paired successfully.');
-
-        const updatedUser = { ...loggedInUser, isBiometricEnabled: false};
-
-        await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-
-        setLoggedInUser(updatedUser);
-      } else {
-        Alert.alert('Error', 'Biometric authentication failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error pairing device:', error);
-      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
-    }
-  };
-
-  const handleSetPin = async () => {
-    try {
-      // Prompt the user to set a PIN
-      const pin = "1234"; // For simplicity, set the PIN to "1234" in this example
-
-      // Update the user object with isPinEnabled set to true and the PIN value
-      const updatedUser = { ...loggedInUser, isPinEnabled: true, pin };
-
-      // Save the updated user to AsyncStorage
-      await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-
-      // Update the state with the new user information
-      setLoggedInUser(updatedUser);
-
-      Alert.alert('Success', 'PIN set successfully.');
-    } catch (error) {
-      console.error('Error setting PIN:', error);
-      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
-    }
-  };
-
-  const handleUnSetPin = async () => {
-    try {
-      const pin = null; // For simplicity, set the PIN to "1234" in this example
-
-      const updatedUser = { ...loggedInUser, isPinEnabled: false, pin };
-
-      await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-
-      setLoggedInUser(updatedUser);
-
-      Alert.alert('Success', 'PIN set successfully.');
-    } catch (error) {
-      console.error('Error setting PIN:', error);
-      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
-    }
-  };
+  
   return (
     <View style={styles.container}>
       <View style={styles.userContainer}>
@@ -150,32 +67,6 @@ const ListScreen = ({ setIsLoggedIn }) => {
           )}
         </View>
       </View>
-
-      <TouchableOpacity onPress={handleDevicePairing}>
-        <View style={styles.pairDeviceButton}>
-          <Text style={styles.pairDeviceButtonText}>Pair Device with Biometrics</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleDeviceUnpairing}>
-        <View style={styles.pairDeviceButton}>
-          <Text style={styles.pairDeviceButtonText}>Unpair Device with Biometrics</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleSetPin}>
-        <View style={styles.pairDeviceButton}>
-          <Text style={styles.pairDeviceButtonText}>Set PIN for account</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleUnSetPin}>
-        <View style={styles.pairDeviceButton}>
-          <Text style={styles.pairDeviceButtonText}>Unset PIN for account</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleLogout}>
-        <View style={styles.logoutButton}>
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </View>
-      </TouchableOpacity>
     </View>
     );
 };
@@ -224,34 +115,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 20,
     padding: 15,
-  },
-  pairDeviceButton: {
-    backgroundColor: '#ff570c',
-    paddingVertical: 10,
-    width: '80%',
-    borderRadius: 8,
-    marginTop: 20,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  pairDeviceButtonText: {
-    fontSize: 16,
-    color: 'white',
-  },
-  logoutButton: {
-    backgroundColor: '#ff0000', 
-    paddingVertical: 10,
-    width: '80%',
-    borderRadius: 8,
-    marginTop: 20,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoutButtonText: {
-    fontSize: 16,
-    color: 'white',
   },
 });
 
