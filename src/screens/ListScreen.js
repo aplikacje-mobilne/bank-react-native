@@ -3,16 +3,21 @@ import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native
 import axios from 'axios';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import API_CONFIG from '../components/config';
 import Header from '../components/Header';
 
 const ListScreen = () => {
   const [users, setUsers] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const isFocused = useIsFocused(); 
+  const [transactionHistory, setTransactionHistory] = useState([]);
+  const isFocused = useIsFocused();
+  const navigation = useNavigation();
+
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://192.168.1.102:3001/users');
+      const response = await axios.get(`${API_CONFIG.BASE_URL}/users`);
+      console.log('Users Response:', response.data);
       setUsers(response.data || []);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -22,8 +27,10 @@ const ListScreen = () => {
   const fetchLoggedInUser = async () => {
     try {
       const userString = await AsyncStorage.getItem('loggedInUser');
+      console.log('Stored Logged In User:', userString);
       if (userString) {
         const user = JSON.parse(userString);
+        console.log('Parsed Logged In User:', user);
         setLoggedInUser(user);
       }
     } catch (error) {
@@ -31,68 +38,84 @@ const ListScreen = () => {
     }
   };
 
+  const fetchTransactionHistory = async () => {
+    try {
+      const storedLoggedInUser = await AsyncStorage.getItem('loggedInUser');
+      console.log('Stored Logged In User for Transaction:', storedLoggedInUser);
+      if (storedLoggedInUser) {
+        const loggedInUser = JSON.parse(storedLoggedInUser);
+
+        const response = await axios.get(`${API_CONFIG.BASE_URL}/transactions`);
+        console.log('Transaction Response:', response.data);
+
+        const userTransactions = response.data
+          .filter(
+            (transaction) =>
+              transaction.loggedInUser === loggedInUser.login || transaction.toUserLogin === loggedInUser.login
+          )
+          .reverse()
+          .slice(0, 4);
+
+        setTransactionHistory(userTransactions);
+      }
+    } catch (error) {
+      console.error('Error fetching transaction history:', error);
+    }
+  };
+
+ 
   useEffect(() => {
-    fetchUsers();
-    fetchLoggedInUser();
-    }, [isFocused]);
+    const fetchData = async () => {
+      try {
+        await fetchUsers();
+        await fetchLoggedInUser();
+        await fetchTransactionHistory();
+      
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  const navigation = useNavigation();
-
+    fetchData();
+  }, [isFocused]);
   
-/* <FlatList
-        data={users}
-        keyExtractor={(user) => user.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Text>Id: {item.id}</Text>
-            <Text>Name: {item.name}</Text>
-            <Text>Login: {item.login}</Text>
-            <Text>Password: {item.pass}</Text>
-            
-          </View>
-          )}
-       */
 
-      return (
-        <View>
-          
-          <View style={styles.rectangle1}>
-            {loggedInUser ? (
-              <Text style={styles.loggedInUserText}>Hej, {loggedInUser.name}!</Text>
-            ) : null}
-            <View style={styles.rectangle2}>
-              <Text style={styles.Text2}>Stan konta: </Text>
-              {loggedInUser ? (
-                <Text style={styles.Text3}>PLN {loggedInUser.balance}</Text>
-              ) : (
-                <Text style={styles.Text3}>PLN 0.00</Text>
+  return (
+    <View>
+      <View style={styles.rectangle1}>
+        {loggedInUser ? (
+          <Text style={styles.loggedInUserText}>Hello, {loggedInUser.name}!</Text>
+          ) : null}
+        <View style={styles.rectangle2}>
+          <Text style={styles.Text2}>Account Balance: </Text>
+          {loggedInUser ? (
+            <Text style={styles.Text3}>{loggedInUser.balance} PLN</Text>
+            ) : (
+              <Text style={styles.Text3}>0.00 PLN</Text>
               )}
-            </View>
-          </View>
-      
-          
-          <View style={styles.rectangle3}>
-            <Text style={styles.Text4}>Ostatnie transakcje:</Text>
-            <View style={styles.rectangle4}></View>
-            <View style={styles.rectangle4}></View>
-            <View style={styles.rectangle4}></View>
-            <TouchableOpacity onPress={() => navigation.navigate('History')}>
-              <View style={styles.rectangle5}>
-                <Text style={styles.buttonText}>Więcej</Text>
-              </View>
-           </TouchableOpacity>
-           
-
-
-            
-          </View>
-          
         </View>
-      );
-      
-      
+      </View>
+      <View style={styles.rectangle3}>
+        <Text style={styles.Text4}>Recent Transactions:</Text>
+        {transactionHistory.map((transaction, index) => (
+          <View key={index} style={styles.rectangle4}>
+            <Text style={[styles.tytulTransakcji, styles.flexBoxTransakcji]}>{transaction.title}</Text>
+            <Text style={[styles.opisTransakcji, styles.flexBoxTransakcji]}>{transaction.description}</Text>
+            <Text style={{ ...styles.kwota }}>
+              {loggedInUser && transaction.toUserLogin === loggedInUser.login ? `${transaction.amount} PLN` : `-${transaction.amount} PLN`}
+            </Text>
+          </View>
+        ))}
+        <TouchableOpacity onPress={() => navigation.navigate('History')}>
+          
+          <View style={styles.rectangle5}>
+            <Text style={styles.buttonText}>More</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -116,7 +139,7 @@ const styles = StyleSheet.create({
   },
  
   loggedInUserText: {
-    fontSize: 50, 
+    fontSize: 40,
     marginTop: 8,
     marginBottom: 8,
     marginLeft: 20,
@@ -132,7 +155,7 @@ const styles = StyleSheet.create({
     
   },
   Text3: {
-    fontSize: 35,
+    fontSize: 32,
     marginTop: -15, 
     marginLeft: 10,
     color: 'white',
@@ -166,7 +189,7 @@ const styles = StyleSheet.create({
   rectangle3: {
     backgroundColor: '#323643',
     width: 390,
-    height: 320,
+    height: 400,
     borderRadius: 8,
     marginVertical: 20,
     marginTop: 0,
@@ -179,7 +202,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 10,
     marginTop: 0,
+    paddingLeft:0,
     alignSelf: 'center',
+
+   // marginBottom: 1,
+    overflow: 'hidden',
+    //flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+
   },
   rectangle5: {
 
@@ -206,6 +238,49 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 10,
     textAlign: 'center', 
+  },
+  kontenerTransakcji: {
+    backgroundColor: 'white',
+    marginBottom: 1,
+    overflow: 'hidden',
+    height: 70,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+
+  flexBoxTransakcji: {
+    textAlign: 'left',
+    letterSpacing: 0,
+    position: 'absolute',
+  },
+  tytulTransakcji: {
+    marginTop: -30,
+    left: 10,
+    width: 240,
+    fontWeight: '500',
+    height: 34,
+    fontSize: 24,
+    top: '50%',
+    letterSpacing: 0,
+  },
+  opisTransakcji: {
+    marginTop: 5,
+    left: 10,
+    width: 240,
+  fontSize: 14,
+  top: '50%',
+  letterSpacing: 0,
+},
+  kwota: {
+    marginTop: 23,
+    fontSize: 24,
+    fontWeight: '500',
+    position: 'absolute',
+    right: 10,
+    textAlign: 'right',
   },
 });
 

@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "zadanie-Edit4",
+      "appliesTo": "src/screens/Edit4.js",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "zadanie-Edit3",
+      "appliesTo": "src/screens/Edit3.js",
+      "type": "launch"
+    }
+  ]
+}

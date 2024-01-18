@@ -6,7 +6,7 @@ const BankScreen = () => {
     <View style={styles.bankScreen}>
       <Image
         style={styles.vector}
-        source={require("./bank.png")} // Upewnij się, że podajesz poprawną ścieżkę do swojego pliku SVG
+        source={require("./bank.png")}
       />
     </View>
   );

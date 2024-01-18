@@ -1,31 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 
-const OfferThird = () => {
+const OfferFirst = () => {
   return (
-    
     <View style={styles.container}>
-      
-   
-      
-
       <View style={styles.rectangle}>
-        <Text style={styles.headerText}>Odblokuj potencjał swoich oszczędności dzięki naszej ekskluzywnej promocji depozytów! Łącząc 12-miesięczną lokatę z regularnym inwestowaniem, możesz zyskać atrakcyjne oprocentowanie na poziomie 4,5% już od 10 000 zł.</Text>
-        <Text style={styles.text}>1. Dzięki tej specjalnej promocji możesz zyskać konkurencyjne odsetki od swojego depozytu w wysokości 4,5%</Text>
-        <Text style={styles.text}>2. Promocja łączy w sobie stabilność 12-miesięcznej lokaty z potencjałem wzrostu regularnego inwestowania.</Text>
-        <Text style={styles.text}>3. Aby wziąć udział wystarczy zacząć od minimalnego depozytu w wysokości 10 000 zł.</Text>
-        <Text style={styles.text}>4. Jest to doskonały sposób na obserwowanie, jak Twoje oszczędności rosną z biegiem czasu, a jednocześnie zyskujesz hojne oprocentowanie.</Text>
-        <Text style={styles.text}>5. Twoje środki pozostają dostępne, co pozwala na dokonywanie dodatkowych inwestycji w miarę upływu czasu.</Text>
-        <Text style={styles.text}>6. Promocja ma na celu pomóc Ci osiągnąć Twoje cele finansowe przy jednoczesnej maksymalizacji zysków.</Text>
-        <Text style={styles.text}>7. Opcje regularnego inwestowania są elastyczne i można je dostosować do Twoich preferencji i tolerancji ryzyka.</Text>
-        <Text style={styles.text}>8. Obowiązują zasady i warunki, więc zapoznaj się z nimi, aby w pełni zrozumieć korzyści płynące z tej promocji.</Text>
-        <Text style={styles.headerText}>Ta promocja daje wyjątkową możliwość połączenia korzyści lokaty terminowej z regularnymi inwestycjami, aby zmaksymalizować zyski i osiągnąć swoje cele finansowe!</Text>
+        <Image
+          source={require('./3.png')}
+          style={{ width: 120, height: 120, position: 'absolute', top: 10, right: 10 }}
+        />
+        <Text style={[styles.headerText, { marginRight: 140 }]}>
+          4.5% from just 10,000 PLN!
+        </Text>
+        <Text style={[styles.headerText2, { marginRight: 140 }]}>
+          With this special promotion, you can earn competitive interest on your deposit at a rate of 4.5%.
+        </Text>
+        <Text style={[styles.headerText2, { marginRight: 20 }]}>
+          To participate, all you need to do is start with a minimum deposit of 10,000 PLN.
+        </Text>
 
-
+        <Text style={styles.text}>Regular investment options are flexible and can be tailored to your preferences and risk tolerance.</Text>
+        <Text style={styles.text}>The promotion aims to help you achieve your financial goals while maximizing profits.</Text>
+        <Text style={[styles.headerText3, { marginRight: 20 }]}>
+          Hurry, the offer is limited!
+        </Text>
+        <Text style={[styles.headerText4]}>
+          For more details, inquire at the bank branch.
+        </Text>
       </View>
-
-     
-
     </View>
   );
 };
@@ -37,31 +39,54 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'left',
   },
-  headerText: {
+  text: {
     fontSize: 15,
+    marginBottom: 5,
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  headerText: {
+    fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 10, 
-    marginBottom: 5, 
-    marginLeft: 10, 
+    marginTop: 15,
+    marginBottom: 5,
+    marginLeft: 15,
     marginRight: 10,
     textAlign: 'left',
-
   },
-  text: {
-    fontSize: 12, 
+  headerText2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 15,
     marginBottom: 5,
-    marginLeft: 10,
-    marginLeft: 10,
-  
+    marginLeft: 15,
+    marginRight: 10,
+    textAlign: 'left',
+  },
+  headerText3: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginTop: 15,
+    marginBottom: 15,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  headerText4: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 5,
+    marginBottom: 15,
+    marginLeft: 15,
+    marginRight: 10,
+    textAlign: 'center',
   },
   rectangle: {
     backgroundColor: 'white',
-    width: 350, 
-    height: 580, 
+    width: 350,
+    height: 580,
     borderRadius: 8,
     marginVertical: 20,
   },
-
 });
 
-export default OfferThird;
+export default OfferFirst;

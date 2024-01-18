@@ -1,33 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 
 const OfferFirst = () => {
   return (
-    
     <View style={styles.container}>
-      
-   
-      
-
       <View style={styles.rectangle}>
-        <Text style={styles.headerText}>Przedstawiamy naszą nową promocję Konta Oszczędnościowego, w której możesz zarobić aż do 5% odsetek przez okres 90 dni. Ta ograniczona czasowo oferta ma na celu pomóc Ci zmaksymalizować potencjał oszczędności.</Text>
-        <Text style={styles.text}>1. Zarabiaj do 8% odsetek od swoich oszczędności przez okres 90 dni.</Text>
-        <Text style={styles.text}>2. Promocja dostępna jest dla nowych środków wpłaconych na konto, z maksymalnym limitem wpłat wynoszącym 500 000 zł.</Text>
-        <Text style={styles.text}>3. Oprocentowanie jest gwarantowane przez cały okres 90 dni.</Text>
-        <Text style={styles.text}>4. Twoje środki pozostają dostępne, zapewniając elastyczność, gdy ich potrzebujesz.</Text>
-        <Text style={styles.text}>5. Promocja dostępna jest przez ograniczony czas, dlatego warto działać szybko, aby skorzystać z tej oferty.</Text>
-        <Text style={styles.text}>6. Odsetki naliczane są codziennie i naliczane na Twoje konto po upływie 90 dni.</Text>
-        <Text style={styles.text}>7. Dochody odsetkowe podlegają standardowym przepisom podatkowym.</Text>
-        <Text style={styles.text}>8. Kontem możesz wygodnie zarządzać poprzez bankowość internetową.</Text>
-        <Text style={styles.text}>9. W okresie promocyjnym nie są pobierane żadne opłaty za prowadzenie konta.</Text>
-        <Text style={styles.text}>10. Obowiązują zasady i warunki, więc pamiętaj o zapoznaniu się z nimi przed otwarciem konta.</Text>
-        <Text style={styles.headerText}>Nie przegap okazji na powiększenie swoich oszczędności dzięki naszej promocji Konta Oszczędnościowego. Zacznij oszczędzać z nami już dziś!</Text>
-
-
+        <Image
+          source={require('./1.png')}
+          style={{ width: 120, height: 120, position: 'absolute', top: 10, right: 10 }}
+        />
+        <Text style={[styles.headerText, { marginRight: 140 }]}>
+          Save up to 8% on your savings account!
+        </Text>
+        <Text style={[styles.headerText2, { marginRight: 70 }]}>
+          Don't miss the opportunity to grow your savings with our Savings Account promotion. Start saving with us today!
+        </Text>
+        <Text style={[styles.headerText2, { marginRight: 50 }]}>
+          The interest rate is guaranteed for the entire period:
+        </Text>
+        <Text style={[styles.headerText3, { marginRight: 50 }]}>
+          90 days!
+        </Text>
+        <Text style={styles.text}>Your funds remain accessible, providing flexibility when you need them.</Text>
+        <Text style={styles.text}>The promotion is available for a limited time, so act quickly to take advantage of this offer.</Text>
+        <Text style={[styles.headerText4]}>
+          For more details, inquire at the bank branch.
+        </Text>
       </View>
-
-     
-
     </View>
   );
 };
@@ -39,31 +38,55 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'left',
   },
-  headerText: {
+  text: {
     fontSize: 15,
+    marginBottom: 5,
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  headerText: {
+    fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 10, 
-    marginBottom: 5, 
-    marginLeft: 10, 
+    marginTop: 15,
+    marginBottom: 5,
+    marginLeft: 15,
     marginRight: 10,
     textAlign: 'left',
-
   },
-  text: {
-    fontSize: 12, 
+  headerText2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 25,
     marginBottom: 5,
-    marginLeft: 10,
-    marginLeft: 10,
-  
+    marginLeft: 15,
+    marginRight: 10,
+    textAlign: 'left',
+  },
+  headerText3: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 15,
+    marginLeft: 15,
+    marginRight: 10,
+    textAlign: 'center',
+  },
+  headerText4: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 25,
+    marginBottom: 15,
+    marginLeft: 15,
+    marginRight: 10,
+    textAlign: 'center',
   },
   rectangle: {
     backgroundColor: 'white',
-    width: 350, 
-    height: 580, 
+    width: 350,
+    height: 580,
     borderRadius: 8,
     marginVertical: 20,
   },
-
 });
 
 export default OfferFirst;

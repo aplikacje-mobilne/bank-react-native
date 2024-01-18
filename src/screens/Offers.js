@@ -12,9 +12,9 @@ const Offers = ({ navigation }) => {
       
 
       <View style={styles.rectangle}>
-        <Text style={styles.headerText}>Konto oszczędnościowe - promocja</Text>
-        <Text style={styles.text}>✔ Możesz zarobić do 8% rocznie przez 90 dni</Text>
-        <Text style={styles.text}>✔ Nowe środki do 500 000 zł</Text>
+        <Text style={styles.headerText}>Savings account - promotion</Text>
+        <Text style={styles.text}>✔ You can earn up to 8% annually for 90 days</Text>
+        <Text style={styles.text}>✔ New funds up to PLN 500,000</Text>
         <TouchableOpacity
           style={styles.orangeButton}
           onPress={() => navigation.navigate('OfferFirst')}
@@ -24,9 +24,9 @@ const Offers = ({ navigation }) => {
       </View>
 
       <View style={styles.rectangle}>
-        <Text style={styles.headerText}>Cel inwestycyjny w promocji</Text>
-          <Text style={styles.text}>✔ Masz szansę zyskać nawet do 200 zł</Text>
-          <Text style={styles.text}>✔ Wysokość bonusu zależy od zlecenia stałego</Text>
+        <Text style={styles.headerText}>Investment goal in the promotion</Text>
+          <Text style={styles.text}>✔ You have a chance to gain up to PLN 200</Text>
+          <Text style={styles.text}>✔ The amount of the bonus depends on the standing order</Text>
           <TouchableOpacity
             style={styles.orangeButton}
             onPress={() => navigation.navigate('OfferSecond')}
@@ -36,9 +36,10 @@ const Offers = ({ navigation }) => {
       </View>
 
       <View style={styles.rectangle}>
-        <Text style={styles.headerText}>Możesz zyskać 4,5% na lokacie</Text>
-            <Text style={styles.text}>✔ Lokata 12-miesięczna</Text>
-            <Text style={styles.text}>✔ Od 10 000 zł</Text>
+        <Text style={styles.headerText}>You can gain 4.5% on your deposit</Text>
+            <Text style={styles.text}>✔ 12-month deposit</Text>
+            <Text style={styles.text}>✔ From PLN 10,000
+</Text>
             <TouchableOpacity
               style={styles.orangeButton}
               onPress={() => navigation.navigate('OfferThird')}

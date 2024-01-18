@@ -55,7 +55,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'normal',
     color: '#333',
-    fontWeight: 'bold',
   },
   sectionDescription: {
     fontSize: 15,
@@ -101,5 +100,24 @@ export const styles = StyleSheet.create({
   },
   pp:{
     color: 'white',
+  },
+  tabBarLabel: {
+    fontSize: 12,
+    color: '#606470',
+    marginBottom: 5,
+    fontWeight: '400',
+  },
+  tabBarLabelFocused: {
+    fontSize: 14,
+    color: '#FF570C',
+    marginBottom: 5,
+
+    fontWeight: '600',
+  },
+  tabBar: {
+    height: 65,
+  },
+  tabBarIcon: {
+    fontWeight: 100, 
   },
 });

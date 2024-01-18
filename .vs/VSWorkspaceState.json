@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\screens"
   ],
-  "SelectedNode": "\\RNScreens65.sln",
+  "SelectedNode": "\\src\\screens\\Edit2.js",
   "PreviewInSolutionExplorer": false
 }
