@@ -7,19 +7,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import API_CONFIG from '../components/config';
 
 const Payment1 = ({ navigation }) => {
-<<<<<<< HEAD
-  const [recipientName, setRecipientName] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
-=======
   const [recipientName, setInput1] = useState("");
   const [accountNumber, setInput2] = useState("");
   const [title, setInput3] = useState("");
   const [description, setInput4] = useState("");
   const [amount, setInput5] = useState("");
->>>>>>> branchPatryk
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [toUserLogin, setUserLogin] = useState(null);
 
@@ -33,11 +25,7 @@ const Payment1 = ({ navigation }) => {
           setLoggedInUser(userLogin);
         }
       } catch (error) {
-<<<<<<< HEAD
-        console.error('Error fetching the logged-in user login:', error);
-=======
         console.error('Error fetching the login of the logged-in user:', error);
->>>>>>> branchPatryk
       }
     };
 
@@ -55,23 +43,13 @@ const Payment1 = ({ navigation }) => {
           await AsyncStorage.setItem('toUserLogin', JSON.stringify({ login: toUserLogin }));
         }
       } catch (error) {
-<<<<<<< HEAD
-        console.error('Error fetching recipient login:', error);
-=======
         console.error('Error fetching the recipient login:', error);
->>>>>>> branchPatryk
       }
     };
 
     fetchData();
   }, [recipientName]);
 
-<<<<<<< HEAD
-  const checkAccountNumber = async (recipientName, accountNumber) => {
-    try {
-      const response = await axios.get(
-        `${API_CONFIG.BASE_URL}/users?name=${recipientName}&accountNumber=${accountNumber}`
-=======
   const checkRecipientName = async (Name) => {
     try {
       const response = await axios.get(`${API_CONFIG.BASE_URL}/users?name=${Name}`);
@@ -86,7 +64,6 @@ const Payment1 = ({ navigation }) => {
     try {
       const response = await axios.get(
         `${API_CONFIG.BASE_URL}/users?name=${Name}&nrkonta=${Number}`
->>>>>>> branchPatryk
       );
       return response.data.length > 0;
     } catch (error) {
@@ -101,9 +78,6 @@ const Payment1 = ({ navigation }) => {
       Alert.alert('Error', 'Recipient with the provided account number does not exist.');
       return;
     }
-<<<<<<< HEAD
-
-=======
   
     const enteredAmount = parseFloat(amount);
   
@@ -116,20 +90,10 @@ const Payment1 = ({ navigation }) => {
     }
   
     const recipientAccountNumber = recipientResponse.data[0].accountNumber;
->>>>>>> branchPatryk
     try {
       const response = await axios.post(`${API_CONFIG.BASE_URL}/transactions`, {
         loggedInUser,
         title,
-<<<<<<< HEAD
-        toUserLogin,
-        description,
-        type: 'normal',
-        amount: parseFloat(amount),
-        transactionDate: new Date().toISOString(),
-      });
-
-=======
         toUserLogin: recipientResponse.data[0].login,
         description,
         type: 'normal',
@@ -145,7 +109,6 @@ const Payment1 = ({ navigation }) => {
       const recipientNewBalance = recipientResponse.data[0].balance + parseFloat(amount);
       await axios.patch(`${API_CONFIG.BASE_URL}/users/${recipientId}`, { balance: recipientNewBalance });
   
->>>>>>> branchPatryk
       Alert.alert('Transfer successful');
       navigation.goBack();
     } catch (error) {
@@ -164,17 +127,6 @@ const Payment1 = ({ navigation }) => {
       <View style={styles.sectionContainer}>
         <TextInput
           style={styles.input}
-<<<<<<< HEAD
-          placeholder="Recipient's Name:"
-          value={recipientName}
-          onChangeText={(text) => setRecipientName(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Account Number:"
-          value={accountNumber}
-          onChangeText={(text) => setAccountNumber(text)}
-=======
           placeholder="Recipient's name and surname:"
           value={recipientName}
           onChangeText={(text) => setInput1(text)}
@@ -184,48 +136,31 @@ const Payment1 = ({ navigation }) => {
           placeholder="Account number:"
           value={accountNumber}
           onChangeText={(text) => setInput2(text)}
->>>>>>> branchPatryk
         />
         <TextInput
           style={styles.input}
           placeholder="Title:"
           value={title}
-<<<<<<< HEAD
-          onChangeText={(text) => setTitle(text)}
-=======
           onChangeText={(text) => setInput3(text)}
->>>>>>> branchPatryk
         />
         <TextInput
           style={styles.input}
           placeholder="Description:"
           value={description}
-<<<<<<< HEAD
-          onChangeText={(text) => setDescription(text)}
-=======
           onChangeText={(text) => setInput4(text)}
->>>>>>> branchPatryk
         />
         <TextInput
           style={styles.input}
           placeholder="Amount"
           value={amount}
-<<<<<<< HEAD
-          onChangeText={(text) => setAmount(text)}
-=======
           onChangeText={(text) => setInput5(text)}
->>>>>>> branchPatryk
         />
         <TouchableOpacity style={styles.check} onPress={handleCheck}>
           <Text style={styles.pp}>Check</Text>
         </TouchableOpacity>
       </View>
     </View>
-<<<<<<< HEAD
-    );
-=======
   );
->>>>>>> branchPatryk
 };
 
 export default Payment1;
