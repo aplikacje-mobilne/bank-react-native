@@ -49,7 +49,7 @@ const Edit6 = ({ setIsLoggedIn }) => {
                     }
                 } else {
                     Alert.alert('Error', 'PIN authentication is not enabled for this account.');
-                    navigation.navigate('Login');
+                    navigation.goBack();
                 }
             } else {
                 if (newPin === confirmNewPin) {
@@ -172,7 +172,7 @@ const Edit6 = ({ setIsLoggedIn }) => {
                         setNewPin('');
                         setConfirmNewPin('');
                     } else {
-                        navigation.navigate('Login');
+                        navigation.goBack();
                     }
                 }}
             >
