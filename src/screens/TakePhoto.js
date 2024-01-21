@@ -3,7 +3,6 @@ import * as FileSystem from 'expo-file-system';
 import { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import PhotoDisplay from "./PhotoDisplay";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TakePhoto({ navigation }) {
@@ -48,7 +47,7 @@ export default function TakePhoto({ navigation }) {
                 });
 
                 console.log('Saved photo:', destination);
-                navigation.navigate("Edit2", {
+                navigation.navigate("EditDataPersonalization", {
                     capturedPhotoUri: destination
                 });
             } catch (error) {

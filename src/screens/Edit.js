@@ -9,7 +9,7 @@ const Edit = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.div}>
 
-                <TouchableOpacity onPress={() => navigation.navigate('Edit2')}>
+                <TouchableOpacity onPress={() => navigation.navigate('EditDataPersonalization')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="user" size={30} marginLeft={10} color="black" />
@@ -20,7 +20,7 @@ const Edit = ({ navigation }) => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('Edit3')}>
+                <TouchableOpacity onPress={() => navigation.navigate('EditSecurityAccess')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="lock" size={30} marginLeft={10} color="black" />
@@ -31,10 +31,10 @@ const Edit = ({ navigation }) => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('Edit4')}>
+                <TouchableOpacity onPress={() => navigation.navigate('EditPayments')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
-                            <Icon name="money" size={30} marginLeft={10} marginTop={'1%'} color="black" />
+                            <Icon name="credit-card" size={25} marginLeft={10} marginTop={'1%'} color="black" />
                             <Text style={styles.text}>Payments</Text>
                         </View>
                         <Text style={styles.text2}>Payment settings</Text>
@@ -42,7 +42,7 @@ const Edit = ({ navigation }) => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('Edit5')}>
+                <TouchableOpacity onPress={() => navigation.navigate('EditLogOut')}>
                     <View style={styles.wiersz1b}>
                         <View style={styles.wiersz1}>
                             <Icon name="power-off" size={30} marginLeft={10} color="black" />
