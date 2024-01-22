@@ -81,7 +81,11 @@ const Payment2 = ({ navigation }) => {
         Alert.alert('Error', 'The entered amount is too large or too small.');
         return;
       }
-
+      if (isNaN(validAmount) || validAmount <= 0) {
+        Alert.alert('Error', 'Please enter a valid numeric amount.');
+        return;
+      }
+      
       const recipientAccountNumber = recipientResponse.data[0].accountNumber;
 
       const transactionResponse = await axios.post(`${API_CONFIG.BASE_URL}/transactions`, {
