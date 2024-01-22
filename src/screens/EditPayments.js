@@ -5,20 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 
 const EditPayments = ({ navigation }) => {
-    const [isChecked, setChecked] = useState(false);
     const [userData, setUserData] = useState(null);
-
-    const fetchCheckboxState = async () => {
-        try {
-            const receiveTransfersOnPhoneJson = await AsyncStorage.getItem('receiveTransfersOnPhone');
-            if (receiveTransfersOnPhoneJson) {
-                const receiveTransfersOnPhone = JSON.parse(receiveTransfersOnPhoneJson);
-                setChecked(receiveTransfersOnPhone);
-            }
-        } catch (error) {
-            console.error('Error fetching checkbox state:', error);
-        }
-    };
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -36,11 +23,7 @@ const EditPayments = ({ navigation }) => {
         fetchUserData();
     }, []);
 
-    useFocusEffect(
-        useCallback(() => {
-            fetchCheckboxState();
-        }, [])
-    );
+
 
     return (
         <View style={styles.container}>

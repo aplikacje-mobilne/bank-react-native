@@ -46,6 +46,13 @@ export default function TakePhoto({ navigation }) {
                     to: destination,
                 });
 
+                // Zapisz œcie¿kê do zapisanego pliku w AsyncStorage z uwzglêdnieniem identyfikatora u¿ytkownika
+                try {
+                    AsyncStorage.setItem(`capturedPhotoUri_${userData.id}`, destination);
+                } catch (error) {
+                    console.error('Error saving photo URI:', error);
+                }
+
                 console.log('Saved photo:', destination);
                 navigation.navigate("EditDataPersonalization", {
                     capturedPhotoUri: destination
@@ -57,6 +64,7 @@ export default function TakePhoto({ navigation }) {
             console.error('Error taking picture:', error);
         }
     };
+
 
     return (
         <View style={styles.container}>

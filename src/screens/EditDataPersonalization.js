@@ -29,28 +29,31 @@ const EditDataPersonalization = ({ navigation }) => {
         if (route.params && route.params.capturedPhotoUri) {
             console.log('Captured Photo URI from route:', route.params.capturedPhotoUri);
             setCapturedPhotoUri(route.params.capturedPhotoUri);
+            // zapisuje ścieżkę do pliku w AsyncStorage
+            try {
+                AsyncStorage.setItem('capturedPhotoUri', route.params.capturedPhotoUri);
+            } catch (error) {
+                console.error('Error saving photo URI:', error);
+            }
         }
     }, [route.params]);
 
     useEffect(() => {
-        const fetchCapturedPhotoUri = async () => {
+        const getStoredPhotoUri = async () => {
             try {
-                const userId = userData ? userData.id : null;
-                const uri = await AsyncStorage.getItem(`capturedPhotoUri_${userId}`);
-                if (uri) {
-                    setCapturedPhotoUri(uri);
+                if (userData && userData.id) {
+                    const storedPhotoUri = await AsyncStorage.getItem(`capturedPhotoUri_${userData.id}`);
+                    if (storedPhotoUri) {
+                        setCapturedPhotoUri(storedPhotoUri);
+                    }
                 }
             } catch (error) {
-                console.error('Error fetching captured photo URI:', error);
+                console.error('Error fetching stored photo URI:', error);
             }
         };
 
-        fetchCapturedPhotoUri();
+        getStoredPhotoUri();
     }, [userData]);
-
-    const openCamera = () => {
-        navigation.navigate('TakePhoto');
-    };
 
     return (
         <View style={styles.container}>
