@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import axios from 'axios';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import API_CONFIG from '../components/config';
+
+
 import * as LocalAuthentication from 'expo-local-authentication'; 
 
 const EditBiomPinLogout = ({ setIsLoggedIn }) => {
@@ -87,14 +87,7 @@ const EditBiomPinLogout = ({ setIsLoggedIn }) => {
 
   const handleSetPin = async () => {
     try {
-      const pin = "1234"; 
-      const updatedUser = { ...loggedInUser, isPinEnabled: true, pin };
-
-      await AsyncStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-
-      setLoggedInUser(updatedUser);
-
-      Alert.alert('Success', 'PIN set successfully.');
+      navigation.navigate('EditSetPin');
     } catch (error) {
       console.error('Error setting PIN:', error);
       Alert.alert('Error', 'An unexpected error occurred. Please try again.');
@@ -122,35 +115,35 @@ const EditBiomPinLogout = ({ setIsLoggedIn }) => {
           <View style={styles.div}>
               <View style={styles.inputs}>
 
-          <Text style={styles.infoText}>You can pair your device with biometrics for added security.</Text>
+          <Text style={styles.infoText}>You can pair your device with biometrics</Text>
           <TouchableOpacity onPress={handleDevicePairing}>
               <View style={styles.btn}>
                   <Text style={styles.btnText}>Pair Device with Biometrics</Text>
               </View>
           </TouchableOpacity>
 
-          <Text style={styles.infoText}>You can unpair your device from biometrics.</Text>
+          <Text style={styles.infoText}>You can unpair your device from biometrics</Text>
           <TouchableOpacity onPress={handleDeviceUnpairing}>
               <View style={styles.btn}>
                   <Text style={styles.btnText}>Unpair Device with Biometrics</Text>
               </View>
           </TouchableOpacity>
 
-          <Text style={styles.infoText}>Set a PIN for added security to your account.</Text>
+          <Text style={styles.infoText}>Set a PIN </Text>
           <TouchableOpacity onPress={handleSetPin}>
               <View style={styles.btn}>
-                  <Text style={styles.btnText}>Set PIN for account</Text>
+                  <Text style={styles.btnText}>Set PIN </Text>
               </View>
           </TouchableOpacity>
 
-          <Text style={styles.infoText}>Remove PIN from your account.</Text>
+          <Text style={styles.infoText}>Remove PIN from your account</Text>
           <TouchableOpacity onPress={handleUnSetPin}>
               <View style={styles.btn}>
-                  <Text style={styles.btnText}>Unset PIN for account</Text>
+                  <Text style={styles.btnText}>Unset PIN </Text>
               </View>
           </TouchableOpacity>
 
-          <Text style={styles.infoText}>Logout from your account.</Text>
+          <Text style={styles.infoText}>Logout from your account</Text>
           <TouchableOpacity onPress={handleLogout}>
                       <View style={styles.btn}>
                      <Text style={styles.btnText}>Logout</Text>

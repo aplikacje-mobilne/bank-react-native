@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DrawerNavigator from './DrawerNavigator';
@@ -9,6 +9,8 @@ import EditDataPersonalization from '../screens/EditDataPersonalization';
 import EditSecurityAccess from '../screens/EditSecurityAccess';
 import EditPayments from '../screens/EditPayments';
 import EditLogOut from '../screens/EditLogOut';
+import EditSetPin from '../screens/EditSetPin';
+
 import EditChangePinScreen from '../screens/EditChangePinScreen';
 import EditChangePassScreen from '../screens/EditChangePassScreen';
 import EditBiomPinLogout from '../screens/EditBiomPinLogout';
@@ -59,6 +61,8 @@ const StackNav = () => {
                   <Stack.Screen name="EditChangePinScreen" children={() => <EditChangePinScreen setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Change PIN' }} />
                   <Stack.Screen name="EditChangePassScreen" children={() => <EditChangePassScreen setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Change Account Password' }} />
                   <Stack.Screen name="EditBiomPinLogout" children={() => <EditBiomPinLogout setIsLoggedIn={setIsLoggedIn} />} options={{ title: 'Set up authentication' }} />
+                  <Stack.Screen name="EditSetPin" component={EditSetPin} options={{ title: 'Setting PIN' }} />
+
                   <Stack.Screen name="Payment1" component={Payment1} options={{ title: 'Transfer' }} />
                   <Stack.Screen name="Payment2" component={Payment2} options={{ title: 'Transfer' }} />
                   <Stack.Screen name="TakePhoto" component={TakePhoto} options={{ title: 'Take Photo' }} />
@@ -72,21 +76,16 @@ const StackNav = () => {
       ) : (
           <>
           <Stack.Screen name="Start"
-            children={() => <Start setIsLoggedIn={setIsLoggedIn}/>}
-
-            />
-              <Stack.Screen
-                  name="Login"
-                  options={optionScreen}
-                  children={() => <Login setIsLoggedIn={setIsLoggedIn}/>}
-              />
-              <Stack.Screen
-                  name="PinLogin"
-          children={() => <PinLogin setIsLoggedIn={setIsLoggedIn}/>}
-                />
-
-              <Stack.Screen name="RegisterScreen"
-                            component={RegisterScreen}/>
+            children={() => <Start setIsLoggedIn={setIsLoggedIn}/>}/>
+          <Stack.Screen
+            name="Login"
+            options={optionScreen}
+            children={() => <Login setIsLoggedIn={setIsLoggedIn}/>}  />
+          <Stack.Screen
+            name="PinLogin"
+            children={() => <PinLogin setIsLoggedIn={setIsLoggedIn}/>}/>
+          <Stack.Screen name="RegisterScreen"
+            component={RegisterScreen}/>
           </>
       )}
     </Stack.Navigator>

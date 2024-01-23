@@ -10,7 +10,7 @@ const History = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [selectedFilter, setSelectedFilter] = useState('default');
 
   const translateY = useRef(new Animated.Value(0)).current;
 

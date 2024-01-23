@@ -41,6 +41,11 @@ const Frame = ({ setIsLoggedIn }) => {
             setIsLoggedIn(true);
           } else {
             Alert.alert('Authentication Failed', 'Please try again or use another authentication method.');
+            if (user.isPinEnabled) {
+              navigation.navigate('PinLogin');
+            } else {
+              navigation.navigate('Login');
+            }
           }
         } else {
           if (user.isPinEnabled) {

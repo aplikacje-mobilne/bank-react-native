@@ -38,6 +38,8 @@ export function Login({ setIsLoggedIn }) {
       }
     } catch (error) {
       console.error("Error during API request:", error);
+      alert('No database connection');
+
     }
   };
 

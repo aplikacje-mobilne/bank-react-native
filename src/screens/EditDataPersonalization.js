@@ -29,7 +29,6 @@ const EditDataPersonalization = ({ navigation }) => {
         if (route.params && route.params.capturedPhotoUri) {
             console.log('Captured Photo URI from route:', route.params.capturedPhotoUri);
             setCapturedPhotoUri(route.params.capturedPhotoUri);
-            // zapisuje ścieżkę do pliku w AsyncStorage
             try {
                 AsyncStorage.setItem('capturedPhotoUri', route.params.capturedPhotoUri);
             } catch (error) {
